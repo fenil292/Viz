@@ -1,0 +1,14 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            {{title}}
+        </span>
+        <span class="breadcrumb-number">
+            {{index}}
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+<div>
+    <kendo-textarea class="v-textarea" [value]="datasetLogs" [resizable]="'vertical'">
+    </kendo-textarea>
+</div>

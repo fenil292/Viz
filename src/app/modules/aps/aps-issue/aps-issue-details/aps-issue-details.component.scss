@@ -1,0 +1,32 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.aps-detail-dialog {
+    .k-dialog-titlebar {
+        .k-dialog-title {
+            @extend .primary-font-family-700;
+            font-weight: 700 !important;
+        }
+    }
+
+    .k-dialog-buttongroup {
+        display: none;
+    }
+}
+
+.aps-issue-wrapper {
+    .control-wrapper {
+        margin-bottom: 16px;
+
+        .control-name {
+            @extend .primary-font-family-700;
+            color: $primary-color;
+            height: 20px;
+            line-height: 20px;
+            margin-bottom: 8px;
+        }
+
+        &:last-child {
+            margin-bottom: 0px;
+        }
+    }
+}

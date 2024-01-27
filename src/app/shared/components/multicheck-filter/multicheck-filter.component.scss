@@ -1,0 +1,53 @@
+@import "../../../../assets/scss/variables.scss";
+
+.multicheck-filter-wrapper {
+    .search-box {
+        padding: 8px 12px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    ul {
+        list-style-type: none;
+        max-height: 200px;
+        overflow-y: auto;
+        padding-left: 0;
+
+        .k-checkbox {
+            &:checked {
+                border-color: $light-blue;
+                background-color: $light-blue;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+    }
+
+    ul>li {
+        padding: 8px 12px;
+        border: 1px solid rgba(0, 0, 0, .08);
+        border-bottom: none;
+        display: flex;
+        place-items: center;
+    }
+
+    ul>li:last-of-type {
+        border-bottom: 1px solid rgba(0, 0, 0, .08);
+    }
+
+    ul>li:first-of-type {
+        border-top: 0px;
+    }
+
+    .k-checkbox-label {
+        pointer-events: none;
+    }
+
+    .item-text {
+        text-overflow: ellipsis;
+        width: 140px;
+        word-wrap: break-word;
+        margin-left: 5px;
+    }
+}

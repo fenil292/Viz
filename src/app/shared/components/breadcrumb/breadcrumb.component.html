@@ -1,0 +1,38 @@
+<div class="breadcrumb-wrapper">
+    <span class="breadcrumb-text">
+        <span *ngFor="let item of path;">
+            <span *ngIf="item === 'Work Orders'">
+                <a class="link" href="data-table-maintenance/work-orders">{{ item }} \</a>
+            </span>
+            <span *ngIf="item === 'Sales Orders'">
+                <a class="link" href="data-table-maintenance/sales-orders">{{ item }} \</a>
+            </span>
+            <span *ngIf="item !== 'Work Orders' && item !== 'Sales Orders'">
+                {{ item }} \
+            </span>
+        </span>
+        <span class="active">{{ activePath }}</span>
+    </span>
+  <div class="breadcrum-right">
+    <ng-container *ngIf="activePath === 'Cadence'">
+      <kendo-dropdownlist #dropdownlist [data]="widgets" (close)="onClose($event)" class="widget-dropdown"
+        [popupSettings]="popupSetting" textField="title" valueField="title">
+        <ng-template kendoDropDownListValueTemplate>
+          Widgets
+        </ng-template>
+        <ng-template kendoDropDownListItemTemplate let-dataItem>
+          <span>{{dataItem.title}}</span>
+          <div class="widget-dropdown-button" kendoTooltip filter="span">
+            <span (click)="onWidgetHideShow(dataItem.title)">
+              <span title="Show"><kendo-switch [size]="'small'" [checked]="dataItem.visible"
+                [onLabel]="''" [offLabel]="''"></kendo-switch></span>
+            </span>
+          </div>
+        </ng-template>
+      </kendo-dropdownlist>
+    </ng-container>
+    <span class="breadcrumb-number">
+        {{ index }}
+    </span>
+  </div>
+</div>

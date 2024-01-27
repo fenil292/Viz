@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2020 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="129px" height="25px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 129 24.97"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:none}
+   ]]>
+  </style>
+   <clipPath id="id0">
+    <path d="M0 24.97l129 0 0 -24.97 -129 0 0 24.97z"/>
+   </clipPath>
+    <clipPath id="id1">
+     <path d="M4.24 24.97l120.52 0 0 -24.97 -120.52 0 0 24.97z"/>
+    </clipPath>
+    <clipPath id="id2">
+     <path d="M0 24.97l129 0 0 -24.97 -129 0 0 24.97z"/>
+    </clipPath>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g>
+  </g>
+  <g style="clip-path:url(#id0)">
+   <g>
+   </g>
+   <g style="clip-path:url(#id1)">
+    <image x="4.24" y="-4.81" width="120.52" height="34.6" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAPCAIAAAG1iYAAAAAACXBIWXMA
+ABKbAAAT1gGkhwJzAAADI0lEQVR4nM1VW0iTYRh+t31zc8PNw6bOLXaxYEqlJnlh0EHp4EXaYUgF
+3XS6sYsQka4U77woDzRQMLWLxLCgMLsSyQ4UQlcVFoGRo02CGXPmnJs79Oz/1u9vpcEE693+n/f/
+vvd7v+d/vud9f3Zu75HBV15GHyK0fJ4u36bRL9cesrbh/tZQyGazkWADwp3hqjteO3X20fsz1EiN
+Y9TOZmdnTSZTYvY0D73B4vF4JBKZn583GAy0viWyhcNhHoQ1MplM6nA/GQdrOPa80zPeYD4Uf9bS
+9f1pE1310YiODndQ3wlHKfN6vRkZGSqVqoP2CfETncl9unC1U28iUygUArL8/PyNYJnN5j9OcDQc
+HOMPfr8fm8rl8g3y/dUYskSj0VgsNjc3BydJZ2q59Hr9zMwMYwmAIANvCx8TyKtQKLAHwHKKuS9O
+8XtcMIzjkckURz/HxrZRppVYcVlh0Nw8fvJKzYXpUdpV7rCZJ51t1TeL+vuIfCADtDh201RZ/YNT
+d8MXJ0u/2slACk11sVM5OB1nqxAvEWFJZklluX1Cde/JHep4W/L4wJvVgFqiQrANcQj/HmGwhmiU
+WsodSXEtLS3pdDq6JS4axlW5X1i2nnWvZcrtdufl5Wm1Wii4oKAgdcphgUAA5CFXMBhMT09PMRGK
+YXFxkT/k5OSknggcaTQaLvasrCxae8b025FDDVJ9kFh5VqsVHhKp1Wqem8tfVDxPJ61cPiWWMPcZ
+fhRVU+7yUH1rr6mqp+J+UYkThwXJbO9uMX566Xrndl7/SDEtUYDIMuTYs7PqW/OOFyMHKZdIX2Ud
+qGjyv65L1t1/ZUltu1wukAjeV1ZWuDw3U8ibxQQtoSOiG6SlpeGQIAQoCsg8Hg/ELj2ercOE9oaN
+ucrRNiG2hYUFKAuOz+fLzs7+B5iwKw4OpYazAz6wBZLAFjRvsVi2HlACEyix2+3oT2graC5Axo/P
+aDTSz9ol4dsJuHAwixFQy2sVbR8+XgO8wucBJDQq6XLpIIJxVyqVYoCYMyZYUuPrUcIzwjggMS8J
+1S82D77BLwHS5dJBaTAPEGflgv0AaQGSvkwlRyQAAAAASUVORK5CYII="/>
+   </g>
+   <g style="clip-path:url(#id2)">
+   </g>
+  </g>
+  <polygon class="fil0" points="0,24.97 129,24.97 129,0 0,0 "/>
+ </g>
+</svg>

@@ -1,0 +1,25 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            {{changesetId}}
+        </span>
+        <span class="breadcrumb-number">
+            5.2.2
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+
+<div class="export-changeset-wrapper h-full">
+    <div class="v-grid-wrapper h-full">
+        <kendo-grid class="h-full" [kendoGridBinding]="changeSet?.rows" [loading]="isLoading" [style.overflow]="isLoading ? 'hidden' : 'auto'">
+            <kendo-grid-column *ngFor="let column of changeSet?.columns;let i = index" [title]="column">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem[i]}}
+                </ng-template>
+            </kendo-grid-column>
+            <ng-template kendoGridNoRecordsTemplate>
+                <div *ngIf="!isLoading && (changeSet === undefined || changeSet?.rows?.length === 0)">No Data Found</div>
+            </ng-template>
+        </kendo-grid>
+    </div>
+</div>

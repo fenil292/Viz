@@ -1,0 +1,123 @@
+@import './theme.scss';
+
+.page-auth {
+    .header-container {
+      background-color: $auth-dialog-header-bg-color;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+    
+      .title-text {
+        color: $auth-dialog-header-text-color;
+        font-size: 18px;
+        letter-spacing: 0.2px;
+      }
+    
+      .index {
+        min-width: 70px;
+        background-color: $white;
+        border-radius: 15px;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: $auth-dialog-control-text-color;
+        padding: 3px 0px;
+      }
+    }
+  
+    .auth-form-wrapper {
+      padding-left: 30px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+  
+      .control-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+  
+        .control-name {
+  
+          .control-text {
+            @extend .primary-font-family-700;
+            line-height: 16px;
+            text-align: right;
+            color: $auth-dialog-control-text-color;
+            letter-spacing: 0.5px;
+          }
+        }
+  
+        .field-wrapper {
+          margin-left: 17px;
+          display: flex;
+          align-items: center;
+          width: 100%;
+  
+          .form-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: $auth-dialog-control-text-color;
+          }
+  
+          .forgot-password-label {
+            margin-left: 83px;
+            font-weight: 400;
+            text-decoration: underline;
+            cursor: pointer;
+            color: #282828cc;
+          }
+  
+          .k-checkbox {
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+          }
+  
+          kendo-textbox,
+          input {
+            height: 26px;
+            width: 243px;
+  
+            .k-button {
+              padding: 0px;
+              margin-right: 8px;
+  
+              .k-i-eye, .k-i-x {
+                color: $close-icon-color;
+              }
+
+              &:first-child {
+                margin-right: 2px;
+              }
+            }
+          }
+  
+          .k-input-solid:focus  {
+            box-shadow: unset !important;
+          }
+  
+          .k-input-solid:focus-within {
+            box-shadow: unset !important;
+          }
+  
+          .k-checkbox:checked, .k-checkbox.k-checked {
+            border-color: $primary-color;
+            background-color: $primary-color;
+          }
+  
+          .k-checkbox:checked:focus, .k-checkbox.k-checked.k-focus {
+            box-shadow: 0 0 0 2px rgb(40 40 43 / 30%);
+          }
+  
+          .k-value {
+            border: 1px solid $auth-dialog-value-color;
+          }
+        }
+      }
+  
+      .control-wrapper:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }

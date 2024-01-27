@@ -1,0 +1,17 @@
+.date-range-filter {
+    padding: 5px;
+
+    .date-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .v-datepicker {
+            width: 150px;
+        }
+
+        &:first-child {
+            margin-bottom: 8px;
+        }
+    }
+}

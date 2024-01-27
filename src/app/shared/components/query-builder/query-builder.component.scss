@@ -1,0 +1,204 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/font.scss";
+
+.query-builder {
+    width: max-content;
+
+    .k-i-delete,
+    .k-i-plus {
+        color: $very-light-gray;
+    }
+
+    .q-button-group {
+        margin-left: 20px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        .button-group {
+            .k-icon {
+                font-size: 22px;
+            }
+        }
+    }
+
+    .q-rule {
+        padding: 8px 8px !important;
+        border: 1px solid $light-white-gray !important;
+        background: transparent !important;
+
+        .v-textbox, .v-dropdown, .v-numeric-textbox {
+            height: 28px;
+            width: 174px;
+        }
+
+        .v-textbox, .v-dropdown, .v-numeric-textbox, .v-datepicker {
+            margin-left: 10px;
+
+            &.field-dropdown {
+                .k-input-inner {
+                    .k-input-value-text {
+                        .attribute-not-exist-text {
+                            color: $error-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .q-error {
+            border: 1px solid $error-color !important;
+        }
+
+        .query-builder-caption {
+            display: none;
+        }
+
+        &:first-child {
+            .query-builder-caption {
+                position: relative;
+                bottom: 5px;
+                text-align: center;
+                font-weight: bold;
+                display: block;
+            }
+            
+            .q-button-group {
+                margin-top: 20px;
+            }
+        }        
+    }
+
+    .q-ruleset {
+        padding: 8px 8px !important;
+        border: 1px solid $light-white-gray !important;
+        background: transparent !important;
+    }
+
+    .q-tree-container {
+        .q-tree {
+            padding-left: 40px;
+        }
+    }
+
+    .condition-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .condition-radio-label {
+            @extend .primary-font-family-400;
+            color: $dark-button-gray !important;
+            padding: 0px 15px 0px 8px !important;
+            font-size: 14px;
+
+            &:last-child {
+                padding-right: 0px !important;
+            }
+        }
+    }
+}
+
+query-builder > div:nth-of-type(1) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.add-rule-popup {
+    background: $white !important;
+    border-radius: 4px !important;
+    padding: 3px 8px !important;
+    width: 180px;
+    height: 52px;
+    cursor: pointer;
+
+    .icontext-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+        .rule-button-text {
+            color: 3e4046;
+            font-size: 14px;
+            line-height: 20px;
+            margin-left: 8px;
+        }
+    }
+}
+
+.query-builder {
+    background: $white-smoke;
+    padding: 30px;
+    box-sizing: border-box;
+
+    .pointer {
+        cursor: pointer !important;
+        height: 24px;
+    }
+
+    .q-tree-container {
+        .q-tree {
+            .q-rule {
+                margin-top: 9px;
+                display: flex;
+
+                .k-input-inner {
+                    background-color: $white;
+                    padding: 3px 8px;
+                    height: 28px;
+                    display: flex;
+                    align-items: center;
+                    border-color: $title-option;
+                    border-radius: 4px;
+
+                    .k-input-value-text {
+                        color: $dark-button-gray;
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+                }
+
+                .k-input-button {
+                    background-color: $white;
+                }
+
+                .q-right-align {
+                    display: inline-block !important;
+                    margin-left: 8px;
+                    order: 5;
+                }
+
+                .q-inline-block-display {
+                    order: 1;
+                }
+
+                .flex-order-2 {
+                    order: 2;
+                }
+
+                .flex-order-3 {
+                    order: 3;
+                }
+
+                .flex-order-4 {
+                    order: 4;
+                }
+            }
+        }
+    }
+}
+
+.date-tooltip-wrapper{
+    .k-popup {
+        .k-tooltip {
+            .k-tooltip-content {
+                text-align: center;
+            }
+        }
+    }
+}

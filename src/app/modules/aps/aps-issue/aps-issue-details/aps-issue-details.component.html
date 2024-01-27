@@ -1,0 +1,30 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            Description
+        </span>
+        <span class="breadcrumb-number">
+            2.4.1
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+<div class="aps-issue-wrapper">
+    <div class="control-wrapper">
+        <div class="control-name">
+            Error Descriptions
+        </div>
+        <div class="field-wrapper">
+            <kendo-textarea class="v-textarea" [value]="apsIssueDetail?.message" [resizable]="'vertical'">
+            </kendo-textarea>
+        </div>
+    </div>
+    <div class="control-wrapper">
+        <div class="control-name">
+            Resolution Steps
+        </div>
+        <div class="field-wrapper">
+            <kendo-textarea class="v-textarea" [value]="apsIssueDetail?.solution" [resizable]="'vertical'">
+            </kendo-textarea>
+        </div>
+    </div>
+</div>

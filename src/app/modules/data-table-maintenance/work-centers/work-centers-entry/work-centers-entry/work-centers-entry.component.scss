@@ -1,0 +1,48 @@
+@import "../../../../../../assets/scss/dialog.scss";
+
+.work-center-dialog-wrapper {
+    .v-dropdown {
+        width: 260px;
+    }
+
+    .dialog-action-wrapper {
+        padding-top: 16px;
+        display: flex;
+        float: right;
+    }
+
+    .form-wrapper {
+        .row {
+            &:last-child {
+                margin-bottom: 0px;
+
+                .field-wrapper {
+                    align-items: baseline;
+
+                    .form-control-wrapper {
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+    }
+
+    .custom-attribute-tab-wrapper {
+        height: 230px !important;
+
+        .attribute-form-wrapper {
+            .form-container {
+                overflow-y: unset !important;
+
+                .form-wrapper {
+                    margin-right: 0px !important;
+                }
+            }
+        }
+    }
+
+    .no-attributes {
+        text-align: center;
+        padding-top: 20px;
+    }
+}

@@ -1,0 +1,199 @@
+@import '../../../../assets/scss/variables.scss';
+
+.work-order-operations-wrapper {
+    height: calc(100% - 200px);
+
+    .work-order-header {
+        display: flex;
+        flex-flow: wrap;
+        height: 60px;
+        justify-content: space-between;
+        align-content: center;
+    
+        .work-order-info {
+            .header-label {
+                display: inline-block;
+                margin: 0;
+                font-size: 18px;
+                font-weight: 500;
+    
+                &:first-child {
+                    margin-right: 70px;
+                }
+            }
+        }
+    
+        .button-group {
+            display: flex;
+            flex-flow: row;
+            gap: 15px;
+        }
+    }
+    
+    .work-order-details {
+        background-color: $white-smoke;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: row;
+    
+        .column-items {
+            min-width: 250px;
+            margin: 30px;
+    
+            .item {
+                font-size: 14px;
+                margin: 0 0 10px 0;
+                display: flex;
+    
+                .field-title {
+                    color: $light-gray;
+                    font-weight: 400;
+                }
+    
+                .field-value {
+                    color: $dark-button-gray;
+                    font-weight: 500;
+                }
+    
+                &:last-child {
+                    margin: 0px;
+                }
+            }
+    
+            &:first-child {
+                .field-title {
+                    min-width: 110px;
+                }
+            }
+    
+            &:last-child {
+                width: max-content;
+    
+                .field-title {
+                    min-width: 125px;
+                }
+            }
+        }
+    }
+}
+
+.work-order-operations-grid-wrapper {
+    padding-top: 20px;
+    
+    .work-order-operations-grid {
+        max-height: 80%;
+        min-height: unset;
+
+        .k-row-disabled {
+            .v-td {
+                outline: none;
+                cursor: default;
+                opacity: 0.6;
+                filter: grayscale(0.1);
+                pointer-events: none;
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+.work-order-operation-tabs {
+    margin-top: 20px;
+
+    .custom-attributes-wrapper {
+        width: 45%;
+    }
+
+    .page-actions {
+        display: flex;
+        justify-content:space-between;
+        gap: 15px;
+    
+        .vs-secondary {
+            width: 120px;
+        }
+    
+        .page-control {
+            max-width: 200px;
+        }
+    }
+    
+    .page-control {
+        min-width: 220px;
+    }
+    
+    .page-filter{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    
+        .export-prioritites-button {
+            min-width: 185px;
+        }
+    
+        .filter-container {
+            display: flex;
+            flex-direction: row;
+            vertical-align: bottom;
+            gap: 10px;
+            
+            span.filter-title {
+                color: $dark-color;
+                font-weight: 900 !important;
+                align-self: flex-end;
+            }
+        }
+    
+        .checkbox-filter {
+            font-weight: 400;
+            min-width: 251px;
+        
+            .checkbox-label {
+                padding-left: 10px;
+            }
+        }
+    
+        .v-multiselect-dropdown {
+            min-height: 26px;
+            width: auto;
+            max-height: 50px;
+        }
+    }
+    
+    .linked-sales-orders-wrapper {
+        margin: 15px 0px;
+    
+        .header-label {
+            font-size: 15px;
+            line-height: 16px;
+            font-weight: 500;
+        }
+    
+        .v-grid-wrapper {
+            .k-grid {
+                min-height: unset;
+            }
+        }
+    }
+
+    .work-order-attributes-wrapper {
+        width: 550px;
+
+        .attribute-form-wrapper {
+            .form-container {
+                .form-wrapper {
+                    .row {
+                        &:last-child {
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .no-attributes {
+        text-align: center;
+    }
+}

@@ -1,0 +1,28 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.troubleshoot-rule-dialog {
+  .k-tabstrip {
+    height: calc(100% - 34px);
+  
+    .k-content {
+      .v-textarea {
+          height: 100%;
+      }
+    }
+  }
+  
+  .k-dialog-buttongroup {
+    display: none;
+  }
+
+  .troubleshoot-wrapper {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 16px;
+  
+    .label-wrapper{
+      display: flex;
+      gap: 20px;
+    }
+  }
+}

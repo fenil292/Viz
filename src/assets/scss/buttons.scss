@@ -1,0 +1,116 @@
+@import "../scss/variables.scss";
+@import "../scss/font.scss";
+
+$primary-button-bg-color: $light-blue;
+$primary-button-text-color: $white;
+$primary-button-hover-text-color: $dark-blue;
+
+$secondary-button-bg-color: $light-white-gray;
+$secondary-button-text-color: $dark-button-gray;
+$secondary-button-hover-text-color: $gainsboro-gray;
+
+$delete-button-bg-color: $wine-red;
+$delete-button-text-color: $white;
+$delete-button-hover-bg-color: $dark-button-gray;
+$delete-button-hover-text-color: $white;
+
+.vs-button {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 9px;
+    gap: 4px;
+    text-align: center;
+    border-radius: 4px;
+    width: 120px;
+    height: 26px;
+    border: 1px solid $dark-black;
+    flex: unset;
+}
+
+.vs-button-text {
+    @extend .primary-font-family-400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.vs-primary {
+    @extend .vs-button;
+    background: $primary-button-bg-color;
+    color: $primary-button-text-color;
+
+    .k-button-text {
+        @extend .vs-button-text;
+    }
+
+    &:hover {
+        background: $primary-button-hover-text-color !important;
+        border: 1px solid $dark-black;
+    }
+
+    &:focus, &.k-focus {
+        box-shadow: none !important;
+    }
+}
+
+.vs-secondary {
+    @extend .vs-button;
+    background: $secondary-button-bg-color;
+    color: $secondary-button-text-color;
+
+    .k-button-text {
+        @extend .vs-button-text;
+    }
+
+    &:hover {
+        background: $secondary-button-hover-text-color !important;
+        border: 1px solid $dark-black;
+    }
+
+    &:focus, &.k-focus {
+        box-shadow: none !important;
+    }
+}
+
+.vs-delete {
+    @extend .vs-button;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.02) 100%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)), $delete-button-bg-color;
+    color: $delete-button-text-color;
+
+    .k-button-text {
+        @extend .vs-button-text;
+    }
+
+    &:hover {
+        background: $delete-button-hover-bg-color !important;
+        color: $delete-button-hover-text-color;
+        border: 1px solid $dark-black;
+    }
+
+    &:focus, &.k-focus {
+        box-shadow: none !important;
+    }
+}
+
+.vs-cancel {
+    @extend .vs-button;
+    background: $secondary-button-bg-color;
+    color: $secondary-button-text-color;
+
+    .k-button-text {
+        @extend .vs-button-text;
+    }
+
+    &:hover {
+        background: $delete-button-hover-bg-color !important;
+        color: $delete-button-hover-text-color;
+        border: 1px solid $dark-black;
+    }
+
+    &:focus, &.k-focus {
+        box-shadow: none !important;
+    }
+}

@@ -1,0 +1,50 @@
+@import '../../../../assets/scss/dialog.scss';
+
+.matrixui-configuration-container {
+    .header-button-wrapper {
+        height: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    .matrixui-configurations-form {
+        .form-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding-bottom: 20px;
+            padding-top: 0px !important;
+
+            .form-control-field {
+                width: 110px;
+                text-align: center;
+
+                .field-text {
+                    font-weight: 500 !important;
+                }
+            }
+
+            .range-field {
+                margin: 0px 15px;
+
+                .v-range-control {
+                    width: 375px;
+                }
+
+                .range-control-wrapper {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            &:first-child {
+                padding-top: 10px;
+
+                .field-title {
+                    font-weight: bold !important;
+                    font-size: 15px !important;
+                }
+            }
+        }
+    }
+}

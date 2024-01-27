@@ -1,0 +1,63 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container matrixui-configuration-container">
+    <form [formGroup]="matrixuiConfigurationsForm" *ngIf="matrixuiConfigurationsForm">
+        <div class="header-button-wrapper">
+            <button kendoButton class="vs-primary" (click)="onSaveConfigurations()" [disabled]="matrixuiConfigurationsForm.invalid">
+                Save
+            </button>
+        </div>
+        <div class="matrixui-configurations-form">
+            <div class="form-wrapper">
+                <div class="form-control-field">
+                    <span class="field-title">Statues</span>
+                </div>
+                <div class="form-control-field">
+                    <span class="field-title">Background</span>
+                </div>
+                <div class="form-control-field">
+                    <span class="field-title">Foreground</span>
+                </div>
+                <div class="form-control-field">
+                    <span class="field-title">Threshold</span>
+                </div>
+            </div>
+            <div [formGroupName]="'colorSchemaItems'">
+                <div class="form-wrapper" *ngFor="let configuration of configurations.colorSchemaItems" [formGroupName]="configuration.name">
+                    <div class="form-control-field">
+                        <span class="field-text">{{configuration.name}}</span>
+                    </div>
+                    <div class="form-control-field">
+                        <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker" formControlName="background">
+                        </kendo-colorpicker>
+                    </div>
+                    <div class="form-control-field">
+                        <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker" formControlName="foreground">
+                        </kendo-colorpicker>
+                    </div>
+                    <div class="form-control-field">
+                        <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox" [min]="0" [format]="'0'" formControlName="threshold">
+                        </kendo-numerictextbox>
+                    </div>
+                </div>
+            </div>
+            <div class="form-wrapper">
+                <div class="form-control-field">
+                    <span class="field-text">Blinking acceleration</span>
+                </div>
+                <div>
+                    <div class="range-field">
+                        <input class="v-range-control" type="range" min="0" max="10000" step="100" formControlName="backgroundBlinking" />
+                        <div class="range-control-wrapper">
+                            <small>Low</small>
+                            <span>{{ matrixuiConfigurationsForm.controls.backgroundBlinking.value }} ms</span>
+                            <small>Fast</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

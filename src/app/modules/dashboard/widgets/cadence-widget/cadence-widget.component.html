@@ -1,0 +1,14 @@
+<ng-container *ngIf="widget && !isLoading">
+    <app-keyvalue-widget *ngIf="widget.template === widgetTypeEnum.KEYVALUE"
+        [widget]="widget" [keyValueWidgetData]="widgetData">
+    </app-keyvalue-widget>
+
+    <app-table-widget *ngIf="widget.template === widgetTypeEnum.TABLE"
+        [widget]="widget" [tableWidgetData]="widgetData">
+    </app-table-widget>
+
+    <app-line-graph-widget *ngIf="widget.template === widgetTypeEnum.LINEGRAPH"
+        [widget]="widget" [lineWidgetData]="widgetData">
+    </app-line-graph-widget>
+</ng-container>
+<viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>

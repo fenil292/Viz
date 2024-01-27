@@ -1,0 +1,17 @@
+.part-info-container {
+    .header-button-wrapper {
+        height: 60px;
+        display: flex;
+        align-items: center;
+
+        .vs-secondary {
+            width: 220px;
+        }
+
+        .v-multiselect-dropdown {
+            min-width: 200px;
+            width: auto;
+            max-height: 50px;
+        }
+    }
+}

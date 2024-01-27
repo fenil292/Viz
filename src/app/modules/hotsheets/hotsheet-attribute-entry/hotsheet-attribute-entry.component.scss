@@ -1,0 +1,24 @@
+@import '../../../../assets/scss/dialog.scss';
+
+.hotsheet-attribute-entry-dialog {
+  .k-dialog {
+      max-height: 50%;
+
+      .k-dialog-content {
+          overflow: hidden;
+
+          .hotSheet-attribute-form-wrapper {
+              height: 80px;
+
+              .no-attributes {
+                  text-align: center;
+                  margin: 30px;
+              }
+
+              .dialog-action-wrapper {
+                  padding-top: 16px;
+              }
+          }
+      }
+  }
+}

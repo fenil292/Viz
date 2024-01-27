@@ -1,0 +1,69 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+  <div class="dialog-titlt-wrapper">
+    <span>
+      APS Process Flow Troubleshoot
+    </span>
+    <span class="breadcrumb-number">
+      2.2.1.2
+    </span>
+  </div>
+</kendo-dialog-titlebar>
+
+<div class="troubleshoot-wrapper">
+  <div class="label-wrapper">
+    <div class="title-text">Priority:</div>
+    <div class="value-text">{{priorityCode}}</div>
+  </div>
+
+  <div class="label-wrapper">
+    <div class="title-text">Dataset Path:</div>
+    <div class="value-text">{{emulateFlowRule.datasetPath}}</div>
+  </div>
+</div>
+
+<kendo-tabstrip>
+  <kendo-tabstrip-tab title="SQL" [selected]="true">
+    <ng-template kendoTabContent>
+      <kendo-textarea class="v-textarea" [value]="emulateFlowRule.sql"
+        [resizable]="'vertical'">
+      </kendo-textarea>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <kendo-tabstrip-tab title="Work Orders">
+    <ng-template kendoTabContent>
+      <div class="v-grid-wrapper h-full">
+        <kendo-grid [kendoGridBinding]="emulateFlowRule.workOrders" [columnMenu]="{columnChooser:false}"
+          [sortable]="true" filterable="menu" [resizable]="false" [reorderable]="false" class="h-full">
+          <kendo-grid-column title="Work Order" field="workOrderNumber">
+          </kendo-grid-column>
+          <kendo-grid-column title="Part Number" field="partNumber">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{dataItem.partNumber + " (" + dataItem.partRevision + ") "}}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column title="Required Date" field="requiredDate">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div *ngIf="dataItem.requiredDate !==''">
+                {{dataItem.requiredDate | date: 'dd/MM/yyyy' }}
+              </div>
+            </ng-template>
+            <ng-template kendoGridFilterMenuTemplate let-filter let-column="column" let-filterService="filterService" let-dataItem>
+              <date-range-filter [field]="'requiredDate'" [currentFilter]="filter" [filterService]="filterService">
+              </date-range-filter>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column title="Quantity" field="requiredQuantity">
+          </kendo-grid-column>
+        </kendo-grid>
+      </div>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <kendo-tabstrip-tab title="Logs">
+    <ng-template kendoTabContent>
+      <kendo-textarea class="v-textarea" [value]="logs" [resizable]="'vertical'">
+      </kendo-textarea>
+    </ng-template>
+  </kendo-tabstrip-tab>
+</kendo-tabstrip>

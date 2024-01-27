@@ -1,0 +1,11 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.failed-integration-container {
+    .v-grid-wrapper {
+        margin-top: 30px;
+
+        .k-grid {
+            max-height: calc(100vh - 200px);
+        }
+    }
+}

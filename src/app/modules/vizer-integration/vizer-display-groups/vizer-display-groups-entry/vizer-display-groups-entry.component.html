@@ -1,0 +1,82 @@
+<kendo-dialog-titlebar (close)="cancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            Vizer Display Group Details
+        </span>
+        <span class="breadcrumb-number">
+            3.2.1
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+<form [formGroup]="vizerDisplayGroupForm" class="vizer-display-group-dialog">
+    <div class="form-wrapper">
+        <div class="row">
+            <div class="field-wrapper">
+                <div class="title-wrapper">
+                    <span>ID:</span>
+                </div>
+                <div class="form-control-wrapper">
+                    <input kendoTextBox [type]="'text'" formControlName="id" class="v-textbox">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field-wrapper">
+                <div class="title-wrapper">
+                    <span>Group Alias:</span>
+                </div>
+                <div class="form-control-wrapper">
+                    <kendo-textbox class="field-control" formControlName="name" placeholder="Enter group alias"></kendo-textbox>
+                    <small class="error" *ngIf="vizerDisplayGroupForm.get('name')?.errors?.maxlength">
+                        The maximum length for this field is {{vizerDisplayGroupForm.get('name').errors.maxlength?.requiredLength}} characters.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field-wrapper align-items-start">
+                <div class="title-wrapper v-mt-5">
+                    <span>Work Center:</span>
+                </div>
+                <div class="form-control-wrapper">
+                    <kendo-multiselect [data]="workCenters" [autoClose]="false" [checkboxes]="true" [valuePrimitive]="true" textField="alias"
+                        [placeholder]="'Select work center'" valueField="id" formControlName="workCenterIds" class="v-multiselect-dropdown"
+                        [kendoDropDownFilter]="multiSelectFilter" (open)="onMultiSelectOpen($event)">
+                        <ng-template kendoMultiSelectItemTemplate let-dataItem>
+                            {{dataItem.workCenterId}} - {{dataItem.alias}}
+                        </ng-template>
+                        <ng-template kendoMultiSelectTagTemplate let-dataItem>
+                            {{dataItem.workCenterId}} - {{dataItem.alias}}
+                        </ng-template>
+                    </kendo-multiselect>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field-wrapper align-items-start">
+                <div class="title-wrapper v-mt-5">
+                    <span>Description:</span>
+                </div>
+                <div class="form-control-wrapper">
+                    <kendo-textarea class="v-textarea" formControlName="description" [resizable]="'vertical'">
+                    </kendo-textarea>
+                    <small class="error" *ngIf="vizerDisplayGroupForm.get('description')?.errors?.maxlength">
+                        The maximum length for this field is {{vizerDisplayGroupForm.get('description').errors.maxlength?.requiredLength}} characters.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-action-wrapper">
+        <button kendoButton (click)="cancel()" class="vs-secondary mr-12">
+            Cancel
+        </button>
+        <button kendoButton class="vs-primary" [disabled]="!vizerDisplayGroupForm.valid" [primary]="true"
+            (click)="onSaveVizerDisplayGroup()">
+            Save
+        </button>
+    </div>
+</form>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

@@ -1,0 +1,15 @@
+.work-related-illness-injuries-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  .header-button-wrapper {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .vs-secondary {
+      width: 120px;
+    }
+  }
+}

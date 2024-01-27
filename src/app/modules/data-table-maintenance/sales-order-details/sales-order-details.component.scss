@@ -1,0 +1,163 @@
+@import '../../../../assets/scss/variables.scss';
+
+.sales-order-details-wrapper {
+    height: calc(100% - 200px);
+
+    .header-label {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0px;
+    }
+
+    .sales-order-header {
+        display: flex;
+        flex-flow: wrap;
+        height: 60px;
+        justify-content: space-between;
+        align-content: center;
+    
+        .sales-order-info {
+            .header-label {
+                display: inline-block;
+                @extend .header-label;
+            }
+        }
+
+        .button-group {
+            display: flex;
+            flex-flow: row;
+            gap: 15px;
+        }
+    }
+    
+    .sales-order-details {
+        background-color: $white-smoke;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: row;
+    
+        .column-items {
+            min-width: 250px;
+            margin: 30px;
+    
+            .item {
+                font-size: 14px;
+                margin: 0 0 10px 0;
+                display: flex;
+    
+                .field-title {
+                    color: $light-gray;
+                    font-weight: 400;
+                }
+    
+                .field-value {
+                    color: $dark-button-gray;
+                    font-weight: 500;
+                }
+    
+                &:last-child {
+                    margin: 0px;
+                }
+            }
+    
+            &:first-child {
+                .field-title {
+                    min-width: 140px;
+                }
+            }
+    
+            &:last-child {
+                width: max-content;
+    
+                .field-title {
+                    min-width: 125px;
+                }
+            }
+        }
+    }
+
+    .linked-work-orders-wrapper {
+        .v-grid-wrapper {
+            margin-top: 15px;
+
+            .k-grid {
+                min-height: unset;
+            }
+        }
+    }
+
+    .quantity-distribution-wrapper {
+        margin-top: 15px;
+
+        .quantity-bar {
+            display: flex;
+            margin-top: 15px;
+            width: 100%;
+            height: 35px;
+            --border-radius: 5px;
+            border-radius: var(--border-radius);
+            border: 1px solid;
+
+            .quantity-section {
+                display: inline-flex;
+                align-items: center;
+                height: 100%;
+
+                .section-wrapper {
+                    display: inline-flex;
+                    align-items: center;
+                    padding-left: 10px;
+                    width: 100%;
+                    height: 100%;
+                    border-left: 1px solid;
+                    cursor: pointer;
+
+                    .section-text {
+                        font-weight: 500;
+                    }
+                }
+
+                &:first-child {
+                    border-radius: var(--border-radius) 0px 0px var(--border-radius);
+
+                    .section-wrapper {
+                        border: 0px;
+                    }
+                }
+
+                &:last-child {
+                    border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+                }
+            }
+        }
+    }
+
+    .sales-order-details-tabs {
+        margin-top: 20px;
+
+        .header-label {
+            font-size: 16px;
+            line-height: 16px;
+        }
+
+        .sales-order-attributes-wrapper {
+            width: 550px;
+    
+            .attribute-form-wrapper {
+                .form-container {
+                    .form-wrapper {
+                        .row {
+                            &:last-child {
+                                margin-bottom: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .no-attributes {
+            text-align: center;
+        }
+    }
+}

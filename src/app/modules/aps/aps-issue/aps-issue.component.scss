@@ -1,0 +1,27 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/font.scss';
+
+.aps-issues-wrapper {
+    .v-grid-wrapper {
+        margin-top: 30px;
+        .k-grid {
+            max-height: calc(100vh - 200px);
+            
+            .k-grid-container {
+                .k-grid-content {
+                    .k-grid-table {
+                        tbody {
+                            tr {
+                                td {
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

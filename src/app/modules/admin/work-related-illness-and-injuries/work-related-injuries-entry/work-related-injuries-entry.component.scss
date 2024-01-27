@@ -1,0 +1,49 @@
+@import '../../../../../assets/scss/dialog.scss';
+@import '../../../../../assets/scss/buttons.scss';
+@import '../../../../../assets/scss/variables.scss';
+
+.k-content {
+  .work-related-injury-illness-wrapper {
+    .work-related-injury-illness-form-details {
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .dialog-action-wrapper {
+      padding-top: 16px;
+      justify-content: center;
+    }
+
+    .work-related-injury-illness-form {
+      margin-top: 20px;
+
+      .form-container {
+        overflow-y: auto;
+        height: calc(100vh - 350px);
+
+        .form-wrapper {
+          .field-wrapper {
+            margin-left: 16px;
+
+            .title-wrapper {
+              margin-top: 20px;
+            }
+
+            .form-control-wrapper {
+              margin-top: 10px;
+              display: grid;
+
+              .v-textbox {
+                width: 18%;
+              }
+
+              .v-radio {
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

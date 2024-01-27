@@ -1,0 +1,152 @@
+<div style="overflow: auto;height: 100%;">
+    <query-builder [formControl]='queryControl' *ngIf="config?.fields" [(ngModel)]='query' [config]='config'
+    class="query-builder" (ngModelChange)="onQueryBuilderChange($event)" [emptyMessage]="'Please Add Condition'" #addRuleRef>
+    <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
+        <div #anchor class="button-group pointer" (click)="openAddRule(anchor, template)">
+            <v-icon [iconName]="'plus'"></v-icon>
+        </div>
+        <ng-template #template>
+            <div *ngIf="addRuleSet" (click)="addRuleSet();closeAddRule();" class="icontext-wrapper">
+                <v-icon [iconName]="'add-plus'"></v-icon>
+                <span class="rule-button-text">Add Group</span>
+            </div>
+            <div (click)="addRule();closeAddRule();" class="icontext-wrapper">
+                <v-icon [iconName]="'add-plus'"></v-icon>
+                <span class="rule-button-text">Add Condition</span>
+            </div>
+        </ng-template>
+        <div *ngIf="removeRuleSet" (click)="removeRuleSet()">
+        <span class="k-icon k-i-delete"></span>
+        </div>
+    </ng-container>
+    <ng-container *querySwitchGroup="let ruleset; let onChange=onChange">
+        <div class="condition-wrapper">
+            <input type="radio" [checked]="(ruleset.condition === '0' || ruleset.condition === 'and' ? 'checked' : '')" value="0" #andOption
+             kendoRadioButton class="v-radio" (change)="ruleset.condition=andOption.value; onQueryBuilderChange(query);"/>
+            <label class="condition-radio-label" (click)="ruleset.condition=andOption.value">AND</label>
+
+            <input type="radio" [checked]="(ruleset.condition === '1' ? 'checked' : '')" value="1" #orOption
+             kendoRadioButton (change)="ruleset.condition=orOption.value; onQueryBuilderChange(query);" class="v-radio"/>
+            <label class="condition-radio-label" (click)="ruleset.condition=orOption.value">OR</label>
+        </div>
+    </ng-container>
+    <ng-container *queryEntity="let rule; let entities=entities; let onChange=onChange">
+        <div class="query-builder-caption">Table</div>
+        <kendo-dropdownlist
+            [data]="entities"
+            textField="name"
+            valueField="name"
+            [(ngModel)]="rule.entity"
+            [style.width.px]="175"
+            class="v-dropdown"
+            [popupSettings]="{ width: 'auto' }"
+            [valuePrimitive]="true"
+            (ngModelChange)="onChange($event, rule)"
+        ></kendo-dropdownlist>
+    </ng-container>
+    <ng-container  *queryField="let rule; let fields=fields; let onChange=onChange; let getFields = getFields">
+        <div class="flex-order-2">
+            <div class="query-builder-caption">Field</div>
+            <kendo-dropdownlist
+                [data]="getFields(rule.entity)"
+                textField="text"
+                valueField="name"
+                [(ngModel)]="rule.field"
+                [style.width.px]="260"
+                class="v-dropdown field-dropdown"
+                [valuePrimitive]="true"
+                [popupSettings]="{popupClass: 'query-field-popup'}"
+                (ngModelChange)="onChange($event, rule)">
+                    <ng-template kendoDropDownListValueTemplate let-dataItem>
+                        <span [ngClass]="{ 'attribute-not-exist-text': dataItem?.name?.includes('NotExistAttribute') }">
+                            {{ dataItem?.text }}
+                        </span>
+                    </ng-template>
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                        <span class="query-field-text" *ngIf="!dataItem?.name?.includes('NotExistAttribute')">{{ dataItem.text }}</span>
+                    </ng-template>
+            </kendo-dropdownlist>
+        </div>
+    </ng-container>
+    <ng-container *queryOperator="let rule; let operators=operators; let onChange=onChange">
+        <div class="flex-order-3">
+            <div class="query-builder-caption">Operator</div>
+            <kendo-dropdownlist
+                [data]="operators"
+                textField="symbol"
+                valueField="id"
+                [(ngModel)]="rule.operator"
+                class="v-dropdown"
+                (ngModelChange)="onChange(rule)"
+            ></kendo-dropdownlist>
+        </div>
+    </ng-container>
+    <ng-container *queryInput="let rule;let field; type: dataTypes.STRING;  let onChange=onChange;">
+        <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
+            <div class="query-builder-caption">Value</div>
+            <kendo-textbox  class="v-textbox"
+                [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, field, dataTypes.STRING)" [clearButton] = "true" (blur)="onChange(rule.value)">
+            </kendo-textbox>
+        </div>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: dataTypes.URL;  let onChange=onChange;">
+        <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
+            <div class="query-builder-caption">Value</div>
+            <kendo-textbox class="v-textbox flex-order-4"
+                [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.URL)" [clearButton] = "true" (blur)="onChange(rule.value)">
+            </kendo-textbox>
+        </div>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: dataTypes.NVARCHAR;  let onChange=onChange;">
+        <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
+            <div class="query-builder-caption">Value</div>
+            <kendo-textbox class="v-textbox flex-order-4"
+                [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.NVARCHAR)" [clearButton] = "true" (blur)="onChange(rule.value)">
+            </kendo-textbox>
+        </div>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: dataTypes.DECIMAL; let onChange=onChange">
+        <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
+            <div class="query-builder-caption">Value</div>
+            <kendo-numerictextbox class="v-numeric-textbox flex-order-4" 
+                [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.DECIMAL)" (blur)="onChange()">
+            </kendo-numerictextbox>
+        </div>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: dataTypes.INT; let onChange=onChange">
+        <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
+            <div class="query-builder-caption">Value</div>
+            <kendo-numerictextbox class="v-numeric-textbox flex-order-4" [decimals]="0" [format]="'0'"
+                [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.INT)" (blur)="onChange()">
+            </kendo-numerictextbox>
+        </div>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: dataTypes.DATETIME; let onChange=onChange">
+        <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
+            <div class="query-builder-caption">Value</div>
+            <span kendoTooltip position="bottom" [tooltipWidth]="230" [tooltipTemplate]="descriptionTemplate" filter=".v-textbox" [tooltipClass]="'date-tooltip-wrapper'">
+                <kendo-textbox class="v-textbox flex-order-4"
+                    [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.DATETIME)" [clearButton] = "true" (blur)="onChange(rule.value);">
+                </kendo-textbox>
+                <ng-template #descriptionTemplate let-anchor>
+                    <div>
+                        <div>Supported Formats:</div>
+                        <div>YYYY-MM-DD HH:MM:SS</div>
+                        <div>date('now'); date('now', '+2 days');</div>
+                        <div>datedate('now', '+3 work days')</div>
+                    </div>
+                </ng-template>
+            </span>
+        </div>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: dataTypes.BOOLEAN; let onChange=onChange">
+    </ng-container>
+    <ng-container *queryInput="let rule; type: dataTypes.BIT; let onChange=onChange">
+    </ng-container>
+    <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
+        <div (click)="removeRule(rule)">
+            <span class="k-icon k-i-delete"></span>
+        </div>
+    </ng-container>
+</query-builder>
+</div>

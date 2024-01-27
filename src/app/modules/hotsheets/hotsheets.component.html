@@ -1,0 +1,105 @@
+<div [hidden]="workOrderId || salesOrderId">
+    <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+    <div class="container hotsheet-wrapper">
+    <div class="page-actions">
+        <div class="search-container" [formGroup]="filterForm">
+            <div class="search-wrapper">
+                <div class="field-label">Priority: </div>
+                <div class="field-control-wrapper">
+                    <kendo-dropdownlist class="v-dropdown" [data]="priorities"
+                        textField="value" valueField="id" formControlName="priority"
+                        [defaultItem]="{ value: 'Select Priority', id: null }">
+                    </kendo-dropdownlist>
+                </div>
+            </div>
+            <div class="search-wrapper">
+                <div class="field-label">Work Order: </div>
+                <div class="field-control-wrapper">
+                    <kendo-textbox [clearButton]="true" class="v-textbox" formControlName="workorder"
+                        (valueChange)="onChangePageFilters($event)" (keydown.enter)="onHotsheetFilter()">
+                    </kendo-textbox>
+                </div>
+            </div>
+            <button kendoButton class="vs-secondary search-btn" (click)="onHotsheetFilter()" 
+                [disabled]="isLoading || (filterForm.get('priority')?.value?.id === null && filterForm.get('workorder')?.value === '')">
+                Search
+            </button>
+            <button kendoButton type="button" class="vs-secondary" *ngIf="showClearFilter" (click)="clearHotsheetFilter()">
+                Clear Filters
+            </button>
+            <button kendoButton type="button" class="vs-secondary excel-button" [disabled]="isLoading || isExcelLoading" (click)="exportToExcel()">
+                Export To Excel
+                <span class="k-icon k-i-loading button-loading" *ngIf="isExcelLoading"></span>
+            </button>
+        </div>
+        <div class="hotsheet-priority-wrapper" [formGroup]="hotSheetPrioritiesForm">
+            <kendo-dropdownlist class="v-dropdown" [data]="priorities" [valuePrimitive]="true"
+                textField="value" valueField="id" required
+                [defaultItem]="{ value: 'Update Priorities', id: null }" formControlName="priorityInfoId">
+            </kendo-dropdownlist>
+        <button class="vs-secondary" kendoButton (click)="openUpdatePrioritiesConfirmDialog()" [disabled]="!hotSheetPrioritiesForm.valid">
+            Confirm
+        </button>
+        </div>
+    </div>
+    <div class="grid-container v-grid-wrapper" kendoTooltip showOn="none" [tooltipTemplate]="template" filter=".k-grid td" (mouseover)="showTooltip($event)">
+        <kendo-grid class="hotsheet-grid" (cellClick)="onHotSheetCellClick($event)" [columnMenu]="true" [loading]="isLoading || isWorkOrderAttributesLoading" [kendoGridBinding]="filterhotsheets"
+            filterable="menu" [sortable]="true" [resizable]="true" [reorderable]="true" [kendoGridSelectBy]="'workOrderNumber'"
+            [(selectedKeys)]="selectedItems" [selectable]="{enabled: true, checkboxOnly: true}"
+            [filter]="gridSettings.state.filter" [sort]="gridSettings.state.sort"
+            (dataStateChange)="dataStateChange($event)" (columnReorder)="columnReorder($event)"
+            (columnResize)="columnResize($event)" (columnVisibilityChange)="columnVisibilityChange($event)"
+            (selectedKeysChange)="onSelectedKeysChange()" (dblclick)="onHotSheetDoubleClick(hotSheetEntry?.dataItem?.workOrderId, hotSheetEntry?.dataItem?.salesOrderId, $event)">
+
+            <ng-container *ngFor="let column of gridSettings.columnConfig">
+                <kendo-grid-checkbox-column [columnMenu]="false" groupable="false" [width]="column.width" [resizable]="false"
+                    [showSelectAll]="true" [reorderable]="false" *ngIf="column.type === columnType.SELECTABLE_CHECKBOX">
+                </kendo-grid-checkbox-column>
+                <kendo-grid-column
+                    *ngIf="column.type !== columnType.SELECTABLE_CHECKBOX" [title]="column.title"
+                    [field]="column.field" [width]="column.width" [hidden]="column.hidden"
+                    [autoSize]="column.width > 0 ? false : true"
+                    [class]="{'priority': column.field === 'priorityCode'}">
+                    <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.TEXT || column.type === columnType.NUMBER">
+                        {{(dataItem[column.field] !== undefined && dataItem[column.field] !== null && column.field !== 'priorityCode') ? dataItem[column.field] : ''}}
+                        <div *ngIf="column.field === 'priorityCode'" [style.background-color]="setCellClassByPriority(dataItem)"
+                            class="lh-26 priority-column data-value">
+                            {{dataItem[column.field]}}
+                        </div>
+                    </ng-template>
+                    <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.DATE">
+                        <div *ngIf="dataItem[column.field] !== ''" class="data-value">
+                            {{ dataItem[column.field] | date: 'MM/dd/yyyy' }}
+                        </div>
+                    </ng-template>
+                    <ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter" let-filterService="filterService"
+                        *ngIf="multiCheckFilterColumns.includes(column.field)">
+                        <multicheck-filter [data]="filterDataArray[column.field]" [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                        </multicheck-filter>
+                    </ng-template>
+                    <ng-template kendoGridFilterMenuTemplate let-filter let-column="column" let-filterService="filterService" *ngIf="column.type === columnType.DATE">
+                        <date-range-filter [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                        </date-range-filter>
+                    </ng-template>
+                </kendo-grid-column>
+            </ng-container>
+            <ng-template kendoGridNoRecordsTemplate>
+                <div *ngIf="!isLoading && ((filterhotsheets === undefined || filterhotsheets?.length === 0) || gridSettings.state?.filter?.filters?.length > 0)">
+                    No Data Found</div>
+            </ng-template>
+        </kendo-grid>
+    </div>
+    <ng-template #template let-anchor class="v-tooltip">
+        <span>{{ anchor.nativeElement.innerText }}</span>
+    </ng-template>
+    </div>
+</div>
+<div [hidden]="!workOrderId">
+    <app-work-order-operations [workOrderId]="workOrderId" (showWorkOrders)="updateWorkOrder($event)">
+    </app-work-order-operations>
+</div>
+<div [hidden]="!salesOrderId">
+    <app-sales-order-details [id]="salesOrderId" (showSalesOrders)="updateSalesOrder($event)">
+    </app-sales-order-details>
+</div>
+<div kendoDialogContainer></div>

@@ -1,0 +1,10 @@
+<div class="b-profile">
+  <a href="https://forms.gle/aiywgdLNaRnywmSHA" target="_blank" class="user-ava">
+    <img src="assets/images/feedback.png" class="user-ava" />
+  </a>
+  <img src="assets/images/avatar.png" class="user-ava" />
+  <span class="username">{{ username | titlecase }}</span>
+  <a class="logout-wrapper" (click)="handleLogout()">
+    <v-icon [iconName]="'logout'"></v-icon>
+  </a>
+</div>

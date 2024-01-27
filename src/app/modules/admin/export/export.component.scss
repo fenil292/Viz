@@ -1,0 +1,34 @@
+.export-container {
+    .v-grid-wrapper {
+        margin-top: 30px;
+
+        .k-grid {
+            max-height: calc(100vh - 200px);
+            
+            .k-grid-aria-root {
+                .k-grid-header {
+                    .k-grid-header-wrap {
+                        table {
+                            thead {
+                                tr {
+                                    .k-header {
+                                        .k-state-active {
+                                            bottom: 2px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .action-button-wrapper {
+        .k-i-report-header-section {
+            font-size: 21px;
+            line-height: 0.9;
+        }
+    }
+}

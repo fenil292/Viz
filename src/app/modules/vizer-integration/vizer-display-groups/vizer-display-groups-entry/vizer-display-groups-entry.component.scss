@@ -1,0 +1,15 @@
+@import "../../../../../assets/scss/dialog.scss";
+
+.vizer-display-group-dialog {
+    .form-wrapper {
+        .row {
+            .field-wrapper {
+                .form-control-wrapper {
+                    .v-textarea {
+                        height: 100px;
+                    }
+                }
+            }
+        }
+    }
+}

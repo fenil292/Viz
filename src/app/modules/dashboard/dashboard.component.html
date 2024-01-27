@@ -1,0 +1,25 @@
+<app-breadcrumb [path]="path" [index]="index" [widgets]="widgets" (widgetHideShow)="onChangeWidgetVisibility($event)">
+</app-breadcrumb>
+<div class="cadence-wrapper" #gridTooltip="kendoTooltip" kendoTooltip [tooltipTemplate]="template" (mouseover)="showTooltip($event)">
+  <kendo-tilelayout [columns]="columns" [reorderable]="true" [resizable]="true" [rowHeight]="defaultRowHeight" [autoFlow]="autoFlow"
+    [ngClass]="{'h-full': isLoading || widgets?.length === 0}" (reorder)="onReorder($event)" (resize)="onResize($event)">
+    <kendo-tilelayout-item [title]="widget.title" *ngFor="let widget of widgets" [colSpan]="widget.colSpan" [rowSpan]="widget.rowSpan" [hidden]="!widget.visible">
+      <ng-container *ngIf="widget.isGroup">
+        <kendo-tilelayout-item-body>
+          <app-group-widget [widgets]="widget.widgets">
+          </app-group-widget>
+        </kendo-tilelayout-item-body>
+      </ng-container>
+      <kendo-tilelayout-item-body *ngIf="!widget.isGroup">
+        <app-cadence-widget [widget]="widget.widgets[0]">
+        </app-cadence-widget>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+   </kendo-tilelayout>
+  <ng-template #template let-anchor>
+    <span>{{ anchor.nativeElement.innerText }}</span>
+  </ng-template>
+</div>
+<div class="full-page-loader">
+  <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

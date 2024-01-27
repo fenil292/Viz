@@ -1,0 +1,82 @@
+@import "../../../../assets/scss/theme.scss";
+@import "../../../../assets/scss/font.scss";
+
+.confirm-dialog-wrapper {
+        .k-dialog-titlebar {
+            height: 45px;
+            padding: 0px;
+            margin: 0px;
+            background-color: $dialog-header-bg-color;
+            box-shadow: -5px 2px 10px $dialog-header-shadow-color;
+            z-index: 1;
+
+            .k-dialog-title {
+                @extend .primary-font-family-400;
+                font-size: 18px;
+                line-height: 20px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.18px;
+                margin-left: 16px;
+                color: $dialog-header-text-color;
+
+                .k-dialog-actions {
+                    padding-right: 16px;
+                }
+            }
+
+            .k-dialog-actions {
+                margin-right: 10px;
+
+                .k-dialog-action {
+                    padding: 0px !important;
+                    margin: 0px !important;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+
+                    .k-i-x {
+                        font-size: 16px !important;
+                        min-width: 16px !important;
+                        min-height: 16px !important;
+                        color: $dialog-header-text-color;
+                    }
+                }
+            }
+        }
+
+    .k-dialog-content {
+        padding: 16px 29px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        background-color: $confirm-dialog-content-bg-color;
+        height: 117px !important;
+
+        .message-text {
+            @extend .primary-font-family-400;
+            font-size: 14px;
+            line-height: 20px;
+            color: $confirm-dialog-content-text-color;
+            text-align: center;
+        }
+    }
+
+    .confirm-dialog-action-wrapper {
+        background: $confirm-dialog-content-bg-color;
+        margin: 0px !important;
+        height: 58px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 16px !important;
+        gap: 15px;
+        border: 0px !important;
+    }
+}

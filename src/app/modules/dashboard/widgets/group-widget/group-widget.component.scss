@@ -1,0 +1,22 @@
+.group-widget-wrapper {
+    display: flex;
+    gap: 18px;
+    height: 100%;
+
+    .widget-wrapper {
+        padding: 0px 16px;
+        min-width: 245px;
+
+        &:first-child {
+            padding-left: 0px;
+        }
+
+        &:last-child {
+            padding-right: 0px;
+        }
+
+        &.line-graph-widget-wrapper {
+            min-width: 490px;
+        }
+    }
+}

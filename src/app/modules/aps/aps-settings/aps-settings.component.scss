@@ -1,0 +1,86 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/font.scss";
+
+.aps-settings-wrapper {
+    .header-button-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .run-button {
+            width: 170px;
+        }
+
+        .action-button-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .integrator-checkbox-wrapper {
+                .v-checkbox {
+                    height: 18px;
+                    width: 18px;
+                }
+                
+                .checkbox-label {
+                    color: $light-title-gray;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+
+    .dataset-wrapper {
+        height: auto !important;
+        margin-top: 16px;
+        padding: 30px 30px 30px 30px !important;
+    }
+
+    .aps-schedulings-wrapper {
+        height: auto !important;
+        margin-top: 16px;
+        margin-bottom: 16px;
+
+        .v-grid-wrapper {
+            .k-grid {
+                width: calc(100% - 30px);
+            }
+        }
+    }
+
+    .form-wrapper {
+        background: $white-smoke;
+        border: 1px solid $dark-black;
+        padding: 30px 0px 30px 30px;
+        height: 182px;
+
+        .row {
+            .field-wrapper {
+                align-items: baseline;
+                .title-wrapper {
+                    width: 160px;
+                }
+
+                .form-control-wrapper {
+                    .v-dropdown {
+                        width: 180px;
+                    }
+
+                    .schedule-wrapper {
+                        display: inline-table;
+
+                        .v-dropdown,
+                        .v-numeric-textbox,
+                        .v-timepicker {
+                            margin-left: 10px;
+                        }
+
+                        .v-dropdown {
+                            width: 100px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

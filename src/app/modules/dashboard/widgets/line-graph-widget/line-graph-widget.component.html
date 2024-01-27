@@ -1,0 +1,11 @@
+<kendo-chart class="h-full">
+    <kendo-chart-category-axis>
+      <kendo-chart-category-axis-item [categories]="graphXAxis" [title]="{ text: lineWidgetData?.keyAxeName }">
+      </kendo-chart-category-axis-item>
+      <kendo-chart-tooltip> </kendo-chart-tooltip>
+    </kendo-chart-category-axis>
+    <kendo-chart-series>
+      <kendo-chart-series-item type="line" *ngFor="let line of graphLineData" [data]="line">
+      </kendo-chart-series-item>
+    </kendo-chart-series>
+</kendo-chart>

@@ -1,0 +1,74 @@
+<div class="signin-wrapper">
+  <div class="header-container">
+    <span class="title-text">
+        Viztoc
+    </span>
+    <span class="index">
+      0.1
+    </span>
+  </div>
+  <form [formGroup]="authFormGroup" autocomplete="off" (ngSubmit)="handleLogin()">
+    <div class="auth-form-wrapper">
+      <div class="control-wrapper">
+        <div class="control-name">
+          <div class="control-text">User Name:</div>
+        </div>
+        <div class="field-wrapper">
+          <kendo-textbox #usernameInput formControlName="login"
+            [ngClass]="{'k-value': authFormGroup.get('login')?.value !== ''}">
+            <ng-template kendoTextBoxSuffixTemplate *ngIf="authFormGroup.get('login')?.value !== ''">
+              <button type="button" kendoButton fillMode="clear"
+                (click)="authFormGroup.controls.login.setValue('')" tabindex="-1">
+                  <span class="k-icon k-i-x"></span>
+              </button>
+            </ng-template>
+          </kendo-textbox>
+        </div>
+      </div>
+      <div class="control-wrapper">
+        <div class="control-name">
+          <div class="control-text">Password:</div>
+        </div>
+        <div class="field-wrapper">
+          <kendo-textbox #passwordInput="kendoTextBox" formControlName="password"
+            [ngClass]="{'k-value': authFormGroup.get('password')?.value !== ''}">
+            <ng-template kendoTextBoxSuffixTemplate *ngIf="authFormGroup.get('password')?.value !== ''">
+              <button type="button" kendoButton fillMode="clear"
+                (click)="authFormGroup.controls.password.setValue('')" tabindex="-1">
+                  <span class="k-icon k-i-x"></span>
+              </button>
+              <button type="button" kendoButton fillMode="clear" *ngIf="!isPasswordVisible"
+                (click)="showPassword()" tabindex="-1">
+                  <span class="k-icon k-i-eye"></span>
+              </button>
+              <button type="button" kendoButton fillMode="clear" *ngIf="isPasswordVisible"
+                (click)="hidePassword()" tabindex="-1">
+                  <v-icon class="k-icon" [iconName]="'hide-password'"></v-icon>
+              </button>
+            </ng-template>
+          </kendo-textbox>
+        </div>
+      </div>
+      <div class="control-wrapper">
+        <div class="control-name">
+          <div class="control-text"></div>
+        </div>
+        <div class="field-wrapper">
+          <input type="checkbox" [rounded]="'small'" kendoCheckBox tabindex="-1" /> 
+          <div class="form-label-wrap">
+            <span class="form-label">Remember me</span>
+            <span class="form-label forgot-password-label" (click)="onForgotPassword()">Forgot Password?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-wrapper">
+      <button kendoButton class="vs-primary" [disabled]="authFormGroup.invalid">
+        Login
+      </button>
+    </div>
+  </form>
+</div>
+<div class="full-page-loader">
+  <viztoc-spinner [isLoading]="isLoading"> </viztoc-spinner>
+</div>

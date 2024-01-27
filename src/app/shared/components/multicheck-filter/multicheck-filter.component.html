@@ -1,0 +1,11 @@
+<div class="multicheck-filter-wrapper">
+    <div class="search-box">
+        <input #textbox class="k-textbox k-input k-rounded-md" (input)="onInput(textbox.value)" />
+    </div>
+    <ul>
+        <li *ngFor="let item of currentData; let i = index;" (click)="onSelectionChange(item)" [ngClass]="{'k-selected': isItemSelected(item)}">
+            <input type="checkbox" kendoCheckBox [checked]="isItemSelected(item)"/>
+            <span class="item-text">{{item}}</span>
+        </li>
+    </ul>
+</div>

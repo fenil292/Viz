@@ -1,0 +1,13 @@
+.control-wrapper {
+    display: flex;
+    justify-content:space-between;
+    gap: 15px;
+
+    .v-dropdown {
+        width: 220px;
+    }
+
+    .vs-secondary {
+        width: 100px;
+    }
+}

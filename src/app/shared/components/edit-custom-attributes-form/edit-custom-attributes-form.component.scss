@@ -1,0 +1,28 @@
+.attribute-form-wrapper {
+    .form-container {
+        overflow-y: auto;
+    
+        .form-wrapper {
+            margin-right: 16px;
+            
+            .row {
+                .field-wrapper {
+                    .title-wrapper {
+                        min-width: 130px;
+                        max-width: 130px;
+                        margin-right: 10px;
+                        word-wrap: break-word;
+                    }
+                }
+                
+                .form-control-wrapper {
+                    width: calc(100% - 140px);
+
+                    .data-value {
+                        line-height: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

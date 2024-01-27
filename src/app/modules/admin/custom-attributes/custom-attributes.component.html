@@ -1,0 +1,91 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container custom-attributes-wrapper" *ngIf="selectedAttribute">
+    <div class="button-container">
+        <div class="table-container">
+            <span class="label-text mr-12">Table:</span>
+            <kendo-dropdownlist [data]="tables" [value]="selectedAttribute.name" (valueChange)="onChangeTable($event)" class="v-dropdown">
+            </kendo-dropdownlist>
+        </div>
+        <div class="button-wrapper">
+            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+                Cancel
+            </button>
+            <button kendoButton class="vs-primary" (click)="onSubmit()">
+                Save
+            </button>
+        </div>
+    </div>
+    <div class="attribute-container">
+        <div class="attribute-action-buttons">
+            <button type="button" kendoButton class="vs-secondary attribute-button mr-12" (click)="onAddNewCustomAttribute()">
+                Add Custom Attribute
+            </button>
+            <span kendoTooltip position="bottom" *ngIf="isCustomAttributesChange" class="warning-icon">
+                <v-icon class="k-icon" title="Has not saved changes" [iconName]="'warning'"></v-icon>
+            </span>
+        </div>
+        <div class="v-grid-wrapper">
+            <kendo-grid [kendoGridBinding]="selectedAttribute.attributes">
+                <kendo-grid-column field="name" [title]="'Attribute Name'">
+                </kendo-grid-column>
+                <kendo-grid-column field="datatype" [title]="'Data Type'">
+                </kendo-grid-column>
+                <kendo-grid-column field="aps" [title]="'APS'">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <input class="k-checkbox k-checkbox-md k-rounded-md" [disabled]="true" type="checkbox"
+                            [checked]="dataItem.aps" />
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="hotSheet" [title]="'Hot Sheet'" *ngIf="!removeHotSheetForTables.includes(selectedAttribute.name)">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <input class="k-checkbox k-checkbox-md k-rounded-md" [disabled]="true" type="checkbox"
+                            [checked]="dataItem.hotSheet" />
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="matrixUI" [title]="'MatrixUI'">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <input class="k-checkbox k-checkbox-md k-rounded-md" [disabled]="true" type="checkbox"
+                            [checked]="dataItem.matrixUI" />
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column [title]="'Actions'">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <div class="action-button-wrapper">
+                            <div kendoTooltip position="top">
+                                <button type="button" kendoButton>
+                                    <span class="k-icon k-i-edit" title="Edit" (click)="onEditAttribute(dataItem)"></span>
+                                </button>
+                            </div>
+                            <div kendoTooltip position="top">
+                                <button type="button" kendoButton>
+                                    <span class="k-icon k-i-delete" title="Delete" (click)="onDeleteAttribute(dataItem)"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
+        </div>
+    </div>
+    <div class="persist-fields-container">
+        <h2 class="header-label">Core Fields</h2>
+        <div class="v-grid-wrapper">
+            <kendo-grid [kendoGridBinding]="selectedAttribute.persistFields" [autoSize]="false">
+                <kendo-grid-column field="column" [title]="'Name'" [width]="250">
+                </kendo-grid-column>
+                <kendo-grid-column field="type" [title]="'Data Type'" [width]="150">
+                </kendo-grid-column>
+                <kendo-grid-column field="aps" [title]="'APS'" [width]="150">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <input class="k-checkbox k-checkbox-md k-rounded-md" [disabled]="true" type="checkbox"
+                            [checked]="dataItem.aps" />
+                    </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
+        </div>
+    </div>
+    <div kendoDialogContainer></div>
+</div>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

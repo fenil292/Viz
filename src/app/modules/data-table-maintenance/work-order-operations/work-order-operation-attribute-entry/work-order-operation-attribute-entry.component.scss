@@ -1,0 +1,24 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.work-order-operation-attribute-entry-dialog {
+    .k-dialog {
+        max-height: 50%;
+        
+        .k-dialog-content {
+            overflow: hidden;
+
+            .work-order-operation-attribute-form-wrapper {
+                height: calc(100% - 42px);
+
+                .no-attributes {
+                    text-align: center;
+                    margin: 30px;
+                }
+
+                .dialog-action-wrapper {
+                    padding-top: 16px;
+                }
+            }
+        }
+    }
+}

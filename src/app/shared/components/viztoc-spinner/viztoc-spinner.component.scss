@@ -1,0 +1,15 @@
+@import "../../../../assets/scss/variables.scss";
+
+.viztoc-spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    .viztoc-spinner {
+        height: 50px;
+        width: 50px;
+        color: $light-black;
+        position: relative;
+        z-index: 99999;
+    }
+}

@@ -1,0 +1,20 @@
+@import '../../../../../../assets/scss/dialog.scss';
+
+.dataset-log-dialog {
+    .k-dialog-titlebar {
+        .k-dialog-title {
+            @extend .primary-font-family;
+            font-weight: 500 !important;
+        }
+    }
+
+    .k-dialog-content {
+        .v-textarea {
+            height: 351px;
+        }
+    }
+
+    .k-dialog-buttongroup {
+        display: none;
+    }
+}

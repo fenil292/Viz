@@ -1,0 +1,377 @@
+1.2.1.0
+[+] #444 - Validate Aps Priority Rule within Aps Process Flow
+[+] #445 - Validate duplicates Aps Process Flow Names
+
+1.2.0.0
+Release Candidate Product Version 2.1.0.4
+
+1.1.4.0
+[+] #427 - Line graph widget
+
+1.1.3.0
+[+] #428 - All correctly loaded widgets should be displayed in the group
+
+1.1.2.0
+[!] #370 - Fix the Issue 5,6,7
+
+1.1.1.0
+[+] #422 - The user is redirected to the page Log Out of the JIS
+
+1.1.0
+Release Candidate Product Version 2.1.0.3
+
+1.0.94.0
+[+] #370 - Cadence Screen - Complete remaning points
+
+1.0.93.0
+[+] #425 - Add the links to pages 'Work Order Details' and 'Sales Order Details' from the page HotSheet
+
+1.0.92.0
+[+] #420 - Add possibility to edit Custom Attributes values inside Hot Sheet grid
+[!] #424 - UI improvements on the pages Add/Edit/Delete Work Related Illness And Injuries
+
+1.0.91.0
+[!] #370 - Fix design issue
+
+1.0.90.0
+[+] #370 - Cadence Screen
+
+1.0.89.0
+[+] #423 - UI improvements on the page Work Related Illness And Injuries
+[+] #424 - UI improvements on the pages Add/Edit/Delete Work Related Illness And Injuries
+
+1.0.88.0
+[+] #410 - [Frontend] Create UI for Injury or Onset of Illness
+
+1.0.87.0
+[+] #420 - Add possibility to edit Custom Attributes values inside Hot Sheet grid
+
+1.0.86.0
+[!] #379 -  APS Process Flow on Entry view
+[+] #403 - The WO in the page WorkOrders should be refreshed if the work order was edited
+[+] #414 - Separate the values of Quantity and UOM in the column Stock Quantity with a space
+[+] #415 - Rename 'Persist Fields' to 'Core Fields' on the page Custom Attributes
+
+1.0.85.0
+[+] #379 -  APS Process Flow on Entry view
+
+1.0.84.0
+[+] #380 - Add paging to Datasets view
+
+1.0.83.0
+[+] #148 - Use JIT Identity Server for authorization, add test environment
+
+1.0.82.0
+[+] #148 - Use JIT Identity Server for authorization
+
+1.0.81.0
+[!] #378 - Color of the WorkCenter is shown incorrect in the grid
+[!] #272 - [Backend] The information in the APS logs is repeated
+[!] #359 - Edit Custom Attributes in grids
+
+1.0.80.0
+[!] #361 - Add MatrixUI flag to SchedulePriority
+[!] #369 - Use UTC DateTime on Backend and Local TimeZone on UI
+
+1.0.79.0
+[+] #359 - Edit Custom Attributes in grids(Rename endpoints)
+
+1.0.78.0
+[!] Remove comment in environment.prod.ts
+
+1.0.77.0
+[!] Changes master to test
+- Used same environment variable and web.config for test branch
+
+1.0.76.0
+[+] #361 - Add MatrixUI flag to SchedulePriority
+[+] #241 - Hot Sheet Screen Refinements
+[+] #369 - Use UTC DateTime on Backend and Local TimeZone on UI
+[!] #314 - The user should be able to reprocess Dataset
+
+1.0.75.0
+[+] #359 - Edit Custom Attributes in grids
+
+1.0.74.0
+[+] #357 - Show custom attributes on entity grids
+
+1.0.73.0
+[+] #360 - Save Part Attribute Value in edit mode
+
+1.0.72.0
+[+] #350 - The full list of the priorities should be shown in the filter 'Priority' on the page Hot Sheet
+[+] #351 - Don`t show the button Load New Dataset on the page  Datasets
+
+1.0.71
+[+] #314 - The user should be able to reprocess Dataset
+
+1.0.70
+[+] #322 - Use WorkOrder.ID and WorkOrderOperation.ID to connect with related tables
+
+1.0.69
+[+] #341 - Change a tooltip for fields Datetime on the page Process Flow
+
+1.0.68
+[+] #334 - The names of all tables should fit in the Dropdown list
+[+] #336 - An incorrect condition for the rule was sent to the server
+
+1.0.67
+[!] fix the issue of #326 - Show the value of Part Revision on the page Part Info
+
+1.0.66
+[+] #326 - Show the value of Part Revision on the page Part Info
+
+1.0.65
+[+] #324 - Filter data asc in the dropdown on the Add Attribute form
+
+1.0.64
+[+] #321 - Add an object to enter a value for the custom attribute with type=URL on the Process Flow Entry page
+
+1.0.63
+[+] #318 -  Flow rules with custom attribute doesn`t save in the db
+
+1.0.62
+[+] #313 - Changes a attribute models of workorder, workorder operation, salesorder, etc...
+
+1.0.61
+[+] #313 - Change the combination of the fields for unique identification of the Sales Orders
+
+1.0.60
+[+] #317 - In the APS logs results value 'null' appears
+
+1.0.59
+[+] #310 - An exclamation mark doesn`t appear when user delete an attribute
+
+1.0.58
+[!] fix the issue of #307 - Custom attributes UI improvements
+
+1.0.57
+[+] #295 - Changes on the page Work Order Details
+[+] #298 - An issues apper on edit Default process flow
+[+] #305 - Add an exclamation mark to notify the user about unsaved data on he page Custom Attributes
+[+] #307 - Custom attributes UI improvements
+
+1.0.56
+[+] #279 - Add Custom Attributes to Hot Sheet view
+[!] fix the issue of #277 - Add Custom Attributres to Work Center
+[!] fix the issue of #278 - Add Custom Attributes to Part
+[!] #303 - Use the the same control for Attribute edit
+
+1.0.55
+[+] #278 - Add Custom Attributes to Part
+[+] #303 - Use the the same control for Attribute edit
+[!] fix the issue(#1, #2) in #277 - Add Custom Attributres to Work Center
+
+1.0.54
+[+] #276 - Add Custom Attributes to Sales Order Details view
+[+] #277 - Add Custom Attributres to Work Center
+[!] fix the issue of #275 - Edit Custom Attributes for WorkOrders
+
+1.0.53
+[+] #275 - Edit Custom Attributes for WorkOrders
+
+1.0.52
+[!] fix the issue of #274 - Add Data Objects view
+[!] fix the issue of #273 - Add Custom Attributes to Process Flow Query Builder
+
+1.0.51
+[+] #274 - Add Data Objects view
+[+] #273 - Add Custom Attributes to Process Flow Query Builder
+[+] #294 - Filtering should not be reset when a priority is changed
+
+1.0.50
+[+] #293 - For all columns with dates use special filter which allows user to select a date range
+
+1.0.49
+[+] #292 - Change a page index of changeSet view '5.2.1' to '5.2.2'
+
+1.0.48
+[+] #292 - Show the next numbers of the pages in the application
+
+1.0.47
+[+] #290 - Add filters for the grid columns on the page Export
+
+1.0.46
+[!] #289 - fix the issue of 'clear filters' button in hotsheet
+
+1.0.45
+[+] #289 - Changes for filter by Work Order on the page Hot Sheet
+
+1.0.44
+[+] #287 - Reorder VizTOC Menu Items
+[!] #250 - Change Work Center Groups to Vizer Display Groups
+
+1.0.43
+[+] #284 - Refine Sales Order Details Screen
+[+] #285 - All Qty should have 4 characters after the dot
+[!] #244 - Sales Order View
+[!] #245 - Show Linked Sales Orders on Work Order Details
+
+1.0.42
+[+] #250 - Change Work Center Groups to Vizer Display Groups
+[+] #252 - Change Bottleneck to Critical Constraint on Hot Sheet
+[+] #254 - Add Critical Constraint Field to Work Center
+
+1.0.41
+[+] #269 - Replace VizTOC Logo and Review Site Color Scheme
+
+1.0.40
+[+] #240 - Add view for Export
+
+1.0.39
+[+] #244 - Sales Order View
+[+] #245 - Show Linked Sales Orders on Work Order Details
+
+1.0.38
+[+] #251 - Please Move Scheduling Priorities to APS Menu Group
+[+] #253 - Make Page Font Size Smaller
+[!] #262 - move the "Only show remaining process steps" filter to the left in work order detail
+[!] #263 - move the search objects to the left in work order page
+
+1.0.37
+[+] #264 - Use WorkOrder Number instead of ID on UI
+
+1.0.36
+[+] #265 - Remove Integration Settings from VizTOC Menu
+
+1.0.35
+[!] #235 - Fix the issue of page while apply filter in work order page
+[!] #263 - Change the order quick filter object in work order page
+
+1.0.34
+[+] #262 - Refine Work Order Details Screen
+[+] #263 - Refine Work Orders Screen
+
+1.0.33
+[!] #258 - Don't reload page on back from entry view
+[+] #260 - Show correct message when token is expired
+
+1.0.32
+[!] #235 - Fix the use of Work Order list optional date filter
+
+1.0.31
+[+] #258 - Don't reload page on back from entry view
+
+1.0.30
+[+] #235 - Work Order list optional date filter
+
+1.0.29
+[!] #234 - Sort items in the group Dropdown (except 'Not assigned') in work center entry
+
+1.0.28
+[+] #234 - Unassign Work Center Group from Work Center
+[+] #236 - Remove 'Cancal' button on popups
+
+1.0.27
+[+] #242 - Add a button leading to google form to collect feedback
+
+1.0.26
+[!] #231 - An incorrect direction of the arrow in the side menu
+[!] #233 - Remove an extra object under the confirmation window when user deletes some Priority
+[!] #206 - Change a date format into other pages
+
+1.0.25
+[+] #206 - Change Date Format on APS Settings Screen
+
+1.0.24
+[!] #224 - Change a tooltip text for date type control in QueryBuilder control
+
+1.0.23
+[+] #223 - Сustomize Grid filtering on the form Hot Sheet
+[+] #224 - Add tooltip for DateTime fields on QueryBuilder
+[+] #201 - Add another a icon when flow rules changes
+[!] #197 - Disable a 'Save' button if form has invalid data in priority entry page
+
+1.0.22
+[+] #208 - Add Export to Excel on Hot Sheet
+[+] #218 - Improve login view
+[+] #216 - Add "Reset Manual Priority" to HotSheet
+
+1.0.21
+[+] #214 - [MatrixUI] Add blink configuration
+
+1.0.20
+[+] #215 - Customize Grid filtering
+[!] #192 - Sort the Priority dropdown list based on the sequence number on the form 'Flow Rule Entry'
+[+] #212 - Chnage caption in the browsr tab when user opens the form 'Work Order Details'
+
+1.0.19
+[+] #207 - Add Part Number Quick Filter on Work Orders Screen
+[+] #202 - [Core] Delete old datasets
+
+1.0.18
+[+] #176 - Add Page to save MatrixUI Configuration
+[+] #201 - Change the logic of save data on the form Process Flow Entry
+[!] #196 - rename column from 'Start By ' to 'Started By' in dataset grid
+[+] #193, #194, #195 - Add a toaster to show a validationError message
+
+1.0.17
+[+] #188 - Add a new  grid on the form APS Settings
+[+] #187 - Fields Dataset Archive Path and Dataset Path: should be mandatory
+[+] #200 - Use value of "forceIntegrationDataset" from GetApsSettings to show data
+[+] #197 - User should see the message that the allowed field size has been exceeded
+[+] #196 - [Core] Extend Dataset download logging
+[+] #198 - Remove the button 'Request New Dataset' from the form 'Failed Integration Requests'
+
+1.0.16
+[+] #190 - The dropdown 'Priority' is empty on the form 'Flow Rule Entry'
+[+] #192 - VizTOC UI Refinement
+[!] #173 - Make check box 'Force VizToc Integrator dataset generation' is off by default
+
+1.0.15
+[!] #181 - Fix the issue of remove tooltip from external work centers button
+
+1.0.14
+[+] #185 - Provide WorkOrder logs
+[+] #189 - Don`t show a validation message when user try to run APS when it's already running
+
+1.0.13
+[!] Fix package lock
+
+1.0.12
+[!] Fix package lock
+
+1.0.11
+[!] Fix a default value of grid state
+
+1.0.10
+[+] #184 - Add Manual Priority to UI in work order and work order detail page, changes for remove "aps" field in scheduling priority page
+[+] #186 - Refine Work Order Details Screen
+[+] #183 - Show the version of the Service on UI
+[+] #187 - Make changes for fields Dataset Archive Path and Dataset Path on the form APS Settings
+
+1.0.9
+[+] #173 - Manually Refresh Dataset from ERP using UI
+[+] #181 - Add Tooltips for all icons in the column Actions
+[!] #177 - Fix a quick filters issues in work order
+
+1.0.8
+[+] #177 - Fix filter on WorkOrders list
+
+1.0.7
+[+] #162 - Save grid state for all grid pages
+[+] #169 - Highlighted Font Color on Work Center Details
+
+1.0.6
+[+] #161 - Fix grid blinking on WorkOrders load
+[+] #163 - Add "Quick Filter" Options to Hot Sheet Screen
+[+] #164 - Add "Quick Filter" Options to Work Orders Screen
+[+] #165 - Change Data Grid Page Size Options
+
+1.0.5
+[+] #157 - Show Aps Job results and logs
+
+1.0.4
+[+] #145 - Rename field ApsConfiguration.OuterData to PublishHotSheet
+
+1.0.3
+[!] Configure
+
+1.0.2
+[!] Fix tag name in environment.prod.ts
+
+1.0.1
+[+] #153 - configure CI/CD for Web UI
+
+1.0.0
+[+] #153 - configure CI/CD for Web UI

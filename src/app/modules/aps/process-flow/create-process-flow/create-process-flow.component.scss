@@ -1,0 +1,146 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/font.scss';
+@import '../../../../../assets/scss/dialog.scss';
+
+.process-flow-wrapper {
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .page-title-text {
+            font-weight: 500;
+            font-size: 18px;
+            margin-top: 19px;
+            margin-bottom: 20px;
+        }
+
+        .button-wrapper {
+            display: flex;
+        }
+    }
+
+    .form-wrapper {
+        background: $white-smoke;
+        border: 1px solid $dark-black;
+        padding: 30px 0px 30px 30px;
+
+        .row {
+            margin-bottom: 16px;
+
+            .field-wrapper {
+                display: flex;
+                align-items: center;
+
+                .title-wrapper {
+                    width: 140px;
+                    height: 17px;
+                }
+            }
+        }
+    }
+
+    .process-type-wrapper {
+        margin: 25px 0px 12px 0px;
+
+        .process-type-text {
+            font-weight: 500;
+            font-size: 16px;
+            display: inline-block;
+            padding: 8px 15px;
+            color: $medium-gray;
+            cursor: pointer;
+
+            .warning-icon {
+                margin-left: 5px;
+            }
+
+            &:first-child {
+                padding-left: 0px;
+            }
+        }
+
+        .active {
+            color: $primary-color;
+        }
+
+        .k-button {
+            float: right;
+            padding: 3px 16px;
+        }
+    }
+
+    .conditions-query-builder {
+        border: 1px solid $dark-black;
+
+        .query-builder {
+            width: max-content !important;
+            
+            .k-i-delete,
+            .k-i-plus {
+                color: $very-light-gray;
+            }
+    
+            .q-button-group {
+                margin-left: 20px;
+                display: flex;
+                gap: 20px;
+    
+                .button-group {
+                    .k-icon {
+                        font-size: 22px;
+                    }
+                }
+            }
+    
+            .q-rule {
+                padding: 8px 8px !important;
+                border: 1px solid $light-white-gray !important;
+            }
+    
+            .q-tree-container {
+                .q-tree {
+                    padding-left: 40px;
+                }
+            }
+        }
+    }
+
+    .add-rule-popup {
+        background: $white !important;
+        border-radius: 4px !important;
+        padding: 5px !important;
+        width: 180px;
+        height: 52px;
+        cursor: pointer;
+
+        .k-i-plus {
+            color: $very-light-gray;
+            margin-right: 7px;
+            vertical-align: text-bottom;
+        }
+
+        .rule-button-text {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    .flow-rule-dialog {
+        .k-dialog {
+            .k-dialog-content {
+                background-color: $very-light-white;
+            }
+        }
+    }
+
+    .flow-rule-dialog {
+        .k-dialog {
+            width: 970px;
+        }
+    }
+
+    .default-process-flow {
+        margin-top: 73px;
+    }
+}

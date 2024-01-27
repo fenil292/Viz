@@ -1,0 +1,12 @@
+<div class="page-auth w-full h-full">
+    <div class="auth-header">
+      <img src="assets/images/viztoc_logo.png" class="logo-image" alt="" />
+    </div>
+    <app-sign-in *ngIf="url === 'login'" [isLoading]="isLoading"></app-sign-in>
+    <app-forgot-password *ngIf="url === 'forgot-password'"></app-forgot-password>
+    <app-reset-password *ngIf="url === 'reset-password'"></app-reset-password>
+    <div class="auth-footer">
+      <img src="assets/images/logo.png" />
+      <span class="version text-xs">v{{version}}</span>
+    </div>
+</div>

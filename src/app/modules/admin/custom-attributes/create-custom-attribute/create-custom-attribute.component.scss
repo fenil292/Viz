@@ -1,0 +1,19 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.custom-attribute-form-wrapper {
+    .form-container {
+        margin-bottom: 40px;
+
+        .form-wrapper {
+            .row {
+                .field-wrapper {
+                    .form-control-wrapper {
+                        .v-dropdown {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

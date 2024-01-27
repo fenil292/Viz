@@ -1,0 +1,9 @@
+<div>
+    <div class="message-text">
+      {{ message ? message : 'Are you sure you want to delete?' }}
+    </div>
+    <kendo-dialog-actions class="confirm-dialog-action-wrapper">
+      <button kendoButton class="vs-cancel" (click)="onCancel()">{{ cancelButtonText }}</button>
+      <button kendoButton  class="{{ confirmButtonClass !== undefined ? confirmButtonClass : 'vs-delete'}}" (click)="onConfirm()">{{ confirmButtonText }}</button>
+    </kendo-dialog-actions>
+</div>

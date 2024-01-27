@@ -1,0 +1,45 @@
+@import "../../../../../assets/scss/dialog.scss";
+
+.part-attribute-entry-dialog {
+    .k-dialog {
+        min-height: 200px;
+        max-height: 50%;
+
+        .k-dialog-content {
+            overflow: hidden;
+
+            .part-attribute-form-wrapper {
+                .part-attributes {
+                    height: 100%;
+
+                    .label-wrapper {
+                        display: flex;
+                        margin-bottom: 16px;
+
+                        .title-text {
+                            width: 140px;
+                        }
+                    }
+
+                    .no-attributes {
+                        text-align: center;
+                        margin-top: 28px;
+                        margin-bottom: 16px;
+                    }
+                    
+                    .attribute-form-wrapper {
+                        .form-container {
+                            height: calc(100% - 32px) !important;
+                        }
+                    }
+                }
+    
+                .has-attributes {
+                    &.dialog-action-wrapper {
+                        padding-top: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

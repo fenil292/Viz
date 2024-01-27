@@ -1,0 +1,135 @@
+<div [hidden]="salesOrderId">
+    <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+    <div class="container sales-orders-wrapper">
+        <div class="header-button-wrapper">
+            <div kendoTooltip [tooltipTemplate]="clearTooltipTemplate">
+                <kendo-multiselect [data]="salesOrderAttributes" [autoClose]="false" [checkboxes]="true" [valuePrimitive]="true"
+                  textField="name" valueField="name" class="v-multiselect-dropdown" [placeholder]="'Custom Attributes'"
+                  (valueChange)="onCustomAttributesChange($event)" [value]="customAttributeAsColumns" [disabled]="isLoading">
+                </kendo-multiselect>
+              </div>
+            <ng-template #clearTooltipTemplate let-anchor>
+                <span>Clear</span>
+            </ng-template>
+            <div class="page-filter" [formGroup]="filterForm">
+                <div class="filter-container">
+                    <span class="filter-title">From: </span>
+                    <kendo-datepicker class="v-datepicker v-datepicker-from" [format]="'MM/dd/yyyy'"
+                        [ngClass]="{ 'k-button-clear-show': filterForm.controls.from.value, 'k-button-clear-hide': !filterForm.controls.from.value }" [disabled]="isLoading"
+                        formControlName="from" (keydown.enter)="pageFilterChanges()">
+                    </kendo-datepicker>
+                </div>
+                <div class="filter-container">
+                    <span class="filter-title">To:</span>
+                    <kendo-datepicker class="v-datepicker v-datepicker-to" [format]="'MM/dd/yyyy'"
+                        [ngClass]="{ 'k-button-clear-show': filterForm.controls.to.value, 'k-button-clear-hide': !filterForm.controls.to.value }" [disabled]="isLoading"
+                        formControlName="to" (keydown.enter)="pageFilterChanges()">
+                    </kendo-datepicker>
+                </div>
+                <div class="filter-container">
+                    <span class="filter-title">Sales Order:</span>
+                    <kendo-textbox #workOrderTextbox [clearButton]="true" class="v-textbox workorder-textbox" formControlName="salesOrderNumber"
+                        (keydown.enter)="pageFilterChanges()" (valueChange)="onChangePageFilters($event)" [disabled]="isLoading">
+                    </kendo-textbox>
+                </div>
+                <div class="filter-container">
+                    <span class="filter-title">Part Number:</span>
+                    <kendo-textbox [clearButton]="true" class="v-textbox part-number-textbox" formControlName="partNumber"
+                        (keydown.enter)="pageFilterChanges()" (valueChange)="onChangePageFilters($event)" [disabled]="isLoading">
+                    </kendo-textbox>
+                </div>
+                <div class="filter-container">
+                    <button kendoButton class="vs-secondary" [disabled]="isLoading" (click)="pageFilterChanges()">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="v-grid-wrapper" #gridTooltip="kendoTooltip" kendoTooltip [tooltipTemplate]="template" showOn="none" filter=".k-grid td" (mouseover)="showTooltip($event)">
+            <kendo-grid
+                (cellClick)="onCellClick($event)"
+                (dblclick)="onRowDoubleClick(entry?.dataItem?.id, $event)"
+                class="sales-orders-grid"
+                [kendoGridBinding]="salesOrders" [columnMenu]="true" [loading]="isLoading" [sortable]="true" [resizable]="true"
+                [reorderable]="true" filterable="menu" [pageSize]="pageSize"
+                [pageable]="(salesOrders.length > 0) ? {
+                    buttonCount: 5,
+                    info: true,
+                    type: 'numeric',
+                    pageSizes: pageSizes,
+                    previousNext: true,
+                    position: 'bottom',
+                    responsive: true
+                } : false"
+                [filter]="gridSettings.state.filter"
+                [sort]="gridSettings.state.sort"
+                [skip]="skip"
+                (dataStateChange)="dataStateChange($event)"
+                (columnReorder)="columnReorder($event)"
+                (columnResize)="columnResize($event)"
+                (columnVisibilityChange)="columnVisibilityChange($event)">
+                <ng-container *ngFor="let column of gridSettings.columnConfig">
+                    <kendo-grid-column 
+                        [title]="column.title" [field]="column.field" [width]="column.width" [hidden]="column.hidden"
+                        [filterable]="column.type === columnType.ACTION ? false : true"
+                        [sortable]="column.type === columnType.ACTION ? false : true">
+                        <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.TEXT || column.type === columnType.NUMBER">
+                            {{dataItem[column.field]}}
+                        </ng-template>
+                        <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.DATE">
+                            <div *ngIf="dataItem[column.field] !== ''">
+                                {{ dataItem[column.field] | date: 'MM/dd/yyyy' }}
+                            </div>
+                        </ng-template>
+                        <ng-template kendoGridCellTemplate let-idx="rowIndex" let-dataItem="dataItem" *ngIf="column.type === columnType.CHECKBOX">
+                            <input class="k-checkbox k-checkbox-md k-rounded-md" [disabled]="true" type="checkbox"
+                                [checked]="dataItem[column.field] === true || (column.isCustomAttribute && dataItem[column.field] === 'true')" />
+                        </ng-template>
+                        <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.URL">
+                            <a href="{{dataItem[column.field]}}" target="_blank" class="data-url data-value">
+                              {{dataItem[column.field]}}
+                            </a>
+                        </ng-template>
+                        <ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter" let-filterService="filterService"
+                            *ngIf="multiCheckFilterColumns.includes(column.field)">
+                            <multicheck-filter [data]="filterDataArray[column.field]" [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                            </multicheck-filter>
+                        </ng-template>
+                        <ng-template kendoGridFilterMenuTemplate let-filter let-column="column" let-filterService="filterService" *ngIf="column.type === columnType.DATE">
+                            <date-range-filter [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                            </date-range-filter>
+                        </ng-template>
+                        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" *ngIf="column.type === columnType.ACTION">
+                            <div class="action-button-wrapper">
+                                <div kendoTooltip position="top">
+                                    <button type="button" kendoButton title="Edit" (click)="openSalesOrderDetails(dataItem.id)">
+                                        <span class="k-icon k-i-edit"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                </ng-container>
+                <ng-template kendoGridNoRecordsTemplate>
+                    <div *ngIf="!isLoading && ((salesOrders === undefined || salesOrders?.length === 0) || gridSettings.state?.filter?.filters?.length > 0)">
+                        No Data Found</div>
+                </ng-template>
+                <ng-template kendoPagerTemplate *ngIf="salesOrders" let-totalPages="totalPages">
+                    <kendo-pager-page-sizes [pageSizes]="pageSizes" *ngIf="totalPages"></kendo-pager-page-sizes>
+                    <kendo-pager-info *ngIf="totalPages"></kendo-pager-info>
+                    <kendo-pager-prev-buttons *ngIf="totalPages"></kendo-pager-prev-buttons>
+                    <kendo-pager-numeric-buttons [buttonCount]="5" *ngIf="totalPages"></kendo-pager-numeric-buttons>
+                    <kendo-pager-next-buttons *ngIf="totalPages"></kendo-pager-next-buttons>
+                </ng-template>
+            </kendo-grid>
+
+            <ng-template #template let-anchor>
+                <span>{{ anchor.nativeElement.innerText }}</span>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<div [hidden]="!salesOrderId">
+    <app-sales-order-details [id]="salesOrderId" (showSalesOrders)="onShowSalesOrders($event)">
+    </app-sales-order-details>
+</div>

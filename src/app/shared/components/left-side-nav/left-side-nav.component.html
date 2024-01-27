@@ -1,0 +1,46 @@
+<div class="left-side-menu-wrapper">
+  <kendo-drawer-container class="w-full h-full">
+    <div class="drawer-container-left h-full">
+      <kendo-drawer #drawer [items]="items" (select)="onSelect($event)" [mode]="'push'" [(expanded)]="expanded"
+        position="start" [mini]="true" [autoCollapse]="false" [width]="300" [miniWidth]="48"
+        [isItemExpanded]="isItemExpanded">
+        <ng-template kendoDrawerHeaderTemplate>
+          <div class="left-menu-toolbar">
+            <button class="menu-button" kendoButton (click)="drawer.toggle();">
+              <v-icon [iconName]="'menu'"></v-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template kendoDrawerItemTemplate let-item let-level="level">
+          <div class="icon-wrapper main">
+            <v-icon [iconName]="item.icon"></v-icon>
+          </div>
+          <div class="menu-name-wrapper">
+            <div class="k-item-text">{{ item.text }}</div>
+            <div *ngIf="item?.path===''" class="k-icon k-drawer-toggle"
+              [ngClass]="item.openSub ? 'k-i-arrow-chevron-down' : 'k-i-arrow-chevron-up'"></div>
+          </div>
+        </ng-template>
+        <ng-template kendoDrawerFooterTemplate class="footer-wrapper">
+          <div class="bottom-logo-version-wrapper">
+            <div class="bottom-logo">
+              <img _ngcontent-dpj-c81="" src="assets/images/Acclimate_logo.svg">
+            </div>
+            <div class="version-text">
+              <span>Web: </span>
+              <span>{{webVersion}}</span>
+            </div>
+            <div class="version-text">
+              <span>API: </span>
+              <span>{{apiVersion}}</span>
+            </div>
+          </div>
+        </ng-template>
+      </kendo-drawer>
+      
+    </div>
+    <kendo-drawer-content class="h-full content-parent" [ngClass]="{'cadence-screen' : url === '/dashboard'}">
+      <router-outlet></router-outlet>
+    </kendo-drawer-content>
+  </kendo-drawer-container>
+</div>

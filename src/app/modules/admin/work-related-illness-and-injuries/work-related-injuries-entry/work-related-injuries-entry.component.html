@@ -1,0 +1,121 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+  <div class="dialog-titlt-wrapper">
+    <span>
+      {{ workrRelatedInjuryDataId > 0 ? "Edit Incident" : "New Incident" }}
+    </span>
+    <span class="breadcrumb-number">
+      5.4.1
+    </span>
+  </div>
+</kendo-dialog-titlebar>
+
+<div class="work-related-injury-illness-wrapper">
+  <div class="work-related-injury-illness-form-details">
+    You must record information about every work-related injury or illness that involves loss of consciousness,
+    restricted work activity or job transfer, days away from work, or medical treatment beyond first aid. You must also
+    record significant work-related injuries and illnesses that are diagnosed by a physician or licensed health care
+    professional. You must also record work-related injuries and illnesses that meet any of the specific recording
+    criteria listed in 29 CFR 1904.8 through 1904.12. Feel free to use two lines for a single case if you need to. You
+    must complete an injury and illness incident report (OSHA Form 301) or equivalent form for each injury or illness
+    recorded on this form. If you're not sure whether a case is recordable, call your local OSHA office for help.
+  </div>
+  <div class="work-related-injury-illness-form">
+    <form [formGroup]="addNewRecordForm" (ngSubmit)="onSubmit()" *ngIf="addNewRecordForm">
+      <div class="form-container">
+        <div class="form-wrapper">
+          <ol>
+            <div class="field-wrapper">
+              <div class="title-wrapper">
+                <span> <li>Worker's Name <span class="error"> *</span> </li> </span>
+              </div>
+              <div class="form-control-wrapper">
+                <kendo-autocomplete class="v-textbox" formControlName="workerName" [suggest]="true" [data]="entryInitializeWorkersNameData"
+                  [clearButton]="true" [kendoDropDownFilter]="filterSettings">
+                </kendo-autocomplete>
+              </div>
+            </div>
+            <div class="field-wrapper">
+              <div class="title-wrapper">
+                <span> <li>Worker's Job Title<span class="error"> *</span> </li> </span>
+              </div>
+              <div class="form-control-wrapper">
+                <kendo-autocomplete class="v-textbox" formControlName="jobTitle" [suggest]="true" [data]="entryInitializeJobTitleData"
+                  [clearButton]="true" [kendoDropDownFilter]="filterSettings">
+                </kendo-autocomplete>
+              </div>
+            </div>
+            <div class="field-wrapper">
+              <div class="title-wrapper">
+                <span> <li>Date of Injury or onset of illness <span class="error"> *</span> </li> </span>
+              </div>
+              <div class="form-control-wrapper">
+                <kendo-datepicker class="v-datepicker" formControlName="issueDate">
+                </kendo-datepicker>
+              </div>
+            </div>
+            <div class="field-wrapper">
+              <div class="title-wrapper">
+                <span> <li>Location of incident <span class="error"> *</span> </li> </span>
+              </div>
+             <div class="form-control-wrapper">
+                <kendo-textbox class="v-textbox" formControlName="location" [clearButton]="true">
+                </kendo-textbox>
+             </div>
+            </div>
+            <div class="field-wrapper">
+              <div class="title-wrapper">
+                <span> <li>Incident Outcome <span class="error"> *</span> </li> </span>
+                <div class="mt-10"><span><b>SELECT ONLY ONE</b> response based on the most serious outcome for that case:</span></div>
+              </div>
+                <div class="form-control-wrapper" *ngFor="let data of incidentOutcomeData">
+                <span> <input type="radio" kendoRadioButton formControlName="incidentOutcome" class="v-radio" [value]='data.key'/> <span>{{data.value}}</span> </span>
+              </div>
+            </div>
+            <div class="field-wrapper" *ngIf="addNewRecordForm.value.incidentOutcome === incidentOutcomeEnum.DAYSAWAYFROMWORK || addNewRecordForm.value.incidentOutcome === incidentOutcomeEnum.JOBTRANSFERORRESTRICTION">
+                <div class="title-wrapper">
+                  <span> <li>Number of <span *ngIf="addNewRecordForm.value.incidentOutcome ===  incidentOutcomeEnum.DAYSAWAYFROMWORK"> days away from work </span> <span *ngIf="addNewRecordForm.value.incidentOutcome ===  incidentOutcomeEnum.JOBTRANSFERORRESTRICTION "> days on job transfer or restriction</span> <span class="error"> *</span> </li> </span>
+                    <div class="mt-10">
+                      Calendar days (rather than scheduled work days) are used for recording days<br>
+                      away from work. If an injury or illness causes a worker to miss work, the employer must<br>
+                      record weekend days, holidays and other days that the worker might not have been<br>
+                      scheduled to work. Employers may limit days away from work to 180 days.
+                    </div>
+                  </div>
+                <div class="form-control-wrapper">
+                <kendo-numerictextbox class="v-textbox" formControlName="days" placeholder="Days" [min]="0" [decimals]="0" [format]="'0'">
+                </kendo-numerictextbox>
+              </div>
+            </div>
+            <div class="field-wrapper">
+              <div class="title-wrapper">
+                <span> <li>Incident type <span class="error"> *</span> </li> </span>
+              </div>
+              <div class="form-control-wrapper" *ngFor="let data of incidentTypedata">
+                <span> <input type="radio" kendoRadioButton formControlName="incidentType" class="v-radio" [value]="data.key" > <span>{{data.value}}</span> </span>
+              </div>
+            </div>
+            <div class="field-wrapper">
+              <div class="title-wrapper">
+                <span> <li>Describe injury or illness</li> </span>
+              </div>
+              <div class="form-control-wrapper">
+              <kendo-textbox class="v-textbox" formControlName="description" [clearButton]="true"> </kendo-textbox>
+              </div>
+            </div>
+          </ol>
+        </div>
+      </div>
+      <div class="dialog-action-wrapper">
+        <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+          Cancel
+        </button>
+        <button kendoButton class="vs-primary" [disabled]="addNewRecordForm.invalid">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="full-page-loader">
+  <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

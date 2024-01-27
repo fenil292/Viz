@@ -1,0 +1,79 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/font.scss";
+
+.sales-orders-wrapper{
+    .header-button-wrapper {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        .v-multiselect-dropdown {
+            min-width: 200px;
+            width: auto;
+            max-height: 50px;
+        }
+
+        .page-filter{
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+        
+            .filter-container {
+                display: flex;
+                flex-direction: row;
+                vertical-align: bottom;
+                gap: 10px;
+                align-items: center;
+
+                .filter-title {
+                    @extend .primary-font-family;
+                    color: $light-black;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 16px;
+                }
+
+                .v-datepicker {
+                    min-width: 142px;
+                    max-width: 174px;
+                    width: unset !important;
+
+                    ::ng-deep .clear-button {
+                        color: $dark-button-gray;
+                        opacity: 0.5;
+                    }
+
+                    .k-input-solid:focus, .k-input-solid:focus-within {
+                        box-shadow: unset !important;
+                    }
+                }
+
+                .workorder-textbox {
+                    width: 100px;
+                    min-width: 90px;
+                }
+
+                .part-number-textbox {
+                    width: 140px;
+                    min-width: 120px;
+                }
+
+                .vs-secondary {
+                    width: 65px;
+                }
+
+                .k-button-clear-show {
+                    ::ng-deep .k-button-clear {
+                        display: flex !important;
+                    }
+                }
+
+                .k-button-clear-hide {
+                    ::ng-deep .k-button-clear {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+}

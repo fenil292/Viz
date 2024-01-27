@@ -1,0 +1,37 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.flow-rule-wrapper {
+    .form-container {
+        .form-wrapper {
+            border: unset;
+            padding: 0px;
+            background-color: $very-light-white;
+        }
+    
+        .flow-rule-query-builder {
+            border-top: 1px solid $light-white-gray-color;
+
+            .title-text {
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+
+            .query-builder-wrapper {
+                height: 328px;
+
+                .query-builder {
+                    width: max-content !important;
+                    padding: 0px;
+                    background: transparent;
+                    border: unset;
+                    padding-bottom: 16px;
+                }
+            }
+        }
+    }
+    .dialog-button-wrapper {
+        padding-top: 16px;
+        float: right;
+        display: flex;
+    }
+}

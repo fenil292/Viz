@@ -1,0 +1,81 @@
+@import "../../../assets/scss/variables.scss";
+
+.hotsheet-wrapper {
+    .page-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 17px 0px;
+
+        .search-container {
+            display: flex;
+            gap: 15px;
+
+            .search-wrapper {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+
+                .field-label {
+                    font-weight: bold;
+                }
+
+                .field-control-wrapper {
+                    .v-textbox {
+                        width: 95px;
+                    }
+                }
+            }
+
+            .vs-secondary {
+                width: 90px;
+            }
+
+            .search-btn {
+                width: 65px;           
+            }
+
+            .excel-button {
+                width: 135px;
+            }
+        }
+
+        .hotsheet-priority-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .v-dropdown {
+            width: 200px;
+        }
+    }
+
+    .v-grid-wrapper {
+        .priority {
+            padding: 0px !important;
+
+            .priority-column {
+                padding: 0px 12px 0px 13px;
+                display: flex;
+                justify-content: left;
+            }
+        }
+    }
+}
+
+@media (min-width:1200px) and (max-width:1600px){
+    .hotsheet-wrapper {
+        .page-actions {
+            .search-container {
+                gap: 10px
+            }
+
+            .hotsheet-priority-wrapper {
+                .vs-secondary {
+                    width: 70px;
+                }
+            }
+        }
+    }
+}

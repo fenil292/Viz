@@ -1,0 +1,28 @@
+@import "../../../../../assets/scss/font.scss";
+@import "../../../../../assets/scss/auth-comman.scss";
+
+.signin-wrapper {
+  background-color: $white-background-color;
+  width: 446px;
+  height: 215px;
+
+  .auth-form-wrapper {
+    .control-wrapper {
+      .control-name {
+        .control-text {
+          width: 80px !important;
+        }
+      }
+    }
+
+    .control-wrapper:last-child {
+      max-height: 12px;
+    }
+  }
+
+  .button-wrapper {
+    .vs-primary {
+      margin: auto;
+    }
+  }
+}

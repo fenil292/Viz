@@ -1,0 +1,30 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/font.scss';
+
+.page-auth {
+  @extend .primary-font-family-400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $primary-color;
+
+  .auth-header {
+    .logo-image {
+      width: 290px;
+      height: 100px;
+    }
+  }
+
+  .auth-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .version {
+      color: $very-light-gray;
+      font-weight: 700;
+      margin-top: 7px;
+    }
+  }
+}

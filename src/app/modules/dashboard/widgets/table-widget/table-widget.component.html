@@ -1,0 +1,14 @@
+<kendo-grid class="table-grid" [kendoGridBinding]="tableWidgetData?.table" [autoSize]="true"
+    (cellClick)="onRowClick($event)">
+    <kendo-grid-column-group [title]="widget?.name" *ngIf="widget?.group !== null">
+        <kendo-grid-column *ngFor="let value of keys" [field]="value">
+        </kendo-grid-column>
+    </kendo-grid-column-group>
+    <ng-container *ngIf="widget?.group === null">
+        <kendo-grid-column *ngFor="let value of keys" [field]="value">
+        </kendo-grid-column>
+    </ng-container>
+    <ng-template kendoGridNoRecordsTemplate>
+        <div>No Data Found</div>
+    </ng-template>
+</kendo-grid>

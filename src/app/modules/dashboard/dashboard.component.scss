@@ -1,0 +1,118 @@
+@import '../../../assets/scss/font.scss';
+@import '../../../assets/scss/variables.scss';
+
+.cadence-screen {
+  overflow-y: hidden !important;
+  width: fit-content;
+}
+
+.cadence-wrapper {
+  overflow-y: auto;
+  height: calc(100% - 60px);
+
+  .k-tilelayout {
+    background: $light-white-gray-color;
+    min-height: 100%;
+
+    .k-card {
+      border-color: rgba(0, 0, 0, 0.3);
+
+      .k-tilelayout-item-body {
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        .viztoc-spinner-container {
+          left: 45%;
+        }
+      }
+    }
+
+    .k-card-header {
+      background-color: $dark-gray-background;
+      padding: 10px 0 10px 15px;
+      letter-spacing: 1px;
+
+      .k-card-title {
+        @extend .primary-font-family-600;
+        font-size: 20px;
+        line-height: 20px;
+        color: $white;
+        text-transform: capitalize;
+      }
+    }
+
+    .k-grid {
+      height: calc(100% - 0px);
+
+      .k-grid-header {
+        padding: 0px 7px 0px 0px !important;
+      }
+
+      .k-header {
+        @extend .primary-font-family-500;
+        size: 16px;
+        line-height: 20px;
+      }
+
+      .hide-header {
+        display: none;
+      }
+
+      tr {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        &:last-child {
+          td {
+            border-bottom: 1px solid $grid-body-row-border-color;
+          }
+        }
+      }
+
+      .k-grid {
+        tr {
+          th {
+            @extend .primary-font-family-600;
+            color: $black-dark-header;
+            text-align: center;
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .group-widget-wrapper {
+    display: flex;
+    gap: 18px;
+    height: 100%;
+
+    .yesterday-color {
+      background-color: $very-light-gray-color;
+    }
+
+    .today-color {
+      background-color: $light-green-color;
+    }
+
+    .tomorrow-color {
+      background-color: $light-yellow-color;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $title-option;
+    border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7f7f7f;
+  }
+}

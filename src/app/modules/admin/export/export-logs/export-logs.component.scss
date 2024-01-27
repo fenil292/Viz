@@ -1,0 +1,24 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.export-log-dialog {
+    .k-dialog {
+        width: 60% !important;
+        height: 60% !important;
+
+        .k-dialog-titlebar {
+            .k-dialog-title {
+                @extend .primary-font-family;
+            }
+        }
+    
+        .k-dialog-content {
+            .logs-content, .v-textarea {
+                height: 100%;
+            }
+        }
+    
+        .k-dialog-buttongroup {
+            display: none;
+        }
+    }
+}

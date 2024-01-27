@@ -1,0 +1,51 @@
+<div kendoDialogContainer></div>
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container vizer-display-group-wrapper">
+    <div class="header-button-wrapper">
+        <button kendoButton class="vs-secondary" (click)="openVizerDisplayGroupDialog()">
+            Add Vizer Display Group
+        </button>
+    </div>
+    <div class="v-grid-wrapper" kendoTooltip showOn="none" [tooltipTemplate]="template" filter=".k-grid td" (mouseover)="showTooltip($event)">
+        <kendo-grid [kendoGridBinding]="vizerDisplayGroups" [columnMenu]="true" [loading]="isLoading" [sortable]="true"
+            [resizable]="true" [reorderable]="true" filterable="menu"
+            [filter]="gridSettings.state.filter" [sort]="gridSettings.state.sort"
+            (dataStateChange)="dataStateChange($event)" (columnReorder)="columnReorder($event)"
+            (columnResize)="columnResize($event)" (columnVisibilityChange)="columnVisibilityChange($event)">
+            <kendo-grid-column *ngFor="let column of gridSettings.columnConfig" [title]="column.title"
+                [field]="column.field" [width]="column.width" [hidden]="column.hidden"
+                [filterable]="column.type === columnType.ACTION ? false : true"
+                [sortable]="column.type === columnType.ACTION ? false : true">
+                <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.TEXT || column.type === columnType.NUMBER">
+                    {{dataItem[column.field]}}
+                </ng-template>
+                <ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter" let-filterService="filterService"
+                    *ngIf="column.field === 'name'">
+                    <multicheck-filter [data]="groupAlias" [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                    </multicheck-filter>
+                </ng-template>
+                <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.ACTION">
+                    <div class="action-button-wrapper">
+                        <div kendoTooltip position="top">
+                            <button kendoButton [look]="'flat'" title="Edit" (click)="openVizerDisplayGroupDialog(dataItem)">
+                                <span class="k-icon k-i-edit"></span>
+                            </button>
+                        </div>
+                        <div kendoTooltip position="top">
+                            <button kendoButton [look]="'flat'" title="Delete" (click)="onDeleteVizerDisplayGroup(dataItem.id)">
+                                <span class="k-icon k-i-delete"></span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            <ng-template kendoGridNoRecordsTemplate>
+                <div *ngIf="!isLoading && ((vizerDisplayGroups === undefined || vizerDisplayGroups?.length === 0) || gridSettings.state?.filter?.filters?.length > 0)">
+                    No Data Found</div>
+            </ng-template>
+        </kendo-grid>
+        <ng-template #template let-anchor>
+            <span>{{ anchor.nativeElement.innerText }}</span>
+        </ng-template>
+    </div>
+</div>

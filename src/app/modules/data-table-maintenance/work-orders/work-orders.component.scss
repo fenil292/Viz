@@ -1,0 +1,135 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/font.scss";
+
+.work-orders-wrapper{
+    .header-button-wrapper {
+        display: flex;
+        gap: 30px;
+        align-items: start;
+        height: auto;
+        margin: 17px 0px;
+
+        .v-multiselect-dropdown {
+            min-width: 200px;
+            width: auto;
+            max-height: 50px;
+        }
+
+        .action-button-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            .v-dropdown{
+                width: 195px;
+            }
+
+            .vs-secondary {
+                width: 100px;
+            }
+
+            .export-prioritites-button {
+                width: 185px !important;
+            }
+        }
+
+        .page-filter{
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+        
+            .filter-container {
+                display: flex;
+                flex-direction: row;
+                vertical-align: bottom;
+                gap: 10px;
+                align-items: center;
+
+                .filter-title {
+                    @extend .primary-font-family;
+                    color: $light-black;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 16px;
+                }
+
+                .v-datepicker {
+                    width: 145px;
+
+                    ::ng-deep .clear-button {
+                        color: $dark-button-gray;
+                        opacity: 0.5;
+                    }
+
+                    .k-input-solid:focus, .k-input-solid:focus-within {
+                        box-shadow: unset !important;
+                    }
+                }
+
+                .workorder-textbox {
+                    width: 90px;
+                }
+
+                .part-number-textbox {
+                    width: 100px;
+                }
+
+                .vs-secondary {
+                    width: 65px;
+                }
+
+                .k-button-clear-show {
+                    ::ng-deep .k-button-clear {
+                        display: flex !important;
+                    }
+                }
+
+                .k-button-clear-hide {
+                    ::ng-deep .k-button-clear {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width:1200px) and (max-width:1600px){
+    .work-orders-wrapper{
+        .header-button-wrapper{
+            gap: 20px;
+            align-items: start;
+
+            .page-filter {
+                gap: 10px;
+
+                .filter-container {
+                    .filter-title {
+                        width: min-content;
+                    }
+
+                    .v-datepicker {
+                        width: 145px;
+                    }
+    
+                    .v-textbox {
+                        width: 88px !important;
+                    }
+                }
+            }
+
+            .action-button-wrapper{
+                gap: 5px !important;
+                flex-wrap: wrap;
+                
+                .v-dropdown{
+                    width: 185px !important;
+                }
+                .vs-secondary{
+                    width: 80px;
+                }
+            }
+        }
+    }
+}

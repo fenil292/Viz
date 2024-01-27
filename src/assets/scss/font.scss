@@ -1,0 +1,26 @@
+$primary-font-family: "Roboto";
+
+.primary-font-family {
+    font-family: $primary-font-family !important;
+    font-style: normal !important;
+}
+
+.primary-font-family-600 {
+  @extend .primary-font-family;
+  font-weight: 600 !important;
+}
+
+.primary-font-family-700 {
+    @extend .primary-font-family;
+    font-weight: 700 !important;
+}
+
+.primary-font-family-400 {
+    @extend .primary-font-family;
+    font-weight: 400 !important;
+}
+
+.primary-font-family-500 {
+    @extend .primary-font-family;
+    font-weight: 500 !important;
+}

@@ -1,0 +1,15 @@
+version: '3.4'
+volumes:
+  node_modules:
+
+services:
+  ui:
+    image: ${DOCKER_REGISTRY}ng
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 4200:4200
+    volumes:
+      - ./src:/myApp/src
+      - node_modules:/myApp/node_modules

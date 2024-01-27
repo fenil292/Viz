@@ -1,0 +1,26 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            Edit Work Order Operation Attributes
+        </span>
+        <span class="breadcrumb-number">
+            4.2.1.1
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+
+<div class="work-order-operation-attribute-form-wrapper">
+    <app-edit-custom-attributes-form *ngIf="attributes?.length > 0 && attributes" [attributes]="attributes" [isSubmit]="isSubmit" (valueChange)="onAttrributeValueChange($event)">
+    </app-edit-custom-attributes-form>
+    <div *ngIf="attributes?.length === 0 || !attributes" class="no-attributes">
+        There is no custom attributes available for work order operation.
+    </div>
+    <div class="dialog-action-wrapper">
+        <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+            Cancel
+        </button>
+        <button kendoButton class="vs-primary" (click)="onSubmit()" [disabled]="attributes?.length === 0 || !attributes">
+            Save
+        </button>
+    </div>
+</div>

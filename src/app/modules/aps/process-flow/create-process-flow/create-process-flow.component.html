@@ -1,0 +1,135 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container process-flow-wrapper">
+    <form [formGroup]="processFlowForm" (ngSubmit)="onSubmit()" *ngIf="processFlowForm">
+    <div class="button-container">
+        <div class="page-title-text">
+            Process Flow
+        </div>
+        <div class="button-wrapper">
+            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+                Cancel
+            </button>
+            <button kendoButton class="vs-primary" [disabled]="((conditions?.rules?.length === 0 && conditions?.groupRules?.length === 0 && !isValidConditions) || processFlowForm.invalid) && !processFlow?.default">
+                Save
+            </button>
+        </div>
+    </div>
+
+        <div class="form-wrapper">
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Name:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <kendo-textbox class="v-textbox-w-400" formControlName="name" placeholder="Enter name">
+                        </kendo-textbox>
+                        <div>
+                            <small class="error" *ngIf="processFlowForm.get('name')?.errors?.maxlength">
+                                The maximum length for this field is {{processFlowForm.get('name').errors.maxlength?.requiredLength}} characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Description:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <kendo-textbox class="v-textbox-w-400" formControlName="description" placeholder="Enter description">
+                        </kendo-textbox>
+                        <div>
+                            <small class="error" *ngIf="processFlowForm.get('description')?.errors?.maxlength">
+                                The maximum length for this field is {{processFlowForm.get('description').errors.maxlength?.requiredLength}} characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Enabled:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="enabled" kendoCheckBox />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Break:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="break" kendoCheckBox />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>   
+
+        <div class="process-type-wrapper" *ngIf="processFlowForm && !processFlow?.default">
+            <div class="process-type-text" [ngClass]="{ 'active':  isConditionsTab}" (click)="onProcessTypeChange(true)">
+                Conditions
+                <span kendoTooltip position="bottom" *ngIf="notExistAttributes?.status === false" class="warning-icon">
+                    <v-icon class="k-icon" title="Conditions with not exist attribute" [iconName]="'warning'"></v-icon>
+                </span>
+            </div>
+            <div class="process-type-text" [ngClass]="{ 'active':  !isConditionsTab}" (click)="onProcessTypeChange(false)">
+                Flow Rule
+                <span kendoTooltip position="bottom" *ngIf="isFlowRulesChange && flowRulesWithNotExistAttribute.length === 0" class="warning-icon">
+                    <v-icon class="k-icon" title="Has not saved changes" [iconName]="'warning'"></v-icon>
+                </span>
+                <span kendoTooltip position="bottom" *ngIf="flowRulesWithNotExistAttribute.length > 0" class="warning-icon">
+                    <v-icon class="k-icon" title="Some flow rules with not exist attribute" [iconName]="'warning'"></v-icon>
+                </span>
+            </div>
+            <button kendoButton class="vs-secondary" *ngIf="!isConditionsTab" (click)="onAddFlowRule()">
+                Add Flow Rule
+            </button>
+        </div>
+        <div [hidden]="!isConditionsTab  || processFlow?.default" class="conditions-query-builder">
+            <app-query-builder [queryConditions]="queryConditions" (changeConditions)="onChangeCondition($event)">
+            </app-query-builder>
+        </div>
+        <div [hidden]="isConditionsTab && !processFlow?.default" class="flow-rule-container v-grid-wrapper"
+        [ngClass]="{'default-process-flow': processFlow?.default}">
+            <kendo-grid [data]="flowRules">
+                <kendo-grid-column [title]="'Priority'" field="priorityCode" [width]="260">
+                </kendo-grid-column>
+                <kendo-grid-column [title]="'Description'" field="description">
+                </kendo-grid-column>
+                <kendo-grid-column [title]="'Actions'" [width]="200">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <div class="action-button-wrapper">
+                            <div kendoTooltip position="top">
+                                <button type="button" kendoButton title="Edit" (click)="onUpdateFlowRule(rowIndex)">
+                                    <span class="k-icon k-i-edit"></span>
+                                </button>
+                            </div>
+                            <div kendoTooltip position="top">
+                                <button type="button" kendoButton title="Delete" (click)="onDeleteFlowRule(rowIndex)">
+                                    <span class="k-icon k-i-delete" *ngIf="!processFlow?.default"></span>
+                                </button>
+                            </div>
+                            <div kendoTooltip position="top" *ngIf="dataItem.id">
+                                <button type="button" kendoButton title="Troubleshoot Rule" (click)="openTroubleshootRule(dataItem)">
+                                    <v-icon [iconName]="'troubleshoot'"></v-icon>
+                                </button>
+                            </div>
+                            <span kendoTooltip position="bottom" *ngIf="this.flowRulesWithNotExistAttribute.includes(dataItem?.id)" class="warning-icon">
+                                <v-icon class="k-icon" title="Flow rule with not exist attribute" [iconName]="'warning'"></v-icon>
+                            </span>
+                        </div>
+                </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
+        </div>
+    <div kendoDialogContainer></div>
+</div>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

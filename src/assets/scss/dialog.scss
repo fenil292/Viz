@@ -1,0 +1,86 @@
+@import "../../assets/scss/theme.scss";
+@import "../../assets//scss//font.scss";
+
+.k-dialog-wrapper {
+    .k-dialog {
+        width: 572px;
+        background: $white-smoke;
+        .k-dialog-titlebar {
+            padding: 0px;
+            height: 45px;
+            background: $dialog-header-bg-color;
+            display: flex;
+            align-items: center;
+            border: 1px solid $dark-black;
+            padding-left: 16px;
+            box-shadow: -5px 2px 10px $dialog-header-shadow-color;
+            z-index: 1;
+
+            .k-dialog-title {
+                @extend .primary-font-family-500;
+                font-size: 18px;
+                line-height: 20px;
+                padding: 0px;
+                margin: 0px;
+                display: flex;
+                align-items: center;
+                color: $dialog-header-text-color;
+            }
+
+            .k-dialog-actions {
+                padding: 0px;
+                margin: 0px;
+
+                .k-dialog-action {
+                    padding: 0px;
+                    margin-right: 16px !important;
+                    color: $dialog-header-text-color;
+                }
+            }
+        }
+
+        .dialog-titlt-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            color: $dialog-header-text-color;
+        
+            .breadcrumb-number {
+                min-width: 60px;
+                margin-right: 10px;
+            }
+        }
+
+        .form-wrapper {
+            border: 0px !important;
+        }
+
+        .k-dialog-content {
+            padding: 16px 16px;
+        }
+
+        .dialog-actions {
+            height: 58px;
+            padding: 16px 16px;
+            border: 0px !important;
+
+            .dialog-action-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: end;
+                align-items: flex-end;
+                gap: 16px;
+            }
+        }
+
+        .k-picker-outline {
+            border-color: rgb(66, 66, 66, 0.1);
+        }
+
+        .dialog-action-wrapper {
+            display: flex;
+            float: right;
+        }
+    }
+}

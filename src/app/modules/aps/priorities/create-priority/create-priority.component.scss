@@ -1,0 +1,21 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.priority-form-wrapper {
+    .form-container {
+        height: 288px;
+
+        .form-wrapper {
+            .row {
+                .field-wrapper {
+                    .title-wrapper {
+                        width: 160px;
+                    }
+                }
+
+                .form-control-wrapper {
+                    width: auto;
+                }
+            }
+        }
+    }
+}

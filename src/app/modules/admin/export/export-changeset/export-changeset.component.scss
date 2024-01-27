@@ -1,0 +1,24 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.export-changeset-wrapper {
+    .v-grid-wrapper {
+        .k-grid {
+            min-height: unset;
+
+            .k-grid-aria-root {
+                .k-grid-header {
+                    background-color: $white;
+
+                    .k-grid-header-wrap {
+                        tr {
+                            .k-header {
+                                background-color: $white;
+                                color: $dark-button-gray !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

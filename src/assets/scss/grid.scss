@@ -1,0 +1,435 @@
+@import "../scss/theme.scss";
+@import "../scss/font.scss";
+
+// Grid header variables
+$grid-header-text-color: $very-dark-blue;
+$grid-header-background-color: $secondary-color;
+$grid-header-icon-color: $very-dark-blue;
+
+// Grid row variables
+$primary-row-background-color:$white;
+$secondary-row-background-color:$white;
+$grid-body-row-text-color: $dark-button-gray;
+$grid-body-row-action-button-icon-color:$very-light-gray;
+$grid-body-row-action-button-icon-hover-color:$grid-action-button-gray;
+$grid-body-row-selected-background-color:$gainsboro-gray;
+$grid-body-row-selected-text-color:$primary-color;
+
+// Pagination variables
+$grid-pagination-text-color: $light-title-gray;
+$grid-pagination-selected-button-color:$light-gray;
+$grid-pagination-selected-button-text-color:$white;
+$grid-pagination-icon-color:$light-gray;
+
+// Grid filter menu variables
+$grid-filter-menu-hover-background-color:$light-gray;
+$grid-filter-menu-hover-text-color:$white;
+$grid-filter-menu-selected-item-background-color:$light-gray;
+
+//Active filter variables
+$grid-column-filter-icon-bg-color: $light-dark-blue;
+$grid-column-filter-icon-hover-bg-color: $light-blue;
+
+.v-grid-wrapper {
+    .k-grid {
+        max-height: calc(100vh - 220px);
+        overflow: auto;
+
+        .k-grid-header {
+            background-color: $grid-header-background-color;
+            padding: 0px 7px 0px 0px !important;
+
+            .k-grid-header-wrap {
+                border-right-color: transparent;
+            }
+
+            thead {
+                tr {
+                    height: 26px !important;
+
+                    th {
+                        @extend .primary-font-family-500;
+                        background: $grid-header-background-color;
+                        padding: 6px 12px 6px 13px;
+                        border-style: solid;
+                        border-color: $dark-black;
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: $grid-header-text-color !important;
+
+                        .k-checkbox {
+                            @extend .v-checkbox;
+                            height: 18px !important;
+                            width: 18px !important;
+                        }
+
+                        &.k-filterable > .k-cell-inner {
+                            margin: -8px -8px -8px -13px !important;
+                        }
+
+                        &.k-filterable {
+                            .k-grid-filter {
+                                padding: 3px;
+                                width: 27px;
+                                height: 27px;
+
+                                .k-i-more-vertical {
+                                    color: $grid-header-icon-color;
+                                }
+
+                                &:hover {
+                                    background-color: transparent;
+                                }
+
+                                &:focus {
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+
+                        .k-cell-inner, kendo-grid-column-menu {
+                            .k-link {
+                                .k-icon {
+                                    color: $grid-header-icon-color;
+                                }
+                            }
+
+                            .k-state-active {
+                                background-color: $grid-column-filter-icon-bg-color;
+
+                                .k-i-more-vertical {
+                                    color: $white !important;
+                                }
+
+                                &:hover {
+                                    background-color: $grid-column-filter-icon-hover-bg-color !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .k-grid-container {
+            .k-grid-content {
+                .k-grid-table {
+                    tbody {
+                        tr {
+                            height: 26px !important;
+                            background: $primary-row-background-color;
+
+                            &.k-alt {
+                                background: linear-gradient(0deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)), $secondary-row-background-color;
+                            }
+
+                            &.k-grid-norecords {
+                                height: 50px !important;
+                            }
+
+                            td {
+                                @extend .primary-font-family-400;
+                                padding: 4px 12px 4px 12px;
+                                margin: 0px;
+                                box-sizing: border-box;
+                                font-size: 12px;
+                                line-height: 18px;
+                                text-align: left;
+                                color: $grid-body-row-text-color;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+
+                                .sequence-cell {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    gap: 10px;
+
+                                    .cdk-drag {
+                                        .k-icon {
+                                            width: 0.4em !important;
+                                            color: $very-light-gray;
+                                            cursor: move;
+                                        }
+                                    }
+
+                                    .arrow-button {
+                                        height: 20px;
+                                        width: 20px;
+                                        border-radius: 2px;
+                                        margin-right: 5px;
+                                    }
+                                }
+
+                                .k-checkbox {
+                                    @extend .v-checkbox;
+                                    height: 16px !important;
+                                    width: 16px !important;
+                                }
+
+                                .action-button-wrapper {
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    align-items: center;
+                                    gap: 10px;
+
+                                    .k-button {
+                                        border: unset;
+                                        background: transparent;
+                                        padding: 0px;
+                                        width: 20px !important;
+                                        height: 20px !important;
+
+                                        .k-icon {
+                                            color: $grid-body-row-action-button-icon-color;
+                                        }
+
+                                        &:hover {
+                                            .k-icon {
+                                                color: $grid-body-row-action-button-icon-hover-color;
+                                            }
+
+                                            svg {
+                                                stroke: $grid-body-row-action-button-icon-hover-color;
+                                                stroke-opacity: 0.5;
+                                            }
+
+                                            .reprocess-dataset {
+                                                svg {
+                                                    stroke-width: 2px;
+                                                    
+                                                    path {
+                                                        stroke-opacity: 0.7;
+                                                        stroke: $grid-body-row-action-button-icon-hover-color;
+                                                    }
+                                                }
+                                            }
+
+                                            .troubleshoot {
+                                                g {
+                                                    fill: $grid-body-row-action-button-icon-hover-color;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .k-button-solid-base:focus {
+                                        box-shadow: unset;
+                                    }
+                                }
+
+                                .colored-cell {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    padding: 0px 1px 0px 0px;
+                                    width: 50px;
+                                    height: 16px;
+                                    border: 1px solid rgba(66, 66, 66, 0.08);
+                                    border-radius: 4px;
+                                    box-sizing: border-box;
+                                }
+                            }
+
+                            &.k-grid-norecords {
+                                td {
+                                    text-align: center !important;
+                                }
+                            }
+                        }
+
+                        .cdk-drag-placeholder {
+                            box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 30%) !important;
+                        }
+                    }
+                }
+
+                &::-webkit-scrollbar {
+                    width: 7px;
+                    height: 7px;
+                }
+        
+                &::-webkit-scrollbar-track {
+                    background: $scrollbar-background;
+                }
+        
+                &::-webkit-scrollbar-thumb {
+                    background: $scrollbar;
+                    border-radius: 20px;
+                }
+        
+                &::-webkit-scrollbar-thumb {
+                    &:hover {
+                        background: $scrollbar-hover;
+                    }
+                }
+            }
+        }
+
+        .k-grid-pager {
+            padding: 0px;
+
+            .k-pager-sizes {
+                margin: 12px 22px;
+
+                .k-dropdownlist {
+                    @extend .v-dropdown;
+                    width: 5em !important;
+                }
+            }
+
+            .k-input-value-text {
+                font-size: 12px;
+            }
+
+            .k-pager-numbers-wrap {
+                .k-pager-numbers {
+                    .k-link {
+                        color: $grid-pagination-text-color !important;
+
+                        &:hover {
+                            background-color: rgba(62, 64, 68, 0.1) !important;
+                        }
+
+                        &:focus {
+                            box-shadow: inset 0 0 0 2px rgb(62 64 68 / 12%);
+                        }
+                    }
+
+                    .k-selected {
+                        background-color: rgba(62, 64, 68, 0.2);
+                    }
+
+                    .k-link.k-state-selected,
+                    .k-link.k-selected {
+                        background-color: $grid-pagination-selected-button-color !important;
+                        color: $grid-pagination-selected-button-text-color !important;
+                    }
+                }
+            }
+
+            .k-pager-nav {
+                .k-icon {
+                    color: $grid-pagination-icon-color !important;
+                }
+            }
+        }
+
+        .k-grouping-header {
+            padding: 4px 8px;
+        }
+    }
+}
+
+.k-grid-columnmenu-popup {
+    .k-columnmenu-item-wrapper {
+        .k-columnmenu-item {
+            &:hover {
+                color: $grid-filter-menu-hover-text-color;
+                background-color: $grid-filter-menu-hover-background-color;
+            }
+
+            &.k-state-selected,
+            .k-columnmenu-item.k-selected {
+                background-color: $grid-filter-menu-selected-item-background-color;
+            }
+        }
+    }
+
+    .k-columnmenu-item-wrapper {
+        .k-columnmenu-item-content {
+            .k-column-list-wrapper {
+                .k-column-list {
+                    .k-column-list-item {
+                        &:hover {
+                            color: $grid-filter-menu-hover-text-color !important;
+                            background-color: $grid-filter-menu-hover-background-color !important;
+                        }
+                        .k-checkbox {
+                            @extend .v-checkbox;
+                            width: 16px !important;
+                            height: 16px !important;
+                        }
+                    }
+                }
+
+                .k-columnmenu-actions {
+                    .k-button-solid-base {
+                        @extend .vs-secondary;
+                        width: 60px;
+                    }
+
+                    .k-button-solid-primary {
+                        @extend .vs-primary;
+                        width: 60px;
+                    }
+                }
+            }
+
+            .k-filter-menu {
+                .k-filter-menu-container {
+                    .k-dropdownlist {
+                        @extend .v-dropdown;
+                        width: 100% !important;
+                    }
+
+                    .k-textbox {
+                        @extend .v-textbox;
+                        width: 100% !important;
+                    }
+
+                    .k-columnmenu-actions {
+                        .k-button-solid-base {
+                            @extend .vs-secondary;
+                            width: 60px;
+                        }
+
+                        .k-button-solid-primary {
+                            @extend .vs-primary;
+                            width: 60px;
+                        }
+                    }
+
+                    .k-switch-on {
+                        .k-switch-track {
+                            border-color: $light-blue;
+                            background-color: $light-blue;
+                            outline: 0px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.k-animation-container {
+    .k-list-container {
+        .k-list {
+            .k-list-content {
+                .k-list-ul {
+                    .k-list-item {
+                        &:hover {
+                            color: $grid-filter-menu-hover-text-color;
+                            background-color: $grid-filter-menu-hover-background-color;
+                        }
+
+                        &.k-selected {
+                            color: $grid-filter-menu-hover-text-color;
+                            background-color: $grid-filter-menu-selected-item-background-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.k-grid td.k-state-selected,
+.k-grid td.k-selected,
+.k-grid tr.k-state-selected > td,
+.k-grid tr.k-selected > td {
+    background-color: $grid-body-row-selected-background-color;
+    color: $grid-body-row-selected-text-color !important;
+}

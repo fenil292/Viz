@@ -1,0 +1,17 @@
+<div class="group-widget-wrapper" *ngIf="widgets?.length > 0 && !isLoading">
+    <div *ngFor="let widget of widgets" class="widget-wrapper"
+        [ngClass]="{'line-graph-widget-wrapper': widget.template === widgetTypeEnum.LINEGRAPH}">
+        <app-keyvalue-widget *ngIf="widget.template === widgetTypeEnum.KEYVALUE"
+            [widget]="widget" [keyValueWidgetData]="widgetsData[widget.id]">
+        </app-keyvalue-widget>
+
+        <app-table-widget *ngIf="widget.template === widgetTypeEnum.TABLE"
+            [widget]="widget" [tableWidgetData]="widgetsData[widget.id]">
+        </app-table-widget>
+
+        <app-line-graph-widget *ngIf="widget.template === widgetTypeEnum.LINEGRAPH"
+            [widget]="widget" [lineWidgetData]="widgetsData[widget.id]">
+        </app-line-graph-widget>
+    </div>
+</div>
+<viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>

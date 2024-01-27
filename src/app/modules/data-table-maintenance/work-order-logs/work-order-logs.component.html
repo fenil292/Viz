@@ -1,0 +1,12 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            Work Order {{workOrderNumber}} Log
+        </span>
+        <span class="breadcrumb-number">
+            4.2.2
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+<kendo-textarea class="v-textarea" [value]="logs" [resizable]="'vertical'">
+</kendo-textarea>

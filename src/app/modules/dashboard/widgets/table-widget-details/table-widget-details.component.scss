@@ -1,0 +1,44 @@
+.table-widget-details-wrapper {
+    .table-widget-details-header {
+        display: flex;
+        flex-flow: wrap;
+        height: 60px;
+        justify-content: space-between;
+        align-content: center;
+
+        .table-widget-info {
+            .header-label {
+                display: inline-block;
+                margin: 0;
+                font-size: 18px;
+                font-weight: 500;
+
+                &:first-child {
+                    margin-right: 70px;
+                }
+            }
+        }
+
+        .button-group {
+            display: flex;
+            flex-flow: row;
+            gap: 15px;
+        }
+    }
+
+    .v-grid-wrapper {
+        .k-grid {
+            .k-grid-aria-root {
+                .k-grid-header {
+                    .k-grid-header-wrap {
+                        .k-header {
+                            .k-grid-column-menu {
+                                margin-bottom: -2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

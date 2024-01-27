@@ -1,0 +1,104 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            {{(priorityId > 0) ? 'Edit Scheduling Priority' : 'New Scheduling Priority'}}
+        </span>
+        <span class="breadcrumb-number">
+            2.1.1
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+
+<div class="priority-form-wrapper">
+    <form [formGroup]="priorityForm" (ngSubmit)="onSubmit()" *ngIf="priorityForm">
+        <div class="form-container">
+            <div class="form-wrapper">
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Priority:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <kendo-textbox class="v-textbox-w-400" formControlName="priorityCode" placeholder="Enter priority">
+                            </kendo-textbox>
+                            <div>
+                                <small class="error" *ngIf="priorityForm.get('priorityCode')?.errors?.maxlength">
+                                    The maximum length for this field is {{priorityForm.get('priorityCode').errors.maxlength?.requiredLength}} characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Viewable Message:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <kendo-textbox class="v-textbox-w-400" formControlName="viewableMessage" placeholder="Enter viewable message">
+                            </kendo-textbox>
+                            <div>
+                                <small class="error" *ngIf="priorityForm.get('viewableMessage')?.errors?.maxlength">
+                                    The maximum length for this field is {{priorityForm.get('viewableMessage').errors.maxlength?.requiredLength}} characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Sequence:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox" [min]="0" formControlName="sequence" [step]="10" [format]="'0'" placeholder="Enter sequence">
+                            </kendo-numerictextbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>HotSheet:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" kendoCheckBox formControlName="hotSheet" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Matrix UI:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" kendoCheckBox formControlName="matrixUI" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Color Scheme:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker" formControlName="color" (close)="onChangeColor()">
+                            </kendo-colorpicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dialog-action-wrapper">
+            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+                Cancel
+            </button>
+            <button kendoButton class="vs-primary" [disabled]="priorityForm.invalid">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

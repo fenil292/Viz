@@ -1,0 +1,65 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/font.scss';
+
+.custom-attributes-wrapper {
+    .v-grid-wrapper {
+        margin-top: 20px;
+    }
+
+    .table-container {
+        .label-text {
+            @extend .primary-font-family-500;
+            font-size: 16px;
+        }
+
+        .v-dropdown {
+            width: 200px;
+        }
+    }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0px;
+    
+        .page-title-text {
+            font-weight: 500;
+            font-size: 18px;
+            margin-top: 19px;
+            margin-bottom: 20px;
+        }
+    
+        .button-wrapper {
+            display: flex;
+        }
+    }
+
+    .attribute-container {
+        margin: 30px 0px;
+
+        .attribute-action-buttons {
+            display: flex;
+            align-items: center;
+
+            .attribute-button {
+                width: 160px;
+            }
+        }
+    }
+
+    .persist-fields-container {
+        .header-label {
+            @extend .primary-font-family-500;
+            font-size: 18px;
+            line-height: 18px;
+            margin: 0px;
+        }
+
+        .v-grid-wrapper {
+            .k-grid {
+                width: min-content;
+            }
+        }
+    }
+}

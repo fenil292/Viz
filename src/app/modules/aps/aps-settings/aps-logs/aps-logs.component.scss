@@ -1,0 +1,20 @@
+@import '../../../../../assets/scss/dialog.scss';
+
+.aps-log-dialog {
+    .k-dialog-titlebar {
+        .k-dialog-title {
+            @extend .primary-font-family;
+            font-weight: 500 !important;
+        }
+    }
+
+    .k-dialog-content {
+        .logs-content, .v-textarea {
+            height: 100%;
+        }
+    }
+
+    .k-dialog-buttongroup {
+        display: none;
+    }
+}

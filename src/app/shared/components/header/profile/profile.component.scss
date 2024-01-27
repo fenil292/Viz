@@ -1,0 +1,49 @@
+@import "../../../../../assets/scss/theme";
+@import "../../../../../assets/scss/font.scss";
+
+.b-profile {
+  display: flex;
+  align-items: center;
+
+  .user-ava {
+    width: 20px;
+    height: 20px;
+
+    &:first-child {
+      margin-right: 15px;
+      cursor: pointer;
+    }
+  }
+  .username {
+    @extend .primary-font-family-700;
+    display: block;
+    margin-left: 10px;
+    color: $header-text-color;
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: capitalize;
+  }
+
+  .btn-profile {
+    display: flex;
+    align-items: center;
+
+    .mat-icon {
+      margin-left: 20px;
+    }
+  }
+
+  .logout-wrapper {
+    margin-left: 30px;
+    width: 20px;
+    height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+
+    .logout {
+      .icon-path {
+        fill: $header-text-color !important;
+      }
+    }
+  }
+}

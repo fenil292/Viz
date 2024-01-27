@@ -1,0 +1,16 @@
+<div class="control-wrapper">
+    <kendo-dropdownlist
+        [fillMode]="'outline'"
+        [data]="data"
+        [disabled]="!enabled"
+        [defaultItem]="defaultItem"
+        [valuePrimitive]="true"
+        textField="value"
+        valueField="id"
+        class="v-dropdown"
+        [(value)]="selected"
+        (valueChange)="selectedId = $event"
+    >
+    </kendo-dropdownlist>
+    <button kendoButton class="vs-secondary" (click)="emitId()" [disabled]="isConfirmationDisabled()">Confirm</button>
+</div>

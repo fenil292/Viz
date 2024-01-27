@@ -1,0 +1,103 @@
+<kendo-dialog-titlebar (close)="onCancel()">
+    <div class="dialog-titlt-wrapper">
+        <span>
+            {{(attribute) ? 'Edit Attribute' : 'Add Attribute' }}
+        </span>
+        <span class="breadcrumb-number">
+            5.3.1
+        </span>
+    </div>
+</kendo-dialog-titlebar>
+
+<div class="custom-attribute-form-wrapper">
+    <form [formGroup]="attributeForm" (ngSubmit)="onSubmit()" *ngIf="attributeForm">
+        <div class="form-container">
+            <div class="form-wrapper">
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Entity:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <span>{{entity}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper align-items-baseline">
+                        <div class="title-wrapper">
+                            <span>Name:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <kendo-textbox class="v-textbox" placeholder="Enter attribute name" formControlName="name">
+                            </kendo-textbox>
+                            <div>
+                                <small class="error" *ngIf="attributeForm.get('name')?.errors?.maxlength">
+                                    The maximum length for this field is {{attributeForm.get('name').errors.maxlength?.requiredLength}} characters.
+                                </small>
+                                <small class="error" *ngIf="attributeForm?.get('name')?.hasError('existAttribute')">
+                                    This name is already exists in attributes.
+                                </small>
+                                <small class="error" *ngIf="attributeForm?.get('name')?.hasError('existTableField')">
+                                    This name is already exists in table fields.
+                                </small>
+                                <small class="error" *ngIf="attributeForm?.get('name')?.hasError('pattern')">
+                                    The name cannot start with a number. Space and '-' characters are not allowed.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Type:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <kendo-dropdownlist [data]="dataTypes" class="v-dropdown" formControlName="datatype">
+                            </kendo-dropdownlist>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Aps:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="aps" kendoCheckBox />
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!removeHotSheetForTables.includes(entity)">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>Hot Sheet:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="hotSheet" kendoCheckBox />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-wrapper">
+                        <div class="title-wrapper">
+                            <span>MatrixUI:</span>
+                        </div>
+                        <div class="form-control-wrapper">
+                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="matrixUI" kendoCheckBox />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dialog-action-wrapper">
+            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+                Cancel
+            </button>
+            <button kendoButton class="vs-primary" [disabled]="attributeForm.invalid">
+                Save
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container export-container">
+    <div class="v-grid-wrapper" kendoTooltip showOn="none" [tooltipTemplate]="template" filter=".k-grid td" (mouseover)="showTooltip($event)">
+        <kendo-grid [kendoGridBinding]="exportData" [loading]="isLoadingData" [columnMenu]="{columnChooser: false}"
+            [filter]="gridSettings.state.filter" filterable="menu" (dataStateChange)="dataStateChange($event)">
+            <kendo-grid-column *ngFor="let column of gridSettings.columnConfig" [title]="column.title"
+                [field]="column.field" [width]="column.width"
+                [columnMenu]="column.type === columnType.ACTION ? false : true">
+                <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.TEXT || column.type === columnType.NUMBER">
+                    {{dataItem[column.field]}}
+                </ng-template>
+                <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.DATE">
+                    <div *ngIf="dataItem[column.field] !== ''">
+                        {{ dataItem[column.field] | localTimeFormat: 'MM/dd/yyyy hh:mm:ss a' }}
+                    </div>
+                </ng-template>
+                <ng-template kendoGridFilterMenuTemplate let-filter let-column="column" let-filterService="filterService" *ngIf="column.type === columnType.DATE">
+                    <date-range-filter [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                    </date-range-filter>
+                </ng-template>
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" *ngIf="column.type === columnType.ACTION">
+                    <div class="action-button-wrapper">
+                        <div kendoTooltip position="top">
+                            <button type="button" kendoButton title="View Logs" (click)="onExportLogs(dataItem)">
+                                <v-icon [iconName]="'view-data'"></v-icon>
+                            </button>
+                        </div>
+                        <div kendoTooltip position="top">
+                            <button type="button" kendoButton title="View Change Set" (click)="onExportChangeSet(dataItem)">
+                                <span class="k-icon k-i-report-header-section"></span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            <ng-template kendoGridNoRecordsTemplate>
+                <div *ngIf="!isLoadingData && ((exportData === undefined || exportData?.length === 0) || gridSettings.state?.filter?.filters?.length > 0)">No Data Found</div>
+            </ng-template>
+        </kendo-grid>
+        <ng-template #template let-anchor>
+            <span>{{ anchor.nativeElement.innerText }}</span>
+        </ng-template>
+    </div>
+    <div class="full-page-loader">
+        <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+    </div>
+</div>
+<div kendoDialogContainer></div>

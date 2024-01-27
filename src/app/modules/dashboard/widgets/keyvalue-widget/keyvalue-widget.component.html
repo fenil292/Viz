@@ -1,0 +1,18 @@
+<kendo-grid class="keyvalue-grid" [kendoGridBinding]="keyValueWidgetData?.keyValues">
+    <kendo-grid-column-group [title]="widget?.name" [headerClass]="setTitleBackgroundColorByName(widget?.name)"
+        *ngIf="widget?.group !== null">
+      <kendo-grid-column [field]="'key'" [headerClass]="'hide-header'">
+      </kendo-grid-column>
+      <kendo-grid-column [field]="'value'" [headerClass]="'hide-header'">
+      </kendo-grid-column>
+    </kendo-grid-column-group>
+    <ng-container *ngIf="widget?.group === null">
+        <kendo-grid-column [field]="'key'" [headerClass]="'hide-header'">
+        </kendo-grid-column>
+        <kendo-grid-column field="value" [headerClass]="'hide-header'">
+        </kendo-grid-column>
+    </ng-container>
+    <ng-template kendoGridNoRecordsTemplate>
+        <div>No Data Found</div>
+    </ng-template>
+</kendo-grid>

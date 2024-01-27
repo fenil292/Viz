@@ -1,0 +1,14 @@
+<div class="date-range-filter">
+    <div class="date-wrapper">
+        <span class="date-label">After:</span>
+        <kendo-datepicker (valueChange)="onStartChange($event)" class="v-datepicker"
+            [value]="start" [max]="max" [popupSettings]="popupSettings">
+        </kendo-datepicker>
+    </div>
+    <div class="date-wrapper">
+        <span class="date-label">Before:</span>
+        <kendo-datepicker (valueChange)="onEndChange($event)" class="v-datepicker"
+            [value]="end" [min]="min" [popupSettings]="popupSettings">
+        </kendo-datepicker>
+    </div>
+</div>

@@ -1,0 +1,221 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container aps-settings-wrapper" *ngIf="apsSettingForm">
+    <form [formGroup]="apsSettingForm" (ngSubmit)="onSaveAPSSettings()">
+        <div class="header-button-wrapper">
+            <div class="action-button-wrapper">
+                <button type="button" kendoButton class="vs-secondary run-button" (click)="onRunAps()" [disabled]="isApsRun || isApiAvailable">
+                    Run APS
+                    <span class="k-icon k-i-loading button-loading" *ngIf="isApsRun"></span>
+                </button>
+                <button type="button" kendoButton class="vs-secondary" (click)="onResetJob()" [disabled]="isResetJob || isApiAvailable">
+                    Reset Job
+                    <span class="k-icon k-i-loading button-loading" *ngIf="isResetJob"></span>
+                </button>
+                <div class="integrator-checkbox-wrapper">
+                    <input type="checkbox" class="v-checkbox" [rounded]="'medium'" kendoCheckBox formControlName="forceIntegrationDataset"/>
+                    <span class="checkbox-label">Force VizToc Integrator dataset generation</span>
+                </div>
+            </div>
+            <div class="action-button-wrapper">
+                <button type="button" kendoButton class="vs-secondary" (click)="onCancel()" [disabled]="apsSettingForm.invalid || isApiAvailable">
+                    Cancel
+                </button>
+                <button kendoButton class="vs-primary" [disabled]="apsSettingForm.invalid || isApiAvailable">
+                    Save
+                </button>
+            </div>
+        </div>
+        <div class="form-wrapper">
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Schedule APS:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <kendo-dropdownlist [data]="scheduleTypes" textField="value" valueField="key"
+                            formControlName="scheduleType" class="v-dropdown" [valuePrimitive]="true"
+                            (valueChange)="onChangeScheduleAPS($event)">
+                        </kendo-dropdownlist>
+
+                        <div class="schedule-wrapper"
+                            *ngIf="apsSettingForm.get('scheduleType')?.value === scheduleTypesEnum.EVERY && apsSettingForm.get('every')"
+                            formGroupName="every">
+
+                            <kendo-numerictextbox
+                            [decimals]="0"
+                            class="v-numeric-textbox"
+                            formControlName="unit"
+                            [min]="1"
+                            [max]="apsSettingForm.get('every.unitType')?.value === unitType.MIN ? 59 : 23"
+                            [format]="'0'">
+                            </kendo-numerictextbox>
+
+                            <kendo-dropdownlist [data]="units" textField="value" valueField="key" class="v-dropdown"
+                                [valuePrimitive]="true" formControlName="unitType">
+                            </kendo-dropdownlist>
+
+                            <div class="v-mt-5 error"
+                                *ngIf="!apsSettingForm.get('every.unit')?.valid && apsSettingForm.get('every.unit').errors?.maxError">
+                                {{ apsSettingForm.get('every.unitType')?.value === unitType.MIN ? 'Minutes' : 'Hours' }}
+                                must be in the range of 1 - {{ apsSettingForm.get('every.unitType')?.value ===
+                                unitType.MIN ? 59 : 23 }}
+                            </div>
+
+                            <div class="v-mt-5 error"
+                                *ngIf="!apsSettingForm.get('every.unit')?.valid && apsSettingForm.get('every.unit').errors?.minError">
+                                {{ apsSettingForm.get('every.unitType')?.value === unitType.MIN ? 'Minutes' : 'Hours' }}
+                                must be in the range of 1 - {{ apsSettingForm.get('every.unitType')?.value ===
+                                unitType.MIN ? 59 : 23 }}
+                            </div>
+                        </div>
+                        <div class="schedule-wrapper"
+                            *ngIf="apsSettingForm.get('scheduleType')?.value === scheduleTypesEnum.EVERY_DAY_AT && apsSettingForm.get('everyDayAt')"
+                            formGroupName="everyDayAt">
+                            <kendo-timepicker class="v-timepicker" placeholder="" formControlName="time">
+                            </kendo-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Publish HotSheet:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="publishHotsheet" kendoCheckBox />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Tolerance %:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <kendo-numerictextbox
+                        [min]="0"
+                        [max]="100"
+                        formControlName="salesOrderQtyFitTolerancePercent"
+                        class="v-numeric-textbox">
+                        </kendo-numerictextbox>
+
+                        <div class="v-mt-5 error"
+                        *ngIf="!apsSettingForm.get('salesOrderQtyFitTolerancePercent')?.valid
+                        && apsSettingForm.get('salesOrderQtyFitTolerancePercent').errors?.maxError
+                        || apsSettingForm.get('salesOrderQtyFitTolerancePercent').errors?.minError">
+                        Tolerance must be in the range of 0 - 100
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Enable:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <input type="checkbox" class="v-checkbox" formControlName="enable" [rounded]="'medium'" kendoCheckBox />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Archive Period (Days):</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <kendo-numerictextbox [min]="0" formControlName="archiveStorePeriodInDays" class="v-numeric-textbox"
+                            [decimals]="0" [format]="'0'">
+                        </kendo-numerictextbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-wrapper dataset-wrapper">
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Dataset Archive Path:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <kendo-textbox class="v-textbox" formControlName="archivePath" placeholder="Enter dataset archive path">
+                        </kendo-textbox>
+                        <small class="error" *ngIf="apsSettingForm.get('archivePath')?.errors?.required">
+                            This field is required.
+                        </small>
+                        <small class="error" *ngIf="apsSettingForm.get('archivePath')?.errors?.maxlength">
+                            The maximum length for this field is {{apsSettingForm.get('archivePath').errors.maxlength?.requiredLength}} characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">
+                        <span>Dataset Path:</span>
+                    </div>
+                    <div class="form-control-wrapper">
+                        <kendo-textbox class="v-textbox" formControlName="datasetPath" placeholder="Enter dataset path">
+                        </kendo-textbox>
+                        <small class="error" *ngIf="apsSettingForm.get('datasetPath')?.errors?.required">
+                            This field is required.
+                        </small>
+                        <small class="error" *ngIf="apsSettingForm.get('datasetPath')?.errors?.maxlength">
+                            The maximum length for this field is {{apsSettingForm.get('datasetPath').errors.maxlength?.requiredLength}} characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-wrapper aps-schedulings-wrapper">
+            <div class="row">
+                <div class="field-wrapper">
+                    <div class="title-wrapper">APS Launch History:</div>
+                </div>
+            </div>
+            <div class="v-grid-wrapper">
+                <kendo-grid [data]="apsSchedulings">
+                    <kendo-grid-column [title]="'Start Date'" field="startTime">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                        <div *ngIf="dataItem.startTime !== '' && dataItem.startTime">
+                            {{ dataItem.startTime | localTimeFormat: 'MM/dd/yyyy hh:mm:ss a' }}
+                        </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column [title]="'Finish Date'" field="finishTime">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                        <div *ngIf="dataItem.finishTime !== '' && dataItem.finishTime">
+                            {{ dataItem.finishTime | localTimeFormat: 'MM/dd/yyyy hh:mm:ss a' }}
+                        </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column [title]="'Status'" field="status">
+                    </kendo-grid-column>
+                    <kendo-grid-column [title]="'Started By'" field="createdBy">
+                    </kendo-grid-column>
+                    <kendo-grid-column [title]="'Actions'">
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="action-button-wrapper">
+                                <div kendoTooltip position="top">
+                                    <button type="button" kendoButton title="View Logs" (click)="openApsLogsDialog(dataItem.logs)">
+                                        <v-icon [iconName]="'view-data'"></v-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                </kendo-grid>
+            </div>
+        </div>
+    </form>
+    <div kendoDialogContainer></div>
+</div>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

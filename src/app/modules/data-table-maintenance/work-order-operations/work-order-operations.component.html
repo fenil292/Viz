@@ -1,0 +1,215 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container work-order-operations-wrapper">
+    <div class="work-order-header">
+        <div class="work-order-info">
+            <h2 class="header-label">Work Order: {{workOrder?.workOrderNumber}}</h2>
+            <h2 class="header-label">Priority: {{workOrder?.priorityCode}}</h2>
+        </div>
+        <div class="button-group">
+            <button kendoButton class="vs-secondary" (click)="onRefresh()">Refresh</button>
+            <button kendoButton class="vs-secondary" (click)="cancel()">Back</button>
+        </div>
+    </div>
+    <div class="work-order-details">
+        <div class="column-items">
+            <div class="item">
+                <span class="field-title">Order Quantity:</span>
+                <span class="field-value">{{workOrder?.requiredQuantity}}</span>
+            </div>
+            <div class="item">
+                <span class="field-title">WO Due Date:</span>
+                <span class="field-value" *ngIf="workOrder?.requiredDate">
+                    {{workOrder.requiredDate | date: 'MM/dd/yyyy'}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title">Sales Order:</span>
+                <span class="field-value">{{workOrder?.salesOrderNumber}}</span>
+            </div>
+            <div class="item">
+                <span class="field-title">SO Due Date:</span>
+                <span class="field-value" *ngIf="workOrder?.salesOrderDueDate">
+                    {{workOrder.salesOrderDueDate | date: 'MM/dd/yyyy'}}
+                </span>
+            </div>
+        </div>
+        <div class="column-items">
+            <div class="item">
+                <span class="field-title">Part Number:</span>
+                <span class="field-value">{{workOrder?.partNumber}}</span>
+            </div>
+            <div class="item">
+                <span class="field-title">Part Revision:</span>
+                <span class="field-value">{{workOrder?.partRevision}}</span>
+            </div>
+            <div class="item">
+                <span class="field-title">Part Description:</span>
+                <span class="field-value part-description">{{workOrder?.partDescription}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="work-order-operation-tabs">
+        <kendo-tabstrip>
+            <kendo-tabstrip-tab title="Operations" [selected]="true">
+                <ng-template kendoTabContent>
+                    <div class="page-actions">
+                        <div class="page-filter">
+                            <app-dropdown-panel
+                                [data]="priorityData"
+                                [placeholder]="'Update priorities'"
+                                [enabled]="isUpdateEnabled()"
+                                (confirm)="updatePriorities($event)">
+                            </app-dropdown-panel>
+                            <button kendoButton type="button" class="vs-secondary export-prioritites-button" *ngIf="selectedItems.length > 0"
+                                (click)="onExprortPrioritiesToERP()" [disabled]="isLoadingExportPriorities">
+                                Export Priorities to ERP
+                                <span class="k-icon k-i-loading button-loading" *ngIf="isLoadingExportPriorities"></span>
+                            </button>
+                            <div kendoTooltip [tooltipTemplate]="clearTooltipTemplate">
+                                <kendo-multiselect [data]="workOrderOpearionAttributes" [autoClose]="false" [checkboxes]="true"
+                                    [valuePrimitive]="true" textField="name" valueField="name" class="v-multiselect-dropdown"
+                                    [placeholder]="'Custom Attributes'" (valueChange)="onCustomAttributesChange($event)"
+                                    [value]="customAttributeAsColumns">
+                                </kendo-multiselect>
+                            </div>
+                            <ng-template #clearTooltipTemplate let-anchor>
+                                <span>Clear</span>
+                            </ng-template>
+                            <div class="checkbox-filter">
+                                <input kendoCheckBox type="checkbox" class="v-checkbox" [checked]="statusFilterActive" [disabled]="!isCheckBoxEnabled()" (click)="showOnlyRemainingProcesses($event)"> 
+                                <span class="checkbox-label">Only show remaining process steps</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="v-grid-wrapper work-order-operations-grid-wrapper" #workOrderGridTooltip="kendoTooltip" kendoTooltip showOn="none" [tooltipTemplate]="template" filter=".k-grid td" (mouseover)="showTooltip($event, workOrderGridTooltip)">
+                        <kendo-grid
+                            [kendoGridBinding]="data"
+                            [columnMenu]="true"
+                            [sortable]="true"
+                            [resizable]="true"
+                            [reorderable]="true"
+                            filterable="menu"
+                            [filter]="gridSettings.state.filter"
+                            [sort]="gridSettings.state.sort"
+                            (dataStateChange)="dataStateChange($event)"
+                            (columnReorder)="columnReorder($event)"
+                            (columnResize)="columnResize($event)"
+                            (columnVisibilityChange)="columnVisibilityChange($event)"
+                            [kendoGridSelectBy]="'step'"
+                            [(selectedKeys)]="selectedItems"
+                            [selectable]="{enabled: true, checkboxOnly: true}"
+                            class="work-order-operations-grid"
+                            [rowClass]="setRowState"
+                        >
+                            <ng-container *ngFor="let column of gridSettings.columnConfig">
+                                <kendo-grid-checkbox-column
+                                    *ngIf="column.type === columnType.SELECTABLE_CHECKBOX" [title]="" [columnMenu]="false"
+                                    groupable="false" [width]="column.width" [resizable]="false" [showSelectAll]="true"
+                                    [reorderable]="false" class="data-value">
+                                </kendo-grid-checkbox-column>
+                                <kendo-grid-column
+                                    *ngIf="column.type !== columnType.SELECTABLE_CHECKBOX && column.type !== columnType.ACTION" [title]="column.title"
+                                    [field]="column.field" [width]="column.width" [hidden]="column.hidden" class="v-td">
+                                    <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.TEXT || column.type === columnType.NUMBER">
+                                        {{dataItem[column.field]}}
+                                    </ng-template>
+                                    <ng-template kendoGridCellTemplate let-idx="rowIndex" let-dataItem="dataItem" *ngIf="column.type === columnType.CHECKBOX">
+                                        <input class="k-checkbox k-checkbox-md k-rounded-md" [disabled]="true" type="checkbox"
+                                            [checked]="dataItem[column.field] === true || (column.isCustomAttribute && dataItem[column.field] === 'true')" />
+                                    </ng-template>
+                                    <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.DATE">
+                                        <div *ngIf="dataItem[column.field] !== ''" class="data-value">
+                                            {{ dataItem[column.field] | date: 'MM/dd/yyyy' }}
+                                        </div>
+                                    </ng-template>
+                                    <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.URL">
+                                        <a href="{{dataItem[column.field]}}" target="_blank" class="data-url data-value">
+                                            {{dataItem[column.field]}}
+                                        </a>
+                                    </ng-template>
+                                    <ng-template kendoGridFilterMenuTemplate let-filter let-column="column" let-filterService="filterService" *ngIf="column.type === columnType.DATE">
+                                        <date-range-filter [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                                        </date-range-filter>
+                                    </ng-template>
+                                </kendo-grid-column>
+                                <kendo-grid-command-column
+                                    *ngIf="column.type === columnType.ACTION" [title]="column.title"
+                                    [width]="column.width" [hidden]="column.hidden">
+                                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" *ngIf="column.type === columnType.ACTION">
+                                        <div class="action-button-wrapper">
+                                            <div kendoTooltip position="top">
+                                                <button type="button" kendoButton title="Edit" aria-describedby="tooltip" (click)="onEditWorkOrderOperationsAttributes(dataItem)">
+                                                    <span class="k-icon k-i-edit"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </kendo-grid-command-column>
+                            </ng-container>
+                            <ng-template kendoGridNoRecordsTemplate>
+                                <div *ngIf="!isLoading && ((data === undefined || data?.length === 0) || gridSettings.state?.filter?.filters?.length > 0)">
+                                    No Data Found</div>
+                            </ng-template>
+                        </kendo-grid>
+                    </div>
+                    <div class="linked-sales-orders-wrapper">
+                        <h2 class="header-label">Linked Sales Orders</h2>
+                        <div class="v-grid-wrapper">
+                            <kendo-grid [kendoGridBinding]="linkedSalesOrders">
+                                <kendo-grid-column field="salesOrderNumber" [title]="'Sales Order Number'">
+                                </kendo-grid-column>
+                                <kendo-grid-column field="salesOrderRequiredDate" [title]="'Requied Date'">
+                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                        {{ (dataItem?.salesOrderRequiredDate) ? (dataItem?.salesOrderRequiredDate | date: 'MM/dd/yyyy') : '' }}
+                                    </ng-template>
+                                </kendo-grid-column>
+                                <kendo-grid-column field="salesOrderRequiredQty" [title]="'Required Qty'">
+                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                        {{dataItem?.salesOrderRequiredQty}} {{dataItem?.salesOrderRequiredQtyUom}}
+                                    </ng-template>
+                                </kendo-grid-column>
+                                <kendo-grid-column field="shipQty" [title]="'Ship Qty'">
+                                </kendo-grid-column>
+                                <kendo-grid-column field="allocatedQty" [title]="'Allocated Qty'">
+                                </kendo-grid-column>
+                                <kendo-grid-column [title]="'Action'">
+                                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                                        <div class="action-button-wrapper">
+                                            <div kendoTooltip position="top">
+                                                <button type="button" kendoButton title="Edit" (click)="openSalesOrderDetails(dataItem.salesOrderId)">
+                                                    <span class="k-icon k-i-edit"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </kendo-grid-column>
+                                <ng-template kendoGridNoRecordsTemplate>
+                                    <div *ngIf="!isLoading && (linkedSalesOrders === undefined || linkedSalesOrders?.length === 0)">
+                                        No Data Found</div>
+                                </ng-template>
+                            </kendo-grid>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-tabstrip-tab>
+            <kendo-tabstrip-tab title="Custom Attributes">
+                <ng-template kendoTabContent>
+                    <div class="work-order-attributes-wrapper" *ngIf="workOrderAttributes?.length > 0 && workOrderAttributes">
+                        <app-edit-custom-attributes-form [attributes]="workOrderAttributes" (valueChange)="onWorkOrderAttrributeValueChange($event)">
+                        </app-edit-custom-attributes-form>
+                    </div>
+                    <div *ngIf="(workOrderAttributes?.length === 0 || !workOrderAttributes)" class="no-attributes">
+                        There is no custom attributes available for work order.
+                    </div>
+                </ng-template>
+            </kendo-tabstrip-tab>
+        </kendo-tabstrip>
+        <ng-template #template let-anchor>
+            <span>{{ anchor.nativeElement.innerText }}</span>
+        </ng-template>
+    </div>
+    <div kendoDialogContainer *ngIf="isWorkOrderDetailUrl"></div>
+</div>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>

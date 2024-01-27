@@ -1,0 +1,81 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container">
+    <div class="header-button-wrapper">
+        <button kendoButton class="vs-secondary" (click)="onAddFlowRule()">
+            Add Flow Rule
+        </button>
+    </div>
+    <div class="v-grid-wrapper" kendoTooltip showOn="none" [tooltipTemplate]="template" filter=".k-grid td" (mouseover)="showTooltip($event)">
+        <kendo-grid
+            [data]="processFlows"
+            [loading]="isLoading"
+            cdkDropList
+            [cdkDropListData]="processFlows"
+            (cdkDropListDropped)="dropProcessFlow($event)"
+        >
+            <kendo-grid-column [title]="'Sequence'" [width]="200">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <div class="sequence-cell" *ngIf="!dataItem.default">
+                        <div cdkDrag cdkDragRootElement="tr" [cdkDragData]="dataItem.id"
+                            class="drag" cdkDragBoundary=".k-grid-table" [cdkDragPreviewContainer]="'parent'">
+                            <span class="k-icon k-i-more-vertical" cdkDragHandle></span>
+                            <span class="k-icon k-i-more-vertical" cdkDragHandle></span>
+                            <tr *cdkDragPreview class="drag-placeholder" role="row">
+                            </tr>
+                        </div>
+                        <div class="">
+                            <button type="button" class="arrow-button" kendoButton *ngIf="rowIndex > 0" 
+                                (click)="onMoveProcessFlow(dataItem.id, rowIndex - 1)">
+                                    <span class="k-icon k-i-arrow-n"></span>
+                            </button>
+                            <button type="button" class="arrow-button" kendoButton *ngIf="rowIndex < processFlows.length - defaultProcessFlowCount - 1"
+                                (click)="onMoveProcessFlow(dataItem.id, rowIndex + 1)">
+                                    <span class="k-icon k-i-arrow-s"></span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column [title]="'Name'" field="name">
+            </kendo-grid-column>
+            <kendo-grid-column [title]="'Description'" field="description">
+            </kendo-grid-column>
+            <kendo-grid-column [title]="'Enabled'" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <input type="checkbox" class="v-checkbox" [checked]="dataItem.enabled" [rounded]="'medium'" 
+                        kendoCheckBox *ngIf="dataItem.enabled !== undefined" [disabled]="true"/>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column [title]="'Break'" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <input type="checkbox" class="v-checkbox" [checked]="dataItem.break" [rounded]="'medium'" kendoCheckBox 
+                        *ngIf="dataItem.break !== undefined" [disabled]="true"/>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column [title]="'Actions'" [width]="200">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <div class="action-button-wrapper">
+                        <div kendoTooltip position="top">
+                            <button type="button" kendoButton title="Edit" (click)="onEditProcessFlow(dataItem.id)">
+                                <span class="k-icon k-i-edit"></span>
+                            </button>
+                        </div>
+                        <div kendoTooltip position="top">
+                            <button type="button" kendoButton title="Delete" *ngIf="!dataItem.default">
+                                <span class="k-icon k-i-delete" (click)="onDeleteProcessFlow(dataItem.id)"></span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            <ng-template kendoGridNoRecordsTemplate>
+                <div *ngIf="!isLoading && (processFlows === undefined || processFlows?.length === 0)">No Data Found</div>
+            </ng-template>
+        </kendo-grid>
+    </div>
+    <div kendoDialogContainer></div>
+    <ng-template #template let-anchor>
+        <span>{{ anchor.nativeElement.innerText }}</span>
+    </ng-template>
+</div>

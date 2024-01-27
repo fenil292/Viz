@@ -1,0 +1,40 @@
+@import './variables.scss';
+
+/* Auth dialog colors */
+$auth-dialog-header-bg-color: $very-light-gray;
+$auth-dialog-header-text-color: $white;
+$auth-dialog-control-text-color: $dark-button-gray;
+$auth-dialog-background-color: $white-background-color;
+$close-icon-color: $very-light-gray;
+$auth-dialog-value-color: $light-blue;
+
+/* Header colors */
+$header-bg-color: #1c1c1c;
+$header-text-color: $white;
+
+/* Left menu colors */
+$left-menu-bg-color: $primary-color;
+$left-menu-toolbar-bg-color: $very-dark-black;
+$left-menu-item-color: $medium-gray;
+$left-menu-item-hover-color: #36373a;
+$item-selected-bg-color: $secondary-color;
+$item-selected-text-color: $very-dark-blue;
+
+/* Breadcrumb colors */
+$breadcrumb-bg-color: $secondary-color;
+$breadcrumb-text-color: $very-dark-blue;
+$breadcrumb-number-bg-color: $white;
+$breadcrumb-shadow-color: #484848c7;
+
+/* Scrollbar colors */
+$scrollbar-background: #f1f1f1;
+$scrollbar: #9c9c9cb3;
+$scrollbar-hover: #555;
+
+/* Dialogbox colors */
+$dialog-header-bg-color: $secondary-color;
+$dialog-header-text-color: $very-dark-blue;
+$dialog-content-bg-color: $white-background-color;
+$confirm-dialog-content-bg-color: $very-light-white;
+$confirm-dialog-content-text-color: $light-title-gray;
+$dialog-header-shadow-color: $breadcrumb-shadow-color;

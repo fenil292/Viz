@@ -1,0 +1,146 @@
+<app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
+<div class="container sales-order-details-wrapper">
+    <div class="sales-order-header">
+        <div class="sales-order-info">
+            <h2 class="header-label">Sales Order: {{salesOrder?.salesOrderNumber}}</h2>
+        </div>
+        <div class="button-group">
+            <button kendoButton class="vs-secondary" (click)="onRefresh()">Refresh</button>
+            <button kendoButton class="vs-secondary" (click)="cancel()">Back</button>
+        </div>
+    </div>
+    <div class="sales-order-details">
+        <div class="column-items">
+            <div class="item">
+                <span class="field-title">SO Due Date:</span>
+                <span class="field-value" *ngIf="salesOrder?.requiredDate">
+                    {{salesOrder?.requiredDate | date: 'MM/dd/yyyy'}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title">Required Qty:</span>
+                <span class="field-value">
+                    {{salesOrder?.requiredQty}} {{salesOrder?.requiredQtyUom}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title">Ship Qty:</span>
+                <span class="field-value">
+                    {{salesOrder?.shipQty}} {{salesOrder?.shipQtyUom}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title">Allocated Stock Qty:</span>
+                <span class="field-value">
+                    {{getFloatNumber(salesOrder?.allocatedStockQty)}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title" kendoTooltip position="bottom">
+                    <span title="Stock Qty + Work Orders Qty">Allocated Qty:</span>
+                </span>
+                <span class="field-value">
+                    {{getFloatNumber(salesOrder?.allocatedQty)}}
+                </span>
+            </div>
+        </div>
+        <div class="column-items">
+            <div class="item">
+                <span class="field-title">Part Number:</span>
+                <span class="field-value">
+                    {{salesOrder?.partNumber}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title">Part Revision:</span>
+                <span class="field-value">
+                    {{salesOrder?.partRevision}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title">Part Description:</span>
+                <span class="field-value part-description">
+                    {{salesOrder?.partDescription}}
+                </span>
+            </div>
+            <div class="item">
+                <span class="field-title">Customer ID:</span>
+                <span class="field-value part-description">
+                    {{salesOrder?.customerId}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="sales-order-details-tabs">
+        <kendo-tabstrip>
+            <kendo-tabstrip-tab title="Linked Work Orders" [selected]="true">
+                <ng-template kendoTabContent>
+                    <div class="linked-work-orders-wrapper">
+                        <h2 class="header-label">Linked Work Orders</h2>
+                        <div class="v-grid-wrapper">
+                            <kendo-grid [kendoGridBinding]="linkedWorkOrders">
+                                <kendo-grid-column field="workOrderNumber" [title]="'Work Order Number'">
+                                </kendo-grid-column>
+                                <kendo-grid-column field="workOrderDueDate" [title]="'WO Due Date'">
+                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                        {{ (dataItem?.workOrderDueDate) ? (dataItem?.workOrderDueDate | date: 'MM/dd/yyyy') : '' }}
+                                    </ng-template>
+                                </kendo-grid-column>
+                                <kendo-grid-column field="workOrderRequiredQty" [title]="'WO Required Qty'">
+                                </kendo-grid-column>
+                                <kendo-grid-column field="allocatedQty" [title]="'SO Allocated Qty'">
+                                    <ng-template kendoGridCellTemplate let-dataItem>
+                                        {{getFloatNumber(dataItem?.allocatedQty)}}
+                                    </ng-template>
+                                </kendo-grid-column>
+                                <kendo-grid-column [title]="'Action'">
+                                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                                        <div class="action-button-wrapper">
+                                            <div kendoTooltip position="top">
+                                                <button type="button" kendoButton title="Edit" (click)="openWorkOrderDetails(dataItem.workOrderId)">
+                                                    <span class="k-icon k-i-edit"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </kendo-grid-column>
+                                <ng-template kendoGridNoRecordsTemplate>
+                                    <div *ngIf="!isLoading && (linkedWorkOrders === undefined || linkedWorkOrders?.length === 0)">
+                                        No Data Found</div>
+                                </ng-template>
+                            </kendo-grid>
+                        </div>
+                    </div>
+                    <div class="quantity-distribution-wrapper">
+                        <h2 class="header-label">Quantity Distribution: {{allocatedQty}}/{{requiredQty}}</h2>
+                        <div class="quantity-bar">
+                            <div class="quantity-section" *ngFor="let item of quantityDistributionBar" [style.width.%]="item.width" [style.backgroundColor]="item.color"
+                                kendoTooltip position="bottom">
+                                <span class="section-wrapper ellipsis-text" title="{{item.text}}">
+                                    <span class="section-text ellipsis-text">{{item.text}}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-tabstrip-tab>
+            <kendo-tabstrip-tab title="Custom Attributes">
+                <ng-template kendoTabContent>
+                    <div class="sales-order-attributes-wrapper" *ngIf="salesOrderAttributes?.length > 0 && salesOrderAttributes">
+                        <app-edit-custom-attributes-form [attributes]="salesOrderAttributes" (valueChange)="onSalesOrderAttrributeValueChange($event)">
+                        </app-edit-custom-attributes-form>
+                    </div>
+                    <div *ngIf="(salesOrderAttributes?.length === 0 || !salesOrderAttributes)" class="no-attributes">
+                        There is no custom attributes available for sales order.
+                    </div>
+                </ng-template>
+            </kendo-tabstrip-tab>
+        </kendo-tabstrip>
+        <ng-template #template let-anchor>
+            <span>{{ anchor.nativeElement.innerText }}</span>
+        </ng-template>
+    </div>
+</div>
+<div class="full-page-loader">
+    <viztoc-spinner [isLoading]="isLoading"></viztoc-spinner>
+</div>
