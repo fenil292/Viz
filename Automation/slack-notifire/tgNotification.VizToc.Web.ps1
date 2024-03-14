@@ -20,7 +20,7 @@ try
 
     $headers = @{
         "Content-Type" = "application/json; charset=utf-8"
-        "Authorization" = "Bearer xoxb-6746585174994-6784063660087-KNJ4YltaUgnSSM0ehuyvtE0L"
+        "Authorization" = "Bearer xoxb-6746585174994-6803464742883-lAzKOS5J0tqoOEEc5n5mtG49"
     }
 
     $body =@{
