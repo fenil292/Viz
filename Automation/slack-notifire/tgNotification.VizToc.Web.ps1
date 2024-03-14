@@ -20,12 +20,11 @@ try
 
     $headers = @{
         "Content-Type" = "application/json; charset=utf-8"
-        "Authorization" = "Bearer xoxb-6746585174994-6784063660087-igwUIJx593vf9avAi8M4jjxh"
+        "Authorization" = "Bearer xoxb-6746585174994-6784063660087-KNJ4YltaUgnSSM0ehuyvtE0L"
     }
 
     $body =@{
-        "channel" = "U06MVLMG0BF";
-        "icon_emoji" = ':megaphone:'
+        "channel" = "general";
         "blocks" = [System.Collections.Arraylist]@(
 		@{
 			"type" = "section";
@@ -62,8 +61,12 @@ try
 
     $url = "https://slack.com/api/chat.postMessage"
     $response = Invoke-WebRequest -Uri $url -Method Post -Headers $headers -Body $body
-    Write-Host "Message successfully sent"
-    
+    $responseObj = $response | ConvertFrom-Json
+    if($responseObj.ok -eq 'true') {
+        Write-Host "Message successfully sent"
+    } else {
+        Write-Host "Message successfully not sent"
+    }
 }
 catch [System.Exception]
 {
