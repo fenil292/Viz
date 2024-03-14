@@ -51,6 +51,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
   public popupRef: PopupRef;
   config: QueryBuilderConfig = {} as any;
   dataTypes = DataType;
+  ruleIndex: number = 1;
 
   constructor(
     private popupService: PopupService,
@@ -110,6 +111,21 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
       this.popupRef.close();
       this.popupRef = null;
     }
+  }
+
+  onReArrangeRuleOrder() {
+    this.ruleIndex = 1;
+    this.query?.rules?.forEach(rule => {
+      if (rule?.rules) {
+        if (rule.rules.length > 0) {
+          this.onTraverseQueryBuilderRules(rule);
+        }
+      }
+      else {
+        rule.ruleIndex = this.ruleIndex;
+        this.ruleIndex++;
+      }
+    });
   }
 
   @HostListener("document:keydown", ["$event"])
@@ -264,7 +280,20 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
 
   private prepareQuery() {
     if(this.queryConditions && this.conditionBuild) {
+      this.ruleIndex = 1;
       this.query = this.setCondition(this.queryConditions) as any;
+    }
+  }
+
+	private onTraverseQueryBuilderRules(rule: any) {
+    if (rule?.rules && rule?.rules.length > 0) {
+      rule.rules.forEach(childRule => {
+        this.onTraverseQueryBuilderRules(childRule);
+      });
+    }
+    else {
+      rule.ruleIndex = this.ruleIndex;
+      this.ruleIndex++;
     }
   }
 
@@ -291,7 +320,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
           value: this.setValueByType(item.value, field.type),
           entity: item.table,
           persist: item.persist,
-          exist: item.exist
+          exist: item.exist,
+          ruleIndex: this.ruleIndex++
         }
         res.push(rule);
       }
@@ -313,7 +343,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, OnDestroy {
           value: this.setValueByType(item.value, item.type),
           entity: item.table,
           persist: item.persist,
-          exist: item.exist
+          exist: item.exist,
+      	  ruleIndex: this.ruleIndex++
         }
         
         const field = {

@@ -1,13 +1,13 @@
 <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
 <div class="container matrixui-configuration-container">
-    <form [formGroup]="matrixuiConfigurationsForm" *ngIf="matrixuiConfigurationsForm">
+    <form [formGroup]="matrixuiConfigurationsForm" *ngIf="matrixuiConfigurationsForm" class="matrixui-configurations-form">
         <div class="header-button-wrapper">
-            <button kendoButton class="vs-primary" (click)="onSaveConfigurations()" [disabled]="matrixuiConfigurationsForm.invalid">
+            <button kendoButton class="vs-primary matrixui-configurations-form__save-btn" (click)="onSaveConfigurations()" [disabled]="matrixuiConfigurationsForm.invalid">
                 Save
             </button>
         </div>
-        <div class="matrixui-configurations-form">
-            <div class="form-wrapper">
+        <div class="matrixui-configurations-form-wrapper">
+            <div class="form-wrapper form-control-header">
                 <div class="form-control-field">
                     <span class="field-title">Statues</span>
                 </div>
@@ -22,20 +22,20 @@
                 </div>
             </div>
             <div [formGroupName]="'colorSchemaItems'">
-                <div class="form-wrapper" *ngFor="let configuration of configurations.colorSchemaItems" [formGroupName]="configuration.name">
+                <div class="form-wrapper" *ngFor="let configuration of configurations.colorSchemaItems;let i = index" [formGroupName]="configuration.name">
                     <div class="form-control-field">
                         <span class="field-text">{{configuration.name}}</span>
                     </div>
                     <div class="form-control-field">
-                        <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker" formControlName="background">
+                        <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker matrixui-configurations-form__background-checkbox-{{i+1}}" formControlName="background">
                         </kendo-colorpicker>
                     </div>
                     <div class="form-control-field">
-                        <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker" formControlName="foreground">
+                        <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker matrixui-configurations-form__foreground-checkbox-{{i+1}}" formControlName="foreground">
                         </kendo-colorpicker>
                     </div>
                     <div class="form-control-field">
-                        <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox" [min]="0" [format]="'0'" formControlName="threshold">
+                        <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox matrixui-configurations-form__threshold-numerictextbox-{{i+1}}" [min]="0" [format]="'0'" formControlName="threshold">
                         </kendo-numerictextbox>
                     </div>
                 </div>
@@ -46,13 +46,26 @@
                 </div>
                 <div>
                     <div class="range-field">
-                        <input class="v-range-control" type="range" min="0" max="10000" step="100" formControlName="backgroundBlinking" />
+                        <input class="v-range-control matrixui-configurations-form__background-blinking-range" type="range" min="0" max="10000" step="100" formControlName="backgroundBlinking" />
                         <div class="range-control-wrapper">
                             <small>Low</small>
                             <span>{{ matrixuiConfigurationsForm.controls.backgroundBlinking.value }} ms</span>
                             <small>Fast</small>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="form-wrapper sort-order-field-wrapper">
+                <div class="form-control-field v-mt-5">
+                    <span class="field-text">Default Sort Order</span>
+                </div>
+                <div class="sort-order-control">
+                    <kendo-dropdownlist [data]="sortOrders" textField="title" valueField="id" class="v-dropdown matrixui-configurations-form__sortorder-dropdown"
+                            [valuePrimitive]="true" formControlName="sortOrderId">
+                    </kendo-dropdownlist>
+                    <span class="sort-order-description" *ngIf="selectedSortOrderDescription">
+                        {{selectedSortOrderDescription}}
+                    </span>
                 </div>
             </div>
         </div>

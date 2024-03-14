@@ -9,7 +9,7 @@
     </div>
 </kendo-dialog-titlebar>
 <div class="flow-rule-wrapper">
-    <form [formGroup]="flowRuleForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="flowRuleForm" (ngSubmit)="onSubmit()" class="flow-rule-dialog__form">
     <div class="form-container">
         <div class="form-wrapper">
             <div class="row">
@@ -18,7 +18,8 @@
                         <span>Name:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-textbox class="v-textbox-w-400" [value]="processFlowName" [disabled]="true">
+                        <kendo-textbox class="v-textbox-w-400 flow-rule-dialog__name-textbox"
+                            [value]="processFlowName" [disabled]="true">
                         </kendo-textbox>
                     </div>
                 </div>
@@ -29,7 +30,7 @@
                         <span>Priority:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-dropdownlist [data]="priority" textField="priorityCode" valueField="id" class="v-dropdown"
+                        <kendo-dropdownlist [data]="priority" textField="priorityCode" valueField="id" class="v-dropdown flow-rule-dialog__priority-dropdown"
                             [valuePrimitive]="true" formControlName="priorityInfoId" [defaultItem]="{ priorityCode: 'Select priority', id: null }">
                         </kendo-dropdownlist>
                     </div>
@@ -41,7 +42,8 @@
                         <span>Description:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-textbox class="v-textbox-w-400" formControlName="description" placeholder="Enter description">
+                        <kendo-textbox class="v-textbox-w-400 flow-rule-dialog__description-textbox" formControlName="description"
+                            placeholder="Enter description">
                         </kendo-textbox>
                         <div>
                             <small class="error" *ngIf="flowRuleForm.get('description')?.errors?.maxlength">
@@ -63,10 +65,10 @@
         </div>
     </div>
     <div class="dialog-button-wrapper button-wrapper">
-        <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+        <button type="button" kendoButton class="vs-secondary mr-12 flow-rule-dialog__cancel-btn" (click)="onCancel()">
             Cancel
         </button>
-        <button kendoButton class="vs-primary" [disabled]="(conditions?.rules?.length === 0 && conditions?.groupRules?.length === 0 && !isValidConditions) || flowRuleForm.invalid">
+        <button kendoButton class="vs-primary flow-rule-dialog__save-btn" [disabled]="(conditions?.rules?.length === 0 && conditions?.groupRules?.length === 0 && !isValidConditions) || flowRuleForm.invalid">
             Save
         </button>
     </div>

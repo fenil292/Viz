@@ -1,12 +1,20 @@
 @import "../../../../../assets/scss/dialog.scss";
 
-.vizer-display-group-dialog {
+.vizer-display-group-dialog-wrapper {
     .form-wrapper {
         .row {
             .field-wrapper {
                 .form-control-wrapper {
                     .v-textarea {
                         height: 100px;
+                    }
+                }
+
+                &.sort-order-field-wrapper {
+                    align-items: start;
+
+                    .sort-order-description {
+                        font-size: 12px;
                     }
                 }
             }

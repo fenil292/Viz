@@ -1,13 +1,13 @@
 <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
 <div class="container work-centers-wrapper">
     <div class="header-button-wrapper">
-        <button kendoButton class="vs-secondary mr-12" (click)="onLoadExternalWorkCenters()" [disabled]="isExternalWorkCenterLoading || isLoading">
+        <button kendoButton class="vs-secondary mr-12 load-external-work-centers-btn" (click)="onLoadExternalWorkCenters()" [disabled]="isExternalWorkCenterLoading || isLoading">
             Load External Work Centers
             <span class="k-icon k-i-loading button-loading" *ngIf="isExternalWorkCenterLoading"></span>
         </button>
         <div kendoTooltip [tooltipTemplate]="clearTooltipTemplate">
             <kendo-multiselect [data]="workCenterAttributes" [autoClose]="false" [checkboxes]="true" [valuePrimitive]="true"
-              textField="name" valueField="name" class="v-multiselect-dropdown" [placeholder]="'Custom Attributes'"
+              textField="name" valueField="name" class="v-multiselect-dropdown work-center-custom-attributes-multidropdown" [placeholder]="'Custom Attributes'"
               (valueChange)="onCustomAttributesChange($event)" [value]="customAttributeAsColumns" [disabled]="isLoading">
             </kendo-multiselect>
         </div>

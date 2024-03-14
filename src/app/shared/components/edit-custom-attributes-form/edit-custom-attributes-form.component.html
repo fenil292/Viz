@@ -27,40 +27,44 @@
                             </ng-template>
                         </div>
                         <div *ngIf="editAttribute === attribute.name" class="attribute-control">
-                            <kendo-textbox class="v-textbox" placeholder="Enter value" [formControlName]="attribute.name"
+                            <kendo-textbox class="v-textbox {{attribute.name}}-textbox" placeholder="Enter value" [formControlName]="attribute.name"
                                 *ngIf="attribute.datatype === dataTypes.STRING || attribute.datatype === dataTypes.URL">
                             </kendo-textbox>
-                            <kendo-datepicker class="v-datepicker w-full" [format]="'MM/dd/yyyy'" [formControlName]="attribute.name"
+                            <kendo-datepicker class="v-datepicker w-full {{attribute.name}}-datepicker" [format]="'MM/dd/yyyy'" [formControlName]="attribute.name"
                                 *ngIf="attribute.datatype === dataTypes.DATETIME">
                             </kendo-datepicker>
-                            <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox w-full" [format]="'0'" [formControlName]="attribute.name"
+                            <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox w-full {{attribute.name}}-numerictextbox" [format]="'0'" [formControlName]="attribute.name"
                                 *ngIf="attribute.datatype === dataTypes.INT">
                             </kendo-numerictextbox>
-                            <kendo-numerictextbox class="v-numeric-textbox w-full" [formControlName]="attribute.name"
+                            <kendo-numerictextbox class="v-numeric-textbox w-full {{attribute.name}}-numerictextbox" [formControlName]="attribute.name"
                                 *ngIf="attribute.datatype === dataTypes.DECIMAL">
                             </kendo-numerictextbox>
-                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" [formControlName]="attribute.name" kendoCheckBox
+                            <input type="checkbox" class="v-checkbox {{attribute.name}}-checkbox" [rounded]="'medium'" [formControlName]="attribute.name" kendoCheckBox
                                 *ngIf="attribute.datatype === dataTypes.BOOLEAN" />
                         </div>
                         <div style="margin-right: auto;">
-                            <div class="attribute-action-wrapper">
+                            <div class="attribute-action-wrapper attribute-actions">
                                 <div kendoTooltip position="top" *ngIf="editAttribute !== attribute.name">
-                                    <button type="button" kendoButton title="Edit" aria-describedby="tooltip" (click)="onEditAttributeValue(attribute)">
+                                    <button type="button" kendoButton title="Edit" aria-describedby="tooltip" (click)="onEditAttributeValue(attribute)"
+                                        class="attribute-actions__edit-btn">
                                         <span class="k-icon k-i-edit"></span>
                                     </button>
                                 </div>
                                 <div kendoTooltip position="top" *ngIf="editAttribute === attribute.name">
-                                    <button type="button" kendoButton title="Accept" aria-describedby="tooltip" (click)="onAcceptAttributeValue(attribute)">
+                                    <button type="button" kendoButton title="Accept" aria-describedby="tooltip" (click)="onAcceptAttributeValue(attribute)"
+                                        class="attribute-actions__accept-btn">
                                         <span class="k-icon k-i-check"></span>
                                     </button>
                                 </div>
                                 <div kendoTooltip position="top" *ngIf="editAttribute === attribute.name">
-                                    <button type="button" kendoButton title="Cancel" aria-describedby="tooltip" (click)="onCancelAttributeValue(attribute)">
+                                    <button type="button" kendoButton title="Cancel" aria-describedby="tooltip" (click)="onCancelAttributeValue(attribute)"
+                                        class="attribute-actions__cancel-btn">
                                         <span class="k-icon k-i-cancel"></span>
                                     </button>
                                 </div>
                                 <div kendoTooltip position="top" *ngIf="(attribute.value !== null || attribute.value === '') && editAttribute !== attribute.name">
-                                    <button type="button" kendoButton title="Clear" aria-describedby="tooltip" (click)="onClearAttributeValue(attribute)">
+                                    <button type="button" kendoButton title="Clear" aria-describedby="tooltip" (click)="onClearAttributeValue(attribute)"
+                                        class="attribute-actions__clear-btn">
                                         <v-icon [iconName]="'clear-icon'"></v-icon>
                                     </button>
                                 </div>

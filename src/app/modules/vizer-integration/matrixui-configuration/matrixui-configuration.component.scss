@@ -7,7 +7,7 @@
         align-items: center;
     }
 
-    .matrixui-configurations-form {
+    .matrixui-configurations-form-wrapper {
         .form-wrapper {
             display: flex;
             gap: 30px;
@@ -22,18 +22,43 @@
                 .field-text {
                     font-weight: 500 !important;
                 }
+
+                &:first-child {
+                    width: 135px;
+                    text-align: left;
+                }
             }
 
             .range-field {
-                margin: 0px 15px;
+                margin-left: 28px;
 
                 .v-range-control {
-                    width: 375px;
+                    width: 358px;
                 }
 
                 .range-control-wrapper {
                     display: flex;
                     justify-content: space-between;
+                }
+            }
+
+            &.sort-order-field-wrapper {
+                align-items: start;
+
+                .sort-order-control {
+                    display: flex;
+                    flex-direction: column;
+                    width: 358px;
+                    gap: 5px;
+                    margin-left: 28px;
+
+                    .v-dropdown {
+                        width: auto;
+                    }
+                }
+
+                .sort-order-description {
+                    font-size: 12px;
                 }
             }
 
@@ -43,6 +68,12 @@
                 .field-title {
                     font-weight: bold !important;
                     font-size: 15px !important;
+                }
+            }
+
+            &.form-control-header {
+                .form-control-field {
+                    text-align: center;
                 }
             }
         }

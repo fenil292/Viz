@@ -35,6 +35,12 @@ export class Pagging {
     sortDirection: string;
 }
 
+export class LookUpItem {
+    id: number;
+    title: string;
+    tag: string;
+}
+
 export const pages = {
     WORK_CENTERS: 'work-centers',
     WORK_ORDERS: 'work-orders',

@@ -96,7 +96,7 @@ export class WorkRelatedIllnessAndInjuriesComponent implements OnInit {
       content: WorkRelatedInjuriesEntryComponent,
       width: '60%',
       height: '90%',
-      cssClass: 'work-related-injury-entry-dialog'
+      cssClass: 'incident-dialog'
     });
 
     const data = dialogRef.content.instance as WorkRelatedInjuriesEntryComponent;

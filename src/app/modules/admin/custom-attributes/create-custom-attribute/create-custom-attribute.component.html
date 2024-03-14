@@ -10,7 +10,7 @@
 </kendo-dialog-titlebar>
 
 <div class="custom-attribute-form-wrapper">
-    <form [formGroup]="attributeForm" (ngSubmit)="onSubmit()" *ngIf="attributeForm">
+    <form [formGroup]="attributeForm" (ngSubmit)="onSubmit()" *ngIf="attributeForm" class="custom-attribute-dialog__form">
         <div class="form-container">
             <div class="form-wrapper">
                 <div class="row">
@@ -19,7 +19,7 @@
                             <span>Entity:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <span>{{entity}}</span>
+                            <span class="custom-attribute-dialog__entity-label">{{entity}}</span>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                             <span>Name:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <kendo-textbox class="v-textbox" placeholder="Enter attribute name" formControlName="name">
+                            <kendo-textbox class="v-textbox custom-attribute-dialog__name-textbox" placeholder="Enter attribute name" formControlName="name">
                             </kendo-textbox>
                             <div>
                                 <small class="error" *ngIf="attributeForm.get('name')?.errors?.maxlength">
@@ -54,7 +54,7 @@
                             <span>Type:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <kendo-dropdownlist [data]="dataTypes" class="v-dropdown" formControlName="datatype">
+                            <kendo-dropdownlist [data]="dataTypes" class="v-dropdown custom-attribute-dialog__type-dropdown" formControlName="datatype">
                             </kendo-dropdownlist>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             <span>Aps:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="aps" kendoCheckBox />
+                            <input type="checkbox" class="v-checkbox custom-attribute-dialog__aps-checkbox" [rounded]="'medium'" formControlName="aps" kendoCheckBox />
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             <span>Hot Sheet:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="hotSheet" kendoCheckBox />
+                            <input type="checkbox" class="v-checkbox custom-attribute-dialog__hotsheet-checkbox" [rounded]="'medium'" formControlName="hotSheet" kendoCheckBox />
                         </div>
                     </div>
                 </div>
@@ -85,17 +85,17 @@
                             <span>MatrixUI:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="matrixUI" kendoCheckBox />
+                            <input type="checkbox" class="v-checkbox custom-attribute-dialog__matrixui-checkbox" [rounded]="'medium'" formControlName="matrixUI" kendoCheckBox />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="dialog-action-wrapper">
-            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+            <button type="button" kendoButton class="vs-secondary mr-12 custom-attribute-dialog__cancel-btn" (click)="onCancel()">
                 Cancel
             </button>
-            <button kendoButton class="vs-primary" [disabled]="attributeForm.invalid">
+            <button kendoButton class="vs-primary custom-attribute-dialog__save-btn" [disabled]="attributeForm.invalid">
                 Save
             </button>
         </div>

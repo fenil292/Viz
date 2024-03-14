@@ -2,7 +2,7 @@
 <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
 <div class="container vizer-display-group-wrapper">
     <div class="header-button-wrapper">
-        <button kendoButton class="vs-secondary" (click)="openVizerDisplayGroupDialog()">
+        <button kendoButton class="vs-secondary add-vizer-display-group-btn" (click)="openVizerDisplayGroupDialog()">
             Add Vizer Display Group
         </button>
     </div>
@@ -20,8 +20,8 @@
                     {{dataItem[column.field]}}
                 </ng-template>
                 <ng-template kendoGridFilterMenuTemplate let-column="column" let-filter="filter" let-filterService="filterService"
-                    *ngIf="column.field === 'name'">
-                    <multicheck-filter [data]="groupAlias" [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
+                    *ngIf="multiCheckFilterColumns.includes(column.field)">
+                    <multicheck-filter [data]="filterDataArray[column.field]" [field]="column.field" [currentFilter]="filter" [filterService]="filterService">
                     </multicheck-filter>
                 </ng-template>
                 <ng-template kendoGridCellTemplate let-dataItem *ngIf="column.type === columnType.ACTION">

@@ -33,15 +33,17 @@ export class VizerDisplayGroupsComponent implements OnInit {
   };
   gridSettings: GridState;
   columnType = ColumnType;
-  groupAlias: string[] = [];
+  multiCheckFilterColumns: string[] = ['name', 'sortOrderName'];
+  filterDataArray: unknown;
   @ViewChild(TooltipDirective) tooltipDir: TooltipDirective;
 
-  constructor(private vizerDisplayGroupsService: VizerDisplayGroupsApiService,
+  constructor(
     private dialogService: DialogService,
     private utilityService: UtilityService,
     private notificationService: NotificationService,
     private confirmDialogService: ConfirmDialogService,
-    private statePersistingService: StatePersistingService) { }
+    private statePersistingService: StatePersistingService,
+    private vizerDisplayGroupsService: VizerDisplayGroupsApiService) { }
 
   ngOnInit(): void {
     this.getVizerDisplayGroups();
@@ -50,7 +52,10 @@ export class VizerDisplayGroupsComponent implements OnInit {
   }
 
   openVizerDisplayGroupDialog(dataItem: VizerDisplayGroups | undefined = undefined): void {
-    const dialog = this.dialogService.open({ content: VizerDisplayGroupsEntryComponent });
+    const dialog = this.dialogService.open({
+      content: VizerDisplayGroupsEntryComponent,
+      cssClass: 'vizer-display-group-dialog'
+    });
     const data = dialog.content.instance as VizerDisplayGroupsEntryComponent;
     if (dataItem !== undefined) {
       data.id = dataItem.id;
@@ -104,10 +109,12 @@ export class VizerDisplayGroupsComponent implements OnInit {
     this.vizerDisplayGroupsService.getVizerDisplayGroups().subscribe({
       next: (response: BaseResponseModel<Array<VizerDisplayGroups>>) => {
           this.vizerDisplayGroups = response.data;
-          this.groupAlias = [...new Set(response.data?.filter(x => x.name !== '')?.map(x => x.name))];
       },
       error: (error) => this.notificationService.error(error)
-    }).add(()=> this.isLoading = false);
+    }).add(() => {
+      this.isLoading = false;
+      this.setFilterArrays();
+    });
   }
 
   private deleteVizerDisplayGroup(id: number): void {
@@ -126,9 +133,18 @@ export class VizerDisplayGroupsComponent implements OnInit {
       columnConfig: [
         { field: 'name', title: 'Group Alias', order: 0, type: ColumnType.TEXT },
         { field: 'description', title: 'Description', order: 1, type: ColumnType.TEXT },
-        { field: 'Actions', title: 'Actions', order: 2, type: ColumnType.ACTION }
+        { field: 'workCenters', title: 'Work Centers', order: 2, type: ColumnType.TEXT },
+        { field: 'sortOrderName', title: 'Data Sort Order', order: 3, type: ColumnType.TEXT },
+        { field: 'Actions', title: 'Actions', order: 4, type: ColumnType.ACTION }
       ],
       state: this.state
     }
+  }
+
+  private setFilterArrays(): void {
+    this.filterDataArray = {};
+    this.multiCheckFilterColumns.forEach((column: string) => {
+      this.filterDataArray[column] = [...new Set(this.vizerDisplayGroups.filter((x: any) => x[column] !== '' && x[column] !== null).map(x => x[column]))];
+    })
   }
 }

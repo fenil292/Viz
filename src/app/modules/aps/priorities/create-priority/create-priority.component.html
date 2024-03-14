@@ -10,7 +10,7 @@
 </kendo-dialog-titlebar>
 
 <div class="priority-form-wrapper">
-    <form [formGroup]="priorityForm" (ngSubmit)="onSubmit()" *ngIf="priorityForm">
+    <form [formGroup]="priorityForm" class="priority-dialog__form" (ngSubmit)="onSubmit()" *ngIf="priorityForm">
         <div class="form-container">
             <div class="form-wrapper">
                 <div class="row">
@@ -19,7 +19,8 @@
                             <span>Priority:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <kendo-textbox class="v-textbox-w-400" formControlName="priorityCode" placeholder="Enter priority">
+                            <kendo-textbox class="v-textbox-w-400 priority-dialog__priority-textbox"
+                                formControlName="priorityCode" placeholder="Enter priority">
                             </kendo-textbox>
                             <div>
                                 <small class="error" *ngIf="priorityForm.get('priorityCode')?.errors?.maxlength">
@@ -35,7 +36,8 @@
                             <span>Viewable Message:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <kendo-textbox class="v-textbox-w-400" formControlName="viewableMessage" placeholder="Enter viewable message">
+                            <kendo-textbox class="v-textbox-w-400 priority-dialog__message-textbox"
+                                formControlName="viewableMessage" placeholder="Enter viewable message">
                             </kendo-textbox>
                             <div>
                                 <small class="error" *ngIf="priorityForm.get('viewableMessage')?.errors?.maxlength">
@@ -51,7 +53,8 @@
                             <span>Sequence:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox" [min]="0" formControlName="sequence" [step]="10" [format]="'0'" placeholder="Enter sequence">
+                            <kendo-numerictextbox [decimals]="0" class="v-numeric-textbox priority-dialog__sequence-numerictextbox"
+                                [min]="0" formControlName="sequence" [step]="10" [format]="'0'" placeholder="Enter sequence">
                             </kendo-numerictextbox>
                         </div>
                     </div>
@@ -62,7 +65,8 @@
                             <span>HotSheet:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" kendoCheckBox formControlName="hotSheet" />
+                            <input type="checkbox" class="v-checkbox priority-dialog__hotsheet-checkbox" [rounded]="'medium'"
+                                kendoCheckBox formControlName="hotSheet" />
                         </div>
                     </div>
                 </div>
@@ -72,7 +76,8 @@
                             <span>Matrix UI:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <input type="checkbox" class="v-checkbox" [rounded]="'medium'" kendoCheckBox formControlName="matrixUI" />
+                            <input type="checkbox" class="v-checkbox priority-dialog__matrixui-checkbox" [rounded]="'medium'"
+                                kendoCheckBox formControlName="matrixUI" />
                         </div>
                     </div>
                 </div>
@@ -82,7 +87,7 @@
                             <span>Color Scheme:</span>
                         </div>
                         <div class="form-control-wrapper">
-                            <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker" formControlName="color" (close)="onChangeColor()">
+                            <kendo-colorpicker [format]="'hex'" [preview]="true" class="v-colorpicker priority-dialog__scheme-colorpicker" formControlName="color" (close)="onChangeColor()">
                             </kendo-colorpicker>
                         </div>
                     </div>
@@ -90,10 +95,10 @@
             </div>
         </div>
         <div class="dialog-action-wrapper">
-            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+            <button type="button" kendoButton class="vs-secondary mr-12 priority-dialog__cancel-btn" (click)="onCancel()">
                 Cancel
             </button>
-            <button kendoButton class="vs-primary" [disabled]="priorityForm.invalid">
+            <button kendoButton class="vs-primary priority-dialog__save-btn" [disabled]="priorityForm.invalid">
                 Save
             </button>
         </div>

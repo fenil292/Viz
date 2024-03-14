@@ -1,3 +1,19 @@
+1.2.6.0
+[+] #462 - Set classes to the components templates
+
+1.2.5.0
+[!] #459 - Add Data Sort Order type on the page Vizer Display Groups
+[!] #458 - Add defaul Data Sort Order type on the page Matrix UI Configuration
+
+1.2.4.0
+[+] #459 - Add Data Sort Order type on the page Vizer Display Groups
+
+1.2.3.0
+[!] #458 - Fix npm install issue for CI/CD pipeline
+
+1.2.2.0
+[+] #458 - Add defaul Data Sort Order type on the page Matrix UI Configuration
+
 1.2.1.0
 [+] #444 - Validate Aps Priority Rule within Aps Process Flow
 [+] #445 - Validate duplicates Aps Process Flow Names

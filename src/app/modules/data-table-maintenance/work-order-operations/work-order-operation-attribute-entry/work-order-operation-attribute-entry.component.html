@@ -16,10 +16,10 @@
         There is no custom attributes available for work order operation.
     </div>
     <div class="dialog-action-wrapper">
-        <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+        <button type="button" kendoButton class="vs-secondary mr-12 work-order-operation-attribute-entry-dialog__cancel-btn" (click)="onCancel()">
             Cancel
         </button>
-        <button kendoButton class="vs-primary" (click)="onSubmit()" [disabled]="attributes?.length === 0 || !attributes">
+        <button kendoButton class="vs-primary work-order-operation-attribute-entry-dialog__save-btn" (click)="onSubmit()" [disabled]="attributes?.length === 0 || !attributes">
             Save
         </button>
     </div>

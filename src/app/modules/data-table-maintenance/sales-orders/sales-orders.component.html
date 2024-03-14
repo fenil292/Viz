@@ -4,42 +4,42 @@
         <div class="header-button-wrapper">
             <div kendoTooltip [tooltipTemplate]="clearTooltipTemplate">
                 <kendo-multiselect [data]="salesOrderAttributes" [autoClose]="false" [checkboxes]="true" [valuePrimitive]="true"
-                  textField="name" valueField="name" class="v-multiselect-dropdown" [placeholder]="'Custom Attributes'"
+                  textField="name" valueField="name" class="v-multiselect-dropdown sales-order-custom-attributes-multidropdown" [placeholder]="'Custom Attributes'"
                   (valueChange)="onCustomAttributesChange($event)" [value]="customAttributeAsColumns" [disabled]="isLoading">
                 </kendo-multiselect>
               </div>
             <ng-template #clearTooltipTemplate let-anchor>
                 <span>Clear</span>
             </ng-template>
-            <div class="page-filter" [formGroup]="filterForm">
+            <div class="page-filter sales-order-filter-form" [formGroup]="filterForm">
                 <div class="filter-container">
                     <span class="filter-title">From: </span>
-                    <kendo-datepicker class="v-datepicker v-datepicker-from" [format]="'MM/dd/yyyy'"
+                    <kendo-datepicker class="v-datepicker v-datepicker-from sales-order-filter-form__form-datepicker" [format]="'MM/dd/yyyy'"
                         [ngClass]="{ 'k-button-clear-show': filterForm.controls.from.value, 'k-button-clear-hide': !filterForm.controls.from.value }" [disabled]="isLoading"
                         formControlName="from" (keydown.enter)="pageFilterChanges()">
                     </kendo-datepicker>
                 </div>
                 <div class="filter-container">
                     <span class="filter-title">To:</span>
-                    <kendo-datepicker class="v-datepicker v-datepicker-to" [format]="'MM/dd/yyyy'"
+                    <kendo-datepicker class="v-datepicker v-datepicker-to sales-order-filter-form__to-datepicker" [format]="'MM/dd/yyyy'"
                         [ngClass]="{ 'k-button-clear-show': filterForm.controls.to.value, 'k-button-clear-hide': !filterForm.controls.to.value }" [disabled]="isLoading"
                         formControlName="to" (keydown.enter)="pageFilterChanges()">
                     </kendo-datepicker>
                 </div>
                 <div class="filter-container">
                     <span class="filter-title">Sales Order:</span>
-                    <kendo-textbox #workOrderTextbox [clearButton]="true" class="v-textbox workorder-textbox" formControlName="salesOrderNumber"
+                    <kendo-textbox #workOrderTextbox [clearButton]="true" class="v-textbox workorder-textbox sales-order-filter-form__salesorder-textbox" formControlName="salesOrderNumber"
                         (keydown.enter)="pageFilterChanges()" (valueChange)="onChangePageFilters($event)" [disabled]="isLoading">
                     </kendo-textbox>
                 </div>
                 <div class="filter-container">
                     <span class="filter-title">Part Number:</span>
-                    <kendo-textbox [clearButton]="true" class="v-textbox part-number-textbox" formControlName="partNumber"
+                    <kendo-textbox [clearButton]="true" class="v-textbox part-number-textbox sales-order-filter-form__part-number-textbox" formControlName="partNumber"
                         (keydown.enter)="pageFilterChanges()" (valueChange)="onChangePageFilters($event)" [disabled]="isLoading">
                     </kendo-textbox>
                 </div>
                 <div class="filter-container">
-                    <button kendoButton class="vs-secondary" [disabled]="isLoading" (click)="pageFilterChanges()">
+                    <button kendoButton class="vs-secondary sales-order-filter-form__search-btn" [disabled]="isLoading" (click)="pageFilterChanges()">
                         Search
                     </button>
                 </div>

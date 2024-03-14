@@ -6,16 +6,16 @@
             <v-icon [iconName]="'plus'"></v-icon>
         </div>
         <ng-template #template>
-            <div *ngIf="addRuleSet" (click)="addRuleSet();closeAddRule();" class="icontext-wrapper">
+            <div *ngIf="addRuleSet" (click)="addRuleSet();closeAddRule();onReArrangeRuleOrder();" class="icontext-wrapper">
                 <v-icon [iconName]="'add-plus'"></v-icon>
                 <span class="rule-button-text">Add Group</span>
             </div>
-            <div (click)="addRule();closeAddRule();" class="icontext-wrapper">
+            <div (click)="addRule();closeAddRule();onReArrangeRuleOrder();" class="icontext-wrapper">
                 <v-icon [iconName]="'add-plus'"></v-icon>
                 <span class="rule-button-text">Add Condition</span>
             </div>
         </ng-template>
-        <div *ngIf="removeRuleSet" (click)="removeRuleSet()">
+        <div *ngIf="removeRuleSet" (click)="removeRuleSet();onReArrangeRuleOrder()">
         <span class="k-icon k-i-delete"></span>
         </div>
     </ng-container>
@@ -38,7 +38,7 @@
             valueField="name"
             [(ngModel)]="rule.entity"
             [style.width.px]="175"
-            class="v-dropdown"
+            class="v-dropdown querybuilder-entities-dropdown-{{rule.ruleIndex}}"
             [popupSettings]="{ width: 'auto' }"
             [valuePrimitive]="true"
             (ngModelChange)="onChange($event, rule)"
@@ -53,7 +53,7 @@
                 valueField="name"
                 [(ngModel)]="rule.field"
                 [style.width.px]="260"
-                class="v-dropdown field-dropdown"
+                class="v-dropdown field-dropdown querybuilder-field-dropdown-{{rule.ruleIndex}}"
                 [valuePrimitive]="true"
                 [popupSettings]="{popupClass: 'query-field-popup'}"
                 (ngModelChange)="onChange($event, rule)">
@@ -76,7 +76,7 @@
                 textField="symbol"
                 valueField="id"
                 [(ngModel)]="rule.operator"
-                class="v-dropdown"
+                class="v-dropdown querybuilder-operator-dropdown-{{rule.ruleIndex}}"
                 (ngModelChange)="onChange(rule)"
             ></kendo-dropdownlist>
         </div>
@@ -84,7 +84,7 @@
     <ng-container *queryInput="let rule;let field; type: dataTypes.STRING;  let onChange=onChange;">
         <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
             <div class="query-builder-caption">Value</div>
-            <kendo-textbox  class="v-textbox"
+            <kendo-textbox  class="v-textbox querybuilder-value-dropdown-{{rule.ruleIndex}}"
                 [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, field, dataTypes.STRING)" [clearButton] = "true" (blur)="onChange(rule.value)">
             </kendo-textbox>
         </div>
@@ -92,7 +92,7 @@
     <ng-container *queryInput="let rule; type: dataTypes.URL;  let onChange=onChange;">
         <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
             <div class="query-builder-caption">Value</div>
-            <kendo-textbox class="v-textbox flex-order-4"
+            <kendo-textbox class="v-textbox flex-order-4 querybuilder-value-textbox-{{rule.ruleIndex}}"
                 [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.URL)" [clearButton] = "true" (blur)="onChange(rule.value)">
             </kendo-textbox>
         </div>
@@ -100,7 +100,7 @@
     <ng-container *queryInput="let rule; type: dataTypes.NVARCHAR;  let onChange=onChange;">
         <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
             <div class="query-builder-caption">Value</div>
-            <kendo-textbox class="v-textbox flex-order-4"
+            <kendo-textbox class="v-textbox flex-order-4 querybuilder-value-textbox-{{rule.ruleIndex}}"
                 [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.NVARCHAR)" [clearButton] = "true" (blur)="onChange(rule.value)">
             </kendo-textbox>
         </div>
@@ -108,7 +108,7 @@
     <ng-container *queryInput="let rule; type: dataTypes.DECIMAL; let onChange=onChange">
         <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
             <div class="query-builder-caption">Value</div>
-            <kendo-numerictextbox class="v-numeric-textbox flex-order-4" 
+            <kendo-numerictextbox class="v-numeric-textbox flex-order-4 querybuilder-value-numerictextbox-{{rule.ruleIndex}}" 
                 [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.DECIMAL)" (blur)="onChange()">
             </kendo-numerictextbox>
         </div>
@@ -116,7 +116,7 @@
     <ng-container *queryInput="let rule; type: dataTypes.INT; let onChange=onChange">
         <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
             <div class="query-builder-caption">Value</div>
-            <kendo-numerictextbox class="v-numeric-textbox flex-order-4" [decimals]="0" [format]="'0'"
+            <kendo-numerictextbox class="v-numeric-textbox flex-order-4 querybuilder-value-numerictextbox-{{rule.ruleIndex}}" [decimals]="0" [format]="'0'"
                 [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.INT)" (blur)="onChange()">
             </kendo-numerictextbox>
         </div>
@@ -125,7 +125,7 @@
         <div class="flex-order-4" *ngIf="rule.operator.name !== 'IsNull' && rule.operator.name !== 'IsNotNull'">
             <div class="query-builder-caption">Value</div>
             <span kendoTooltip position="bottom" [tooltipWidth]="230" [tooltipTemplate]="descriptionTemplate" filter=".v-textbox" [tooltipClass]="'date-tooltip-wrapper'">
-                <kendo-textbox class="v-textbox flex-order-4"
+                <kendo-textbox class="v-textbox flex-order-4 querybuilder-value-textbox-{{rule.ruleIndex}}"
                     [(ngModel)]="rule.value" [ngClass]="{ 'q-error': rule.error }" (ngModelChange)="validator(rule, undefined, dataTypes.DATETIME)" [clearButton] = "true" (blur)="onChange(rule.value);">
                 </kendo-textbox>
                 <ng-template #descriptionTemplate let-anchor>
@@ -144,7 +144,7 @@
     <ng-container *queryInput="let rule; type: dataTypes.BIT; let onChange=onChange">
     </ng-container>
     <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
-        <div (click)="removeRule(rule)">
+        <div (click)="removeRule(rule);onReArrangeRuleOrder();">
             <span class="k-icon k-i-delete"></span>
         </div>
     </ng-container>

@@ -1,4 +1,4 @@
-<div class="control-wrapper">
+<div class="control-wrapper work-order-operation-form">
     <kendo-dropdownlist
         [fillMode]="'outline'"
         [data]="data"
@@ -7,10 +7,10 @@
         [valuePrimitive]="true"
         textField="value"
         valueField="id"
-        class="v-dropdown"
+        class="v-dropdown work-order-operation-form__priority-dropdown"
         [(value)]="selected"
         (valueChange)="selectedId = $event"
     >
     </kendo-dropdownlist>
-    <button kendoButton class="vs-secondary" (click)="emitId()" [disabled]="isConfirmationDisabled()">Confirm</button>
+    <button kendoButton class="vs-secondary work-order-operation-form__confirm-btn" (click)="emitId()" [disabled]="isConfirmationDisabled()">Confirm</button>
 </div>

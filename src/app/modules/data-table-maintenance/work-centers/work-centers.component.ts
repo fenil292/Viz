@@ -62,7 +62,10 @@ export class WorkCentersComponent implements OnInit, AfterContentChecked {
   }
 
   openWorkCenterDialog(dataItem: WorkCenterModel): void {
-    const dialog = this.dialogService.open({ content: WorkCentersEntryComponent });
+    const dialog = this.dialogService.open({
+      content: WorkCentersEntryComponent,
+      cssClass: 'work-center-dialog'
+    });
     const data = dialog.content.instance as WorkCentersEntryComponent;
     data.id = dataItem.id;
     dialog.result.subscribe((result) => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { Data } from '../../../shared/models/shared.model';
+import { Data, LookUpItem } from '../../../shared/models/shared.model';
 import { ColorSchemaItems, MatrixUIConfiguration } from './models/matriui-configuration.model';
 import { MatrixuiConfigurationService } from './services/matrixui-configuration.service';
 
@@ -15,6 +15,8 @@ export class MatrixuiConfigurationComponent implements OnInit {
   index: string = "3.1";
   matrixuiConfigurationsForm!: FormGroup;
   configurations: MatrixUIConfiguration;
+  sortOrders: LookUpItem[] = [];
+  selectedSortOrderDescription: string = null;
   isLoading: boolean = false;
 
   constructor(
@@ -54,6 +56,7 @@ export class MatrixuiConfigurationComponent implements OnInit {
     this.matrixuiConfigurationService.getMatrixUIConfigurations().subscribe({
       next: (res: Data<MatrixUIConfiguration>) => {
         this.configurations = res.data;
+        this.sortOrders = res.data.sortOrders;
         this.prepareMatrixUIConfigurationsForm();
       }
     }).add(() => this.isLoading = false);
@@ -62,12 +65,18 @@ export class MatrixuiConfigurationComponent implements OnInit {
   private prepareMatrixUIConfigurationsForm() {
     if(this.configurations) {
       let configurationsGroup: any[] = [];
+      this.selectedSortOrderDescription = this.sortOrders.find((x: LookUpItem) => x.id === this.configurations.sortOrderId)?.tag;
       this.configurations.colorSchemaItems.forEach((x: ColorSchemaItems) => {
         configurationsGroup[x.name] = new FormGroup(this.getFormControlsFields(x));
       })
       this.matrixuiConfigurationsForm = this.formBuilder.group({
         backgroundBlinking: [this.configurations.backgroundBlinking ? this.configurations.backgroundBlinking : 0, Validators.required],
-        colorSchemaItems: this.formBuilder.group(configurationsGroup)});
+        sortOrderId: [this.configurations.sortOrderId ? this.configurations.sortOrderId : null, Validators.required],
+        colorSchemaItems: this.formBuilder.group(configurationsGroup)
+      });
+      this.matrixuiConfigurationsForm.get('sortOrderId').valueChanges.subscribe((value) => {
+        this.selectedSortOrderDescription = this.sortOrders.find((x: LookUpItem) => x.id === value)?.tag;
+      });
     }
   }
 

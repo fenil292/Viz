@@ -2,11 +2,11 @@
     <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
     <div class="container hotsheet-wrapper">
     <div class="page-actions">
-        <div class="search-container" [formGroup]="filterForm">
+        <div class="search-container hotsheet-search-form" [formGroup]="filterForm">
             <div class="search-wrapper">
                 <div class="field-label">Priority: </div>
                 <div class="field-control-wrapper">
-                    <kendo-dropdownlist class="v-dropdown" [data]="priorities"
+                    <kendo-dropdownlist class="v-dropdown hotsheet-search-form__priority-dropdown" [data]="priorities"
                         textField="value" valueField="id" formControlName="priority"
                         [defaultItem]="{ value: 'Select Priority', id: null }">
                     </kendo-dropdownlist>
@@ -15,29 +15,29 @@
             <div class="search-wrapper">
                 <div class="field-label">Work Order: </div>
                 <div class="field-control-wrapper">
-                    <kendo-textbox [clearButton]="true" class="v-textbox" formControlName="workorder"
+                    <kendo-textbox [clearButton]="true" class="v-textbox hotsheet-search-form__workorder_textbox" formControlName="workorder"
                         (valueChange)="onChangePageFilters($event)" (keydown.enter)="onHotsheetFilter()">
                     </kendo-textbox>
                 </div>
             </div>
-            <button kendoButton class="vs-secondary search-btn" (click)="onHotsheetFilter()" 
+            <button kendoButton class="vs-secondary search-btn hotsheet-search-form__search-btn" (click)="onHotsheetFilter()" 
                 [disabled]="isLoading || (filterForm.get('priority')?.value?.id === null && filterForm.get('workorder')?.value === '')">
                 Search
             </button>
-            <button kendoButton type="button" class="vs-secondary" *ngIf="showClearFilter" (click)="clearHotsheetFilter()">
+            <button kendoButton type="button" class="vs-secondary hotsheet-search-form__clear-btn" *ngIf="showClearFilter" (click)="clearHotsheetFilter()">
                 Clear Filters
             </button>
-            <button kendoButton type="button" class="vs-secondary excel-button" [disabled]="isLoading || isExcelLoading" (click)="exportToExcel()">
+            <button kendoButton type="button" class="vs-secondary excel-button hotsheet-search-form__export-to-excel-btn" [disabled]="isLoading || isExcelLoading" (click)="exportToExcel()">
                 Export To Excel
                 <span class="k-icon k-i-loading button-loading" *ngIf="isExcelLoading"></span>
             </button>
         </div>
-        <div class="hotsheet-priority-wrapper" [formGroup]="hotSheetPrioritiesForm">
-            <kendo-dropdownlist class="v-dropdown" [data]="priorities" [valuePrimitive]="true"
+        <div class="hotsheet-priority-wrapper update-hotsheet-proprity-form" [formGroup]="hotSheetPrioritiesForm">
+            <kendo-dropdownlist class="v-dropdown update-hotsheet-proprity-form__priority-dropdown" [data]="priorities" [valuePrimitive]="true"
                 textField="value" valueField="id" required
                 [defaultItem]="{ value: 'Update Priorities', id: null }" formControlName="priorityInfoId">
             </kendo-dropdownlist>
-        <button class="vs-secondary" kendoButton (click)="openUpdatePrioritiesConfirmDialog()" [disabled]="!hotSheetPrioritiesForm.valid">
+        <button class="vs-secondary update-hotsheet-proprity-form__confirm-btn" kendoButton (click)="openUpdatePrioritiesConfirmDialog()" [disabled]="!hotSheetPrioritiesForm.valid">
             Confirm
         </button>
         </div>

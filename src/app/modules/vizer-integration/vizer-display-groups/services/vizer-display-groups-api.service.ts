@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { endpoints } from '../../../../../endpoints/endpoints';
 import { HttpClient } from '@angular/common/http';
-import { Data } from '../../../../shared/models/shared.model';
+import { Data, LookUpItem } from '../../../../shared/models/shared.model';
 import { VizerDisplayGroups } from '../models/vizer-display-group.model';
 
 @Injectable({
@@ -18,7 +18,11 @@ export class VizerDisplayGroupsApiService {
   }
 
   getVizerDisplayGroupDetails(id: number): Observable<Data<VizerDisplayGroups>> {
-    return this.http.get<Data<VizerDisplayGroups>>(`${this.SOURCES_URL}/GetVizerDisplayGroup/${id}`)
+    return this.http.get<Data<VizerDisplayGroups>>(`${this.SOURCES_URL}/GetVizerDisplayGroup/${id}`);
+  }
+
+  getSortOrders(): Observable<Data<LookUpItem[]>> {
+    return this.http.get<Data<LookUpItem[]>>(`${this.SOURCES_URL}/SortOrders`);
   }
 
   saveVizerDisplayGroup(data: VizerDisplayGroups): Observable<any> {

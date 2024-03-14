@@ -3,21 +3,22 @@
     <div class="button-container">
         <div class="table-container">
             <span class="label-text mr-12">Table:</span>
-            <kendo-dropdownlist [data]="tables" [value]="selectedAttribute.name" (valueChange)="onChangeTable($event)" class="v-dropdown">
+            <kendo-dropdownlist [data]="tables" [value]="selectedAttribute.name" (valueChange)="onChangeTable($event)"
+                class="v-dropdown custom-attributes-wrapper__table-dropdown">
             </kendo-dropdownlist>
         </div>
         <div class="button-wrapper">
-            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+            <button type="button" kendoButton class="vs-secondary mr-12 custom-attributes-wrapper__cancel-btn" (click)="onCancel()">
                 Cancel
             </button>
-            <button kendoButton class="vs-primary" (click)="onSubmit()">
+            <button kendoButton class="vs-primary custom-attributes-wrapper__save-btn" (click)="onSubmit()">
                 Save
             </button>
         </div>
     </div>
     <div class="attribute-container">
         <div class="attribute-action-buttons">
-            <button type="button" kendoButton class="vs-secondary attribute-button mr-12" (click)="onAddNewCustomAttribute()">
+            <button type="button" kendoButton class="vs-secondary attribute-button mr-12 custom-attributes-wrapper__add-custom-attribute-btn" (click)="onAddNewCustomAttribute()">
                 Add Custom Attribute
             </button>
             <span kendoTooltip position="bottom" *ngIf="isCustomAttributesChange" class="warning-icon">

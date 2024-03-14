@@ -17,10 +17,10 @@
       {{attribute?.name}} Attribute not found.
   </div>
   <div class="dialog-action-wrapper">
-      <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+      <button type="button" kendoButton class="vs-secondary mr-12 hotsheet-attribute-entry-dialog__cancel-btn" (click)="onCancel()">
           Cancel
       </button>
-      <button kendoButton class="vs-primary" (click)="onSubmit()" [disabled]="attributes?.length === 0 || !attributes">
+      <button kendoButton class="vs-primary hotsheet-attribute-entry-dialog__save-btn" (click)="onSubmit()" [disabled]="attributes?.length === 0 || !attributes">
           Save
       </button>
   </div>

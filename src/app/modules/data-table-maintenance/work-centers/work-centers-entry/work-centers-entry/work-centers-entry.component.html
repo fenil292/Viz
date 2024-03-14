@@ -8,7 +8,7 @@
         </span>
     </div>
 </kendo-dialog-titlebar>
-<form [formGroup]="workCenterEntryForm" class="work-center-dialog-wrapper">
+<form [formGroup]="workCenterEntryForm" class="work-center-dialog-wrapper work-center-dialog__form">
     <div class="form-wrapper">
         <div class="row">
             <div class="field-wrapper">
@@ -16,7 +16,7 @@
                     <span>External ID:</span>
                 </div>
                 <div class="form-control-wrapper">
-                    <input kendoTextBox formControlName="workCenterId" class="w-100">
+                    <input kendoTextBox formControlName="workCenterId" class="w-100 work-center-dialog__external-id-textbox">
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                                     <span>Alias:</span>
                                 </div>
                                 <div class="form-control-wrapper">
-                                    <kendo-textbox class="field-control" formControlName="alias" placeholder="Enter alias"></kendo-textbox>
+                                    <kendo-textbox class="field-control work-center-dialog__alias-textbox" formControlName="alias" placeholder="Enter alias"></kendo-textbox>
                                     <small class="error" *ngIf="workCenterEntryForm.get('alias')?.errors?.maxlength">
                                         The maximum length for this field is {{workCenterEntryForm.get('alias').errors.maxlength?.requiredLength}} characters.
                                     </small>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-control-wrapper">
                                     <kendo-multiselect [data]="vizerDisplayGroups" [autoClose]="false" [checkboxes]="true" [valuePrimitive]="true" textField="name"
-                                        [placeholder]="'Select vizer display group'" valueField="id" formControlName="vizerDisplayGroupIds" class="v-multiselect-dropdown"
+                                        [placeholder]="'Select vizer display group'" valueField="id" formControlName="vizerDisplayGroupIds" class="v-multiselect-dropdown work-center-dialog__group-multidropdown"
                                         [kendoDropDownFilter]="multiSelectFilter" (open)="onMultiSelectOpen($event)">
                                     </kendo-multiselect>
                                 </div>
@@ -56,7 +56,7 @@
                                     <span>Description:</span>
                                 </div>
                                 <div class="form-control-wrapper">
-                                    <kendo-textbox class="field-control" formControlName="description" placeholder="Enter description"></kendo-textbox>
+                                    <kendo-textbox class="field-control work-center-dialog__description-textbox" formControlName="description" placeholder="Enter description"></kendo-textbox>
                                     <small class="error" *ngIf="workCenterEntryForm.get('description')?.errors?.maxlength">
                                         The maximum length for this field is {{workCenterEntryForm.get('description').errors.maxlength?.requiredLength}} characters.
                                     </small>
@@ -69,7 +69,7 @@
                                     <span>Color:</span>
                                 </div>
                                 <div class="form-control-wrapper">
-                                    <kendo-colorpicker [format]="'hex'" class="v-colorpicker" formControlName="color" [preview]="true" (close)="onChangeColor('color')"></kendo-colorpicker>
+                                    <kendo-colorpicker [format]="'hex'" class="v-colorpicker work-center-dialog__color-colorpicker" formControlName="color" [preview]="true" (close)="onChangeColor('color')"></kendo-colorpicker>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                     <span>Font Color:</span>
                                 </div>
                                 <div class="form-control-wrapper">
-                                    <kendo-colorpicker [format]="'hex'" class="v-colorpicker" formControlName="fontColor" [preview]="true" (close)="onChangeColor('fontColor')"></kendo-colorpicker>
+                                    <kendo-colorpicker [format]="'hex'" class="v-colorpicker work-center-dialog__font-color-colorpicker" formControlName="fontColor" [preview]="true" (close)="onChangeColor('fontColor')"></kendo-colorpicker>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                     <span>Critical Constraint:</span>
                                 </div>
                                 <div class="form-control-wrapper">
-                                    <input type="checkbox" class="v-checkbox" formControlName="criticalConstraint" [rounded]="'medium'" kendoCheckBox />
+                                    <input type="checkbox" class="v-checkbox work-center-dialog__critical-constraint-checkbox" formControlName="criticalConstraint" [rounded]="'medium'" kendoCheckBox />
                                 </div>
                             </div>
                         </div>
@@ -110,8 +110,8 @@
             </kendo-tabstrip>
         </div>
         <div class="dialog-action-wrapper">
-            <button kendoButton (click)="cancel()" class="vs-secondary mr-12">Cancel</button>
-            <button kendoButton [primary]="true" [disabled]="!workCenterEntryForm.valid" (click)="onSaveWorkCenter()" class="vs-primary">Save</button>
+            <button kendoButton (click)="cancel()" class="vs-secondary mr-12 work-center-dialog__cancel-btn">Cancel</button>
+            <button kendoButton [primary]="true" [disabled]="!workCenterEntryForm.valid" (click)="onSaveWorkCenter()" class="vs-primary work-center-dialog__save-btn">Save</button>
         </div>
     </div>
 </form>

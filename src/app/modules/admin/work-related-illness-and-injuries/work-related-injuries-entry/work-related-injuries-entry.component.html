@@ -20,7 +20,7 @@
     recorded on this form. If you're not sure whether a case is recordable, call your local OSHA office for help.
   </div>
   <div class="work-related-injury-illness-form">
-    <form [formGroup]="addNewRecordForm" (ngSubmit)="onSubmit()" *ngIf="addNewRecordForm">
+    <form [formGroup]="addNewRecordForm" (ngSubmit)="onSubmit()" *ngIf="addNewRecordForm" class="incident-dialog__form">
       <div class="form-container">
         <div class="form-wrapper">
           <ol>
@@ -29,7 +29,7 @@
                 <span> <li>Worker's Name <span class="error"> *</span> </li> </span>
               </div>
               <div class="form-control-wrapper">
-                <kendo-autocomplete class="v-textbox" formControlName="workerName" [suggest]="true" [data]="entryInitializeWorkersNameData"
+                <kendo-autocomplete class="v-textbox incident-dialog__worker-textbox" formControlName="workerName" [suggest]="true" [data]="entryInitializeWorkersNameData"
                   [clearButton]="true" [kendoDropDownFilter]="filterSettings">
                 </kendo-autocomplete>
               </div>
@@ -39,7 +39,7 @@
                 <span> <li>Worker's Job Title<span class="error"> *</span> </li> </span>
               </div>
               <div class="form-control-wrapper">
-                <kendo-autocomplete class="v-textbox" formControlName="jobTitle" [suggest]="true" [data]="entryInitializeJobTitleData"
+                <kendo-autocomplete class="v-textbox incident-dialog__job-textbox" formControlName="jobTitle" [suggest]="true" [data]="entryInitializeJobTitleData"
                   [clearButton]="true" [kendoDropDownFilter]="filterSettings">
                 </kendo-autocomplete>
               </div>
@@ -49,7 +49,7 @@
                 <span> <li>Date of Injury or onset of illness <span class="error"> *</span> </li> </span>
               </div>
               <div class="form-control-wrapper">
-                <kendo-datepicker class="v-datepicker" formControlName="issueDate">
+                <kendo-datepicker class="v-datepicker incident-dialog__issue-date-datepicker" formControlName="issueDate">
                 </kendo-datepicker>
               </div>
             </div>
@@ -58,7 +58,7 @@
                 <span> <li>Location of incident <span class="error"> *</span> </li> </span>
               </div>
              <div class="form-control-wrapper">
-                <kendo-textbox class="v-textbox" formControlName="location" [clearButton]="true">
+                <kendo-textbox class="v-textbox incident-dialog__location-textbox" formControlName="location" [clearButton]="true">
                 </kendo-textbox>
              </div>
             </div>
@@ -67,13 +67,20 @@
                 <span> <li>Incident Outcome <span class="error"> *</span> </li> </span>
                 <div class="mt-10"><span><b>SELECT ONLY ONE</b> response based on the most serious outcome for that case:</span></div>
               </div>
-                <div class="form-control-wrapper" *ngFor="let data of incidentOutcomeData">
-                <span> <input type="radio" kendoRadioButton formControlName="incidentOutcome" class="v-radio" [value]='data.key'/> <span>{{data.value}}</span> </span>
+                <div class="form-control-wrapper" *ngFor="let data of incidentOutcomeData;let i = index">
+                <span> <input type="radio" kendoRadioButton formControlName="incidentOutcome" class="v-radio incident-dialog__outcome-radio-{{i+1}}" [value]='data.key'/> <span>{{data.value}}</span> </span>
               </div>
             </div>
             <div class="field-wrapper" *ngIf="addNewRecordForm.value.incidentOutcome === incidentOutcomeEnum.DAYSAWAYFROMWORK || addNewRecordForm.value.incidentOutcome === incidentOutcomeEnum.JOBTRANSFERORRESTRICTION">
                 <div class="title-wrapper">
-                  <span> <li>Number of <span *ngIf="addNewRecordForm.value.incidentOutcome ===  incidentOutcomeEnum.DAYSAWAYFROMWORK"> days away from work </span> <span *ngIf="addNewRecordForm.value.incidentOutcome ===  incidentOutcomeEnum.JOBTRANSFERORRESTRICTION "> days on job transfer or restriction</span> <span class="error"> *</span> </li> </span>
+                  <span>
+                    <li>Number of 
+                      <span *ngIf="addNewRecordForm.value.incidentOutcome === incidentOutcomeEnum.DAYSAWAYFROMWORK"> days away from work </span> <span *ngIf="addNewRecordForm.value.incidentOutcome ===  incidentOutcomeEnum.JOBTRANSFERORRESTRICTION">
+                         days on job transfer or restriction
+                      </span>
+                      <span class="error"> *</span>
+                    </li>
+                  </span>
                     <div class="mt-10">
                       Calendar days (rather than scheduled work days) are used for recording days<br>
                       away from work. If an injury or illness causes a worker to miss work, the employer must<br>
@@ -81,17 +88,17 @@
                       scheduled to work. Employers may limit days away from work to 180 days.
                     </div>
                   </div>
-                <div class="form-control-wrapper">
-                <kendo-numerictextbox class="v-textbox" formControlName="days" placeholder="Days" [min]="0" [decimals]="0" [format]="'0'">
-                </kendo-numerictextbox>
-              </div>
+                  <div class="form-control-wrapper">
+                    <kendo-numerictextbox class="v-textbox incident-dialog__days-numerictextbox" formControlName="days" placeholder="Days" [min]="0" [decimals]="0" [format]="'0'">
+                    </kendo-numerictextbox>
+                  </div>
             </div>
             <div class="field-wrapper">
               <div class="title-wrapper">
                 <span> <li>Incident type <span class="error"> *</span> </li> </span>
               </div>
-              <div class="form-control-wrapper" *ngFor="let data of incidentTypedata">
-                <span> <input type="radio" kendoRadioButton formControlName="incidentType" class="v-radio" [value]="data.key" > <span>{{data.value}}</span> </span>
+              <div class="form-control-wrapper" *ngFor="let data of incidentTypedata;let i = index">
+                <span> <input type="radio" kendoRadioButton formControlName="incidentType" class="v-radio incident-dialog__type-radio-{{i+1}}" [value]="data.key" > <span>{{data.value}}</span> </span>
               </div>
             </div>
             <div class="field-wrapper">
@@ -99,17 +106,17 @@
                 <span> <li>Describe injury or illness</li> </span>
               </div>
               <div class="form-control-wrapper">
-              <kendo-textbox class="v-textbox" formControlName="description" [clearButton]="true"> </kendo-textbox>
+              <kendo-textbox class="v-textbox incident-dialog__description-textbox" formControlName="description" [clearButton]="true"> </kendo-textbox>
               </div>
             </div>
           </ol>
         </div>
       </div>
       <div class="dialog-action-wrapper">
-        <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+        <button type="button" kendoButton class="vs-secondary mr-12 incident-dialog__cancel-btn" (click)="onCancel()">
           Cancel
         </button>
-        <button kendoButton class="vs-primary" [disabled]="addNewRecordForm.invalid">
+        <button kendoButton class="vs-primary incident-dialog__save-btn" [disabled]="addNewRecordForm.invalid">
           Save
         </button>
       </div>

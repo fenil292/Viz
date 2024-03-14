@@ -1,13 +1,13 @@
 <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
-<div class="container part-info-container">
+<div class="container part-info-container part-info-tools">
     <div class="header-button-wrapper">
-        <button type="button" kendoButton class="vs-secondary mr-12" (click)="onLoadExternalParts()" [disabled]="isExternalPartsLoading">
+        <button type="button" kendoButton class="vs-secondary mr-12 part-info-tools__load-external-parts-btn" (click)="onLoadExternalParts()" [disabled]="isExternalPartsLoading">
             Load External Parts
             <span class="k-icon k-i-loading button-loading" *ngIf="isExternalPartsLoading"></span>
         </button>
         <div kendoTooltip [tooltipTemplate]="clearTooltipTemplate">
             <kendo-multiselect [data]="partAttributes" [autoClose]="false" [checkboxes]="true"
-                [valuePrimitive]="true" textField="name" valueField="name" class="v-multiselect-dropdown"
+                [valuePrimitive]="true" textField="name" valueField="name" class="v-multiselect-dropdown part-info-tools__custom-attributes-multidropdown"
                 [placeholder]="'Custom Attributes'" (valueChange)="onCustomAttributesChange($event)"
                 [value]="customAttributeAsColumns" [disabled]="isLoading">
             </kendo-multiselect>

@@ -6,8 +6,8 @@
             <h2 class="header-label">Priority: {{workOrder?.priorityCode}}</h2>
         </div>
         <div class="button-group">
-            <button kendoButton class="vs-secondary" (click)="onRefresh()">Refresh</button>
-            <button kendoButton class="vs-secondary" (click)="cancel()">Back</button>
+            <button kendoButton class="vs-secondary work-order-detail-refresh-btn" (click)="onRefresh()">Refresh</button>
+            <button kendoButton class="vs-secondary work-order-detail-back-btn" (click)="cancel()">Back</button>
         </div>
     </div>
     <div class="work-order-details">
@@ -52,7 +52,7 @@
         <kendo-tabstrip>
             <kendo-tabstrip-tab title="Operations" [selected]="true">
                 <ng-template kendoTabContent>
-                    <div class="page-actions">
+                    <div class="page-actions work-order-operation-tools">
                         <div class="page-filter">
                             <app-dropdown-panel
                                 [data]="priorityData"
@@ -60,14 +60,14 @@
                                 [enabled]="isUpdateEnabled()"
                                 (confirm)="updatePriorities($event)">
                             </app-dropdown-panel>
-                            <button kendoButton type="button" class="vs-secondary export-prioritites-button" *ngIf="selectedItems.length > 0"
+                            <button kendoButton type="button" class="vs-secondary export-prioritites-button work-order-operation-tools__export-prioritites-btn" *ngIf="selectedItems.length > 0"
                                 (click)="onExprortPrioritiesToERP()" [disabled]="isLoadingExportPriorities">
                                 Export Priorities to ERP
                                 <span class="k-icon k-i-loading button-loading" *ngIf="isLoadingExportPriorities"></span>
                             </button>
                             <div kendoTooltip [tooltipTemplate]="clearTooltipTemplate">
                                 <kendo-multiselect [data]="workOrderOpearionAttributes" [autoClose]="false" [checkboxes]="true"
-                                    [valuePrimitive]="true" textField="name" valueField="name" class="v-multiselect-dropdown"
+                                    [valuePrimitive]="true" textField="name" valueField="name" class="v-multiselect-dropdown work-order-operation-tools__custom-attributes-multidropdown"
                                     [placeholder]="'Custom Attributes'" (valueChange)="onCustomAttributesChange($event)"
                                     [value]="customAttributeAsColumns">
                                 </kendo-multiselect>
@@ -76,7 +76,7 @@
                                 <span>Clear</span>
                             </ng-template>
                             <div class="checkbox-filter">
-                                <input kendoCheckBox type="checkbox" class="v-checkbox" [checked]="statusFilterActive" [disabled]="!isCheckBoxEnabled()" (click)="showOnlyRemainingProcesses($event)"> 
+                                <input kendoCheckBox type="checkbox" class="v-checkbox work-order-operation-tools__remaining-process-checkbox" [checked]="statusFilterActive" [disabled]="!isCheckBoxEnabled()" (click)="showOnlyRemainingProcesses($event)"> 
                                 <span class="checkbox-label">Only show remaining process steps</span>
                             </div>
                         </div>

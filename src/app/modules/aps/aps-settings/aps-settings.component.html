@@ -1,26 +1,26 @@
 <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
 <div class="container aps-settings-wrapper" *ngIf="apsSettingForm">
-    <form [formGroup]="apsSettingForm" (ngSubmit)="onSaveAPSSettings()">
+    <form [formGroup]="apsSettingForm" (ngSubmit)="onSaveAPSSettings()" class="aps-settings-form">
         <div class="header-button-wrapper">
             <div class="action-button-wrapper">
-                <button type="button" kendoButton class="vs-secondary run-button" (click)="onRunAps()" [disabled]="isApsRun || isApiAvailable">
+                <button type="button" kendoButton class="vs-secondary run-button aps-settings-form__run-btn" (click)="onRunAps()" [disabled]="isApsRun || isApiAvailable">
                     Run APS
                     <span class="k-icon k-i-loading button-loading" *ngIf="isApsRun"></span>
                 </button>
-                <button type="button" kendoButton class="vs-secondary" (click)="onResetJob()" [disabled]="isResetJob || isApiAvailable">
+                <button type="button" kendoButton class="vs-secondary aps-settings-form__reset-btn" (click)="onResetJob()" [disabled]="isResetJob || isApiAvailable">
                     Reset Job
                     <span class="k-icon k-i-loading button-loading" *ngIf="isResetJob"></span>
                 </button>
                 <div class="integrator-checkbox-wrapper">
-                    <input type="checkbox" class="v-checkbox" [rounded]="'medium'" kendoCheckBox formControlName="forceIntegrationDataset"/>
+                    <input type="checkbox" class="v-checkbox aps-settings-form__force-integration-checkbox" [rounded]="'medium'" kendoCheckBox formControlName="forceIntegrationDataset"/>
                     <span class="checkbox-label">Force VizToc Integrator dataset generation</span>
                 </div>
             </div>
             <div class="action-button-wrapper">
-                <button type="button" kendoButton class="vs-secondary" (click)="onCancel()" [disabled]="apsSettingForm.invalid || isApiAvailable">
+                <button type="button" kendoButton class="vs-secondary aps-settings-form__cancel-btn" (click)="onCancel()" [disabled]="apsSettingForm.invalid || isApiAvailable">
                     Cancel
                 </button>
-                <button kendoButton class="vs-primary" [disabled]="apsSettingForm.invalid || isApiAvailable">
+                <button kendoButton class="vs-primary aps-settings-form__save-btn" [disabled]="apsSettingForm.invalid || isApiAvailable">
                     Save
                 </button>
             </div>
@@ -33,8 +33,8 @@
                     </div>
                     <div class="form-control-wrapper">
                         <kendo-dropdownlist [data]="scheduleTypes" textField="value" valueField="key"
-                            formControlName="scheduleType" class="v-dropdown" [valuePrimitive]="true"
-                            (valueChange)="onChangeScheduleAPS($event)">
+                            formControlName="scheduleType" class="v-dropdown aps-settings-form__schedule-type-dropdown"
+                            [valuePrimitive]="true" (valueChange)="onChangeScheduleAPS($event)">
                         </kendo-dropdownlist>
 
                         <div class="schedule-wrapper"
@@ -43,14 +43,14 @@
 
                             <kendo-numerictextbox
                             [decimals]="0"
-                            class="v-numeric-textbox"
+                            class="v-numeric-textbox aps-settings-form__unit-numerictextbox"
                             formControlName="unit"
                             [min]="1"
                             [max]="apsSettingForm.get('every.unitType')?.value === unitType.MIN ? 59 : 23"
                             [format]="'0'">
                             </kendo-numerictextbox>
 
-                            <kendo-dropdownlist [data]="units" textField="value" valueField="key" class="v-dropdown"
+                            <kendo-dropdownlist [data]="units" textField="value" valueField="key" class="v-dropdown aps-settings-form__unit-type-dropdown"
                                 [valuePrimitive]="true" formControlName="unitType">
                             </kendo-dropdownlist>
 
@@ -71,7 +71,7 @@
                         <div class="schedule-wrapper"
                             *ngIf="apsSettingForm.get('scheduleType')?.value === scheduleTypesEnum.EVERY_DAY_AT && apsSettingForm.get('everyDayAt')"
                             formGroupName="everyDayAt">
-                            <kendo-timepicker class="v-timepicker" placeholder="" formControlName="time">
+                            <kendo-timepicker class="v-timepicker aps-settings-form__time-timepicker" placeholder="" formControlName="time">
                             </kendo-timepicker>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         <span>Publish HotSheet:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="publishHotsheet" kendoCheckBox />
+                        <input type="checkbox" class="v-checkbox aps-settings-form__publish-checkbox" [rounded]="'medium'" formControlName="publishHotsheet" kendoCheckBox />
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                         [min]="0"
                         [max]="100"
                         formControlName="salesOrderQtyFitTolerancePercent"
-                        class="v-numeric-textbox">
+                        class="v-numeric-textbox aps-settings-form__tolerance-numerictextbox">
                         </kendo-numerictextbox>
 
                         <div class="v-mt-5 error"
@@ -118,7 +118,7 @@
                         <span>Enable:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <input type="checkbox" class="v-checkbox" formControlName="enable" [rounded]="'medium'" kendoCheckBox />
+                        <input type="checkbox" class="v-checkbox aps-settings-form__enable-checkbox" formControlName="enable" [rounded]="'medium'" kendoCheckBox />
                     </div>
                 </div>
             </div>
@@ -129,7 +129,8 @@
                         <span>Archive Period (Days):</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-numerictextbox [min]="0" formControlName="archiveStorePeriodInDays" class="v-numeric-textbox"
+                        <kendo-numerictextbox [min]="0" formControlName="archiveStorePeriodInDays"
+                            class="v-numeric-textbox aps-settings-form__archive-period-numerictextbox"
                             [decimals]="0" [format]="'0'">
                         </kendo-numerictextbox>
                     </div>
@@ -143,7 +144,7 @@
                         <span>Dataset Archive Path:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-textbox class="v-textbox" formControlName="archivePath" placeholder="Enter dataset archive path">
+                        <kendo-textbox class="v-textbox aps-settings-form__archive-path-textbox" formControlName="archivePath" placeholder="Enter dataset archive path">
                         </kendo-textbox>
                         <small class="error" *ngIf="apsSettingForm.get('archivePath')?.errors?.required">
                             This field is required.
@@ -161,7 +162,7 @@
                         <span>Dataset Path:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-textbox class="v-textbox" formControlName="datasetPath" placeholder="Enter dataset path">
+                        <kendo-textbox class="v-textbox aps-settings-form__path-textbox" formControlName="datasetPath" placeholder="Enter dataset path">
                         </kendo-textbox>
                         <small class="error" *ngIf="apsSettingForm.get('datasetPath')?.errors?.required">
                             This field is required.

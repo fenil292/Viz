@@ -1,15 +1,15 @@
 <app-breadcrumb [path]="path" [index]="index"></app-breadcrumb>
 <div class="container process-flow-wrapper">
-    <form [formGroup]="processFlowForm" (ngSubmit)="onSubmit()" *ngIf="processFlowForm">
+    <form [formGroup]="processFlowForm" (ngSubmit)="onSubmit()" *ngIf="processFlowForm" class="processflow-form">
     <div class="button-container">
         <div class="page-title-text">
             Process Flow
         </div>
         <div class="button-wrapper">
-            <button type="button" kendoButton class="vs-secondary mr-12" (click)="onCancel()">
+            <button type="button" kendoButton class="vs-secondary mr-12 processflow-form__cancel-btn" (click)="onCancel()">
                 Cancel
             </button>
-            <button kendoButton class="vs-primary" [disabled]="((conditions?.rules?.length === 0 && conditions?.groupRules?.length === 0 && !isValidConditions) || processFlowForm.invalid) && !processFlow?.default">
+            <button kendoButton class="vs-primary processflow-form__save-btn" [disabled]="((conditions?.rules?.length === 0 && conditions?.groupRules?.length === 0 && !isValidConditions) || processFlowForm.invalid) && !processFlow?.default">
                 Save
             </button>
         </div>
@@ -22,7 +22,7 @@
                         <span>Name:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-textbox class="v-textbox-w-400" formControlName="name" placeholder="Enter name">
+                        <kendo-textbox class="v-textbox-w-400 processflow-form__name-textbox" formControlName="name" placeholder="Enter name">
                         </kendo-textbox>
                         <div>
                             <small class="error" *ngIf="processFlowForm.get('name')?.errors?.maxlength">
@@ -38,7 +38,7 @@
                         <span>Description:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <kendo-textbox class="v-textbox-w-400" formControlName="description" placeholder="Enter description">
+                        <kendo-textbox class="v-textbox-w-400 processflow-form__description-textbox" formControlName="description" placeholder="Enter description">
                         </kendo-textbox>
                         <div>
                             <small class="error" *ngIf="processFlowForm.get('description')?.errors?.maxlength">
@@ -54,7 +54,7 @@
                         <span>Enabled:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="enabled" kendoCheckBox />
+                        <input type="checkbox" class="v-checkbox processflow-form__enabled-checkbox" [rounded]="'medium'" formControlName="enabled" kendoCheckBox />
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         <span>Break:</span>
                     </div>
                     <div class="form-control-wrapper">
-                        <input type="checkbox" class="v-checkbox" [rounded]="'medium'" formControlName="break" kendoCheckBox />
+                        <input type="checkbox" class="v-checkbox processflow-form__break-checkbox" [rounded]="'medium'" formControlName="break" kendoCheckBox />
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <v-icon class="k-icon" title="Some flow rules with not exist attribute" [iconName]="'warning'"></v-icon>
                 </span>
             </div>
-            <button kendoButton class="vs-secondary" *ngIf="!isConditionsTab" (click)="onAddFlowRule()">
+            <button kendoButton class="vs-secondary add-flow-rule-btn" *ngIf="!isConditionsTab" (click)="onAddFlowRule()">
                 Add Flow Rule
             </button>
         </div>
