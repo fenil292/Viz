@@ -17,10 +17,10 @@ try
             $lineResult.Add($line)
         }    
     }
-    $p = "slackToken {slackToken} `${slackToken}"
+
     $headers = @{
         "Content-Type" = "application/json; charset=utf-8"
-        "Authorization" = "Bearer [@VAR:slackToken@]"
+        "Authorization" = "Bearer " + $args[0]
     }
 
     $body =@{
