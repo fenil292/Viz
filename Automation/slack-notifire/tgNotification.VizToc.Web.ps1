@@ -60,7 +60,7 @@ try
     } | ConvertTo-Json
 
     $url = "https://slack.com/api/chat.postMessage"
-    $response = Invoke-WebRequest -Uri $url -Method Post -Headers $headers -Body $body
+    $response = Invoke-WebRequest -Uri $url -UseBasicParsing -Method Post -Headers $headers -Body $body
     $responseObj = $response | ConvertFrom-Json
     if($responseObj.ok -eq 'true') {
         Write-Host "Message successfully sent"
